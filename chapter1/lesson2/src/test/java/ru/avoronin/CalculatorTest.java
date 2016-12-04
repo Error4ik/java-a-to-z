@@ -1,47 +1,47 @@
-package avoronin;
+п»їpackage avoronin;
 
 import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 /**
- *  Тестирует основные операции калькулятора.
- *  Сложение, Вычитание, Умножение, Деление.
+ *  РўРµСЃС‚РёСЂСѓРµС‚ РѕСЃРЅРѕРІРЅС‹Рµ РѕРїРµСЂР°С†РёРё РєР°Р»СЊРєСѓР»СЏС‚РѕСЂР°.
+ *  РЎР»РѕР¶РµРЅРёРµ, Р’С‹С‡РёС‚Р°РЅРёРµ, РЈРјРЅРѕР¶РµРЅРёРµ, Р”РµР»РµРЅРёРµ.
  */
 public class CalculatorTest {
 
    /**
-    * Первое число для теста.
+    * РџРµСЂРІРѕРµ С‡РёСЃР»Рѕ РґР»СЏ С‚РµСЃС‚Р°.
     */
     private final double first = 5.0;
 
     /**
-    * Второе число для теста.
+    * Р’С‚РѕСЂРѕРµ С‡РёСЃР»Рѕ РґР»СЏ С‚РµСЃС‚Р°.
     */
     private final double second = 5.0;
 
     /**
-    * Результат сложения для теста.
+    * Р РµР·СѓР»СЊС‚Р°С‚ СЃР»РѕР¶РµРЅРёСЏ РґР»СЏ С‚РµСЃС‚Р°.
     */
     private final double resultAdd = 10.0;
 
     /**
-    * Результат вычитания для теста.
+    * Р РµР·СѓР»СЊС‚Р°С‚ РІС‹С‡РёС‚Р°РЅРёСЏ РґР»СЏ С‚РµСЃС‚Р°.
     */
     private final double resultSubtract = 0.0;
 
     /**
-    * Результат деления для теста.
+    * Р РµР·СѓР»СЊС‚Р°С‚ РґРµР»РµРЅРёСЏ РґР»СЏ С‚РµСЃС‚Р°.
     */
     private final double resultDivide = 1.0;
 
     /**
-    * Результат умножения для теста.
+    * Р РµР·СѓР»СЊС‚Р°С‚ СѓРјРЅРѕР¶РµРЅРёСЏ РґР»СЏ С‚РµСЃС‚Р°.
     */
     private final double resultMultiply = 25.0;
 
     /**
-     * Тест сложения 2 чисел.
+     * РўРµСЃС‚ СЃР»РѕР¶РµРЅРёСЏ 2 С‡РёСЃРµР».
      */
     @Test
     public void testAdd() {
@@ -51,7 +51,7 @@ public class CalculatorTest {
     }
 
     /**
-     * Тест вычитания 2 чисел.
+     * РўРµСЃС‚ РІС‹С‡РёС‚Р°РЅРёСЏ 2 С‡РёСЃРµР».
      */
     @Test
     public void testSubtract() {
@@ -61,7 +61,7 @@ public class CalculatorTest {
     }
 
     /**
-     * Тест деления 2 чисел.
+     * РўРµСЃС‚ РґРµР»РµРЅРёСЏ 2 С‡РёСЃРµР».
      */
     @Test
     public void testDivide() {
@@ -71,7 +71,7 @@ public class CalculatorTest {
     }
 
     /**
-     * Тест умножения 2 чисел.
+     * РўРµСЃС‚ СѓРјРЅРѕР¶РµРЅРёСЏ 2 С‡РёСЃРµР».
      */
     @Test
     public void testMultiply() {
@@ -81,7 +81,7 @@ public class CalculatorTest {
     }
 
     /**
-     * Тест возврата поля result.
+     * РўРµСЃС‚ РІРѕР·РІСЂР°С‚Р° РїРѕР»СЏ result.
      */
     @Test
     public void testGetResult() {
