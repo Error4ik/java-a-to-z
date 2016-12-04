@@ -1,6 +1,6 @@
 <project>
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>ru.avoronin</groupId>
+	<groupId>avoronin</groupId>
 	<artifactId>junior</artifactId>
 	<packaging>pom</packaging>
 	<version>2.0</version>
