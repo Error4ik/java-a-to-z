@@ -13,32 +13,12 @@ public class CalculatorTest {
    /**
     * Первое число для теста.
     */
-    private final double first = 5.0;
+    private final double first = 5d;
 
     /**
     * Второе число для теста.
     */
-    private final double second = 5.0;
-
-    /**
-    * Результат сложения для теста.
-    */
-    private final double resultAdd = 10.0;
-
-    /**
-    * Результат вычитания для теста.
-    */
-    private final double resultSubtract = 0.0;
-
-    /**
-    * Результат деления для теста.
-    */
-    private final double resultDivide = 1.0;
-
-    /**
-    * Результат умножения для теста.
-    */
-    private final double resultMultiply = 25.0;
+    private final double second = 5d;
 
     /**
      * Тест сложения 2 чисел.
@@ -46,8 +26,9 @@ public class CalculatorTest {
     @Test
     public void testAdd() {
         Calculator calc = new Calculator();
+	double result = first + second;
         calc.add(first, second);
-        assertThat(resultAdd, is(calc.getResult()));
+        assertThat(result, is(calc.getResult()));
     }
 
     /**
@@ -56,8 +37,9 @@ public class CalculatorTest {
     @Test
     public void testSubtract() {
         Calculator calc = new Calculator();
+	double result = first - second;
         calc.subtract(first, second);
-        assertThat(resultSubtract, is(calc.getResult()));
+        assertThat(result, is(calc.getResult()));
     }
 
     /**
@@ -66,8 +48,9 @@ public class CalculatorTest {
     @Test
     public void testDivide() {
         Calculator calc = new Calculator();
+	double result = first / second;
         calc.divide(first, second);
-        assertThat(resultDivide, is(calc.getResult()));
+        assertThat(result, is(calc.getResult()));
     }
 
     /**
@@ -76,8 +59,9 @@ public class CalculatorTest {
     @Test
     public void testMultiply() {
         Calculator calc = new Calculator();
+	double result = first * second;
         calc.multiply(first, second);
-        assertThat(resultMultiply, is(calc.getResult()));
+        assertThat(result, is(calc.getResult()));
     }
 
     /**

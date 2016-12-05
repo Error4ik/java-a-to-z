@@ -1,7 +1,7 @@
 <project>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>avoronin.chapter1.lesson2</groupId>
-	<artifactId>lesson1</artifactId>
+	<artifactId>lesson2</artifactId>
 	<version>1.0</version>
 
 	<parent>
@@ -9,6 +9,4 @@
 		<artifactId>chapter1</artifactId>
 		<version>1.0</version>
 	</parent>
-
-	
 </project>

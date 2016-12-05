@@ -4,12 +4,11 @@
  * class Calculator.
  * @author Alexey Voronin.
  */
-
 public class Calculator {
 
     /**
      * Содержит результат вычислений.
-    */
+     */
     private double result;
 
     /**
@@ -22,12 +21,12 @@ public class Calculator {
         this.result = firstNumber + secondNumber;
     }
 
-   /**
-    * Метод вычитает второе число из первого.
-    * @param firstNumber первое число.
-    * @param secondNumber второе число.
-    * записывает в поле result получившийся после вычитания результат.
-    */
+    /**
+     * Метод вычитает второе число из первого.
+     * @param firstNumber первое число.
+     * @param secondNumber второе число.
+     * записывает в поле result получившийся после вычитания результат.
+     */
     public void subtract(double firstNumber, double secondNumber) {
         this.result = firstNumber - secondNumber;
     }

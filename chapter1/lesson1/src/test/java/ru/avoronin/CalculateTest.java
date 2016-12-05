@@ -10,8 +10,7 @@ import java.io.PrintStream;
  * Test.
  *
  * @author Alexey Voronin
- * @version $Id$
- * @since 0.1
+ * @version 1
  */
 
 public class CalculateTest {
