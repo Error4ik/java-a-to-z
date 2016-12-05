@@ -3,8 +3,6 @@ package ru.avoronin;
 import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 
 /**
  * Test.
@@ -18,10 +16,9 @@ public class CalculateTest {
      * Test add.
      */
     @Test
-    public void whenSetWorldInShowTextThenReturnInThreeWorld() {
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(out));
-        Calculate.main(null);
-        assertThat(out.toString(), is("Hello World.\r\n"));
+    public void testShowText() {
+        Calculate calc = new Calculate();
+        String actualText = calc.showText("World");
+        assertThat(actualText, is("World World World"));
     }
 }

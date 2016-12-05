@@ -8,10 +8,10 @@ package ru.avoronin;
  */
 public class Calculate {
    /**
-     * Main.
-     * @param args - args.
-     */
-   public static void main(String[] args) {
-      	System.out.println("Hello World.");
+    * @param text любой текст.
+    * @return Возвращает строку в которой текст повторяется три раза.
+    */
+   public String showText(String text) {
+        return String.format("%s %s %s", text, text, text);
    }
 }
