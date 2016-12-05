@@ -1,27 +1,27 @@
-п»їpackage ru.avoronin;
+package ru.avoronin;
 
 import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 /**
- *  РўРµСЃС‚РёСЂСѓРµС‚ РѕСЃРЅРѕРІРЅС‹Рµ РѕРїРµСЂР°С†РёРё РєР°Р»СЊРєСѓР»СЏС‚РѕСЂР°.
- *  РЎР»РѕР¶РµРЅРёРµ, Р’С‹С‡РёС‚Р°РЅРёРµ, РЈРјРЅРѕР¶РµРЅРёРµ, Р”РµР»РµРЅРёРµ.
+ *  Тестирует основные операции калькулятора.
+ *  Сложение, Вычитание, Умножение, Деление.
  */
 public class CalculatorTest {
 
    /**
-    * РџРµСЂРІРѕРµ С‡РёСЃР»Рѕ РґР»СЏ С‚РµСЃС‚Р°.
+    * Первое число для теста.
     */
     private final double first = 5d;
 
     /**
-    * Р’С‚РѕСЂРѕРµ С‡РёСЃР»Рѕ РґР»СЏ С‚РµСЃС‚Р°.
+    * Второе число для теста.
     */
     private final double second = 5d;
 
     /**
-     * РўРµСЃС‚ СЃР»РѕР¶РµРЅРёСЏ 2 С‡РёСЃРµР».
+     * Тест сложения 2 чисел.
      */
     @Test
     public void testAdd() {
@@ -32,7 +32,7 @@ public class CalculatorTest {
     }
 
     /**
-     * РўРµСЃС‚ РІС‹С‡РёС‚Р°РЅРёСЏ 2 С‡РёСЃРµР».
+     * Тест вычитания 2 чисел.
      */
     @Test
     public void testSubtract() {
@@ -43,7 +43,7 @@ public class CalculatorTest {
     }
 
     /**
-     * РўРµСЃС‚ РґРµР»РµРЅРёСЏ 2 С‡РёСЃРµР».
+     * Тест деления 2 чисел.
      */
     @Test
     public void testDivide() {
@@ -54,7 +54,7 @@ public class CalculatorTest {
     }
 
     /**
-     * РўРµСЃС‚ СѓРјРЅРѕР¶РµРЅРёСЏ 2 С‡РёСЃРµР».
+     * Тест умножения 2 чисел.
      */
     @Test
     public void testMultiply() {
@@ -65,7 +65,7 @@ public class CalculatorTest {
     }
 
     /**
-     * РўРµСЃС‚ РІРѕР·РІСЂР°С‚Р° РїРѕР»СЏ result.
+     * Тест возврата поля result.
      */
     @Test
     public void testGetResult() {
