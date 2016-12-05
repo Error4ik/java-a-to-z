@@ -1,19 +1,18 @@
 <project>
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>avoronin.chapter1</groupId>
 	<artifactId>chapter1</artifactId>
 	<version>1.0</version>
-	<packaging>pom</packaging>
+	<packaging>jar</packaging>
 
 	<parent>
-		<groupId>avoronin</groupId>
-		<artifactId>junior</artifactId>
+		<groupId>ru.avoronin</groupId>
+		<artifactId>java-a-to-z</artifactId>
 		<version>1.0</version>
 	</parent>
 
-	<modules>
-		<module>lesson1</module>
-		<module>lesson2</module>
-	</modules>
-
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 </project>

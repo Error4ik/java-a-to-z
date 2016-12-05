@@ -1,4 +1,4 @@
-package avoronin;
+package ru.avoronin;
 
 /**
  * Calculate.

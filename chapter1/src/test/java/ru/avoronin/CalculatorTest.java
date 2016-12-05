@@ -1,4 +1,4 @@
-﻿package avoronin;
+﻿package ru.avoronin;
 
 import org.junit.Test;
 import static org.hamcrest.core.Is.is;
