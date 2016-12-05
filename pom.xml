@@ -9,12 +9,6 @@
         <module>chapter1</module>
     </modules>
 
-    <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.hamcrest</groupId>
@@ -67,6 +61,9 @@
                         <packageLineRate>60</packageLineRate>
                         <packageBranchRate>60</packageBranchRate>
                     </check>
+                    <formats>
+                        <format>html</format>
+                    </formats>
                 </configuration>
                 <executions>
                     <execution>
@@ -75,6 +72,7 @@
                         <goals>
                             <goal>clean</goal>
                             <goal>check</goal>
+                            <goal>cobertura</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -89,5 +87,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

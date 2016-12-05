@@ -1,5 +1,7 @@
 package ru.avoronin;
 
+
+
 import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -10,15 +12,15 @@ import static org.junit.Assert.assertThat;
  */
 public class CalculatorTest {
 
-   /**
-    * Первое число для теста.
-    */
-    private final double first = 5d;
+    /**
+     * Первое число для теста.
+     */
+    private final double first = 5.0;
 
     /**
-    * Второе число для теста.
-    */
-    private final double second = 5d;
+     * Второе число для теста.
+     */
+    private final double second = 5.0;
 
     /**
      * Тест сложения 2 чисел.
@@ -26,9 +28,9 @@ public class CalculatorTest {
     @Test
     public void testAdd() {
         Calculator calc = new Calculator();
-	double result = first + second;
+        final double resultAdd = 10.0;
         calc.add(first, second);
-        assertThat(result, is(calc.getResult()));
+        assertThat(resultAdd, is(calc.getResult()));
     }
 
     /**
@@ -37,9 +39,9 @@ public class CalculatorTest {
     @Test
     public void testSubtract() {
         Calculator calc = new Calculator();
-	double result = first - second;
+        final double resultSubtract = 0.0;
         calc.subtract(first, second);
-        assertThat(result, is(calc.getResult()));
+        assertThat(resultSubtract, is(calc.getResult()));
     }
 
     /**
@@ -48,9 +50,9 @@ public class CalculatorTest {
     @Test
     public void testDivide() {
         Calculator calc = new Calculator();
-	double result = first / second;
+        final double resultDivide = 1.0;
         calc.divide(first, second);
-        assertThat(result, is(calc.getResult()));
+        assertThat(resultDivide, is(calc.getResult()));
     }
 
     /**
@@ -59,9 +61,9 @@ public class CalculatorTest {
     @Test
     public void testMultiply() {
         Calculator calc = new Calculator();
-	double result = first * second;
+        final double resultMultiply = 25.0;
         calc.multiply(first, second);
-        assertThat(result, is(calc.getResult()));
+        assertThat(resultMultiply, is(calc.getResult()));
     }
 
     /**
@@ -71,5 +73,5 @@ public class CalculatorTest {
     public void testGetResult() {
         Calculator calc = new Calculator();
         assertThat(0.0, is(calc.getResult()));
- }
+    }
 }
