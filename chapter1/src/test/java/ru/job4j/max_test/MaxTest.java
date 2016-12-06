@@ -6,12 +6,12 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 /**
- * Тест класса Max.
+ * РўРµСЃС‚ РєР»Р°СЃСЃР° Max.
  */
 public class MaxTest {
 
     /**
-     * Тест возвращает первое число, если оно больше второго.
+     * РўРµСЃС‚ РІРѕР·РІСЂР°С‰Р°РµС‚ РїРµСЂРІРѕРµ С‡РёСЃР»Рѕ, РµСЃР»Рё РѕРЅРѕ Р±РѕР»СЊС€Рµ РІС‚РѕСЂРѕРіРѕ.
      */
     @Test
     public void whenTheFirstMoreThanTheSecondTheFirstReturn() {
@@ -22,7 +22,7 @@ public class MaxTest {
     }
 
     /**
-     * Тест возвращает второе число, если оно больше первого.
+     * РўРµСЃС‚ РІРѕР·РІСЂР°С‰Р°РµС‚ РІС‚РѕСЂРѕРµ С‡РёСЃР»Рѕ, РµСЃР»Рё РѕРЅРѕ Р±РѕР»СЊС€Рµ РїРµСЂРІРѕРіРѕ.
      */
     @Test
     public void whenTheSecondMoreThanTheFirstTheSecondReturn() {
@@ -33,7 +33,7 @@ public class MaxTest {
     }
 
     /**
-     * Тест возвращает первое число, если оба числа равны.
+     * РўРµСЃС‚ РІРѕР·РІСЂР°С‰Р°РµС‚ РїРµСЂРІРѕРµ С‡РёСЃР»Рѕ, РµСЃР»Рё РѕР±Р° С‡РёСЃР»Р° СЂР°РІРЅС‹.
      */
     @Test
     public void whenTheFirstEqualsThanTheSecondTheFirstReturn() {
@@ -45,7 +45,7 @@ public class MaxTest {
 
 
     /**
-     * Тест возвращает первое число, если оно больше второго и третьего.
+     * РўРµСЃС‚ РІРѕР·РІСЂР°С‰Р°РµС‚ РїРµСЂРІРѕРµ С‡РёСЃР»Рѕ, РµСЃР»Рё РѕРЅРѕ Р±РѕР»СЊС€Рµ РІС‚РѕСЂРѕРіРѕ Рё С‚СЂРµС‚СЊРµРіРѕ.
      */
     @Test
     public void whenTheFirstMoreThanTheSecondAndThirdTheFirstReturn() {
@@ -57,7 +57,7 @@ public class MaxTest {
     }
 
     /**
-     * Тест возвращает второе число, если оно больше первого и третьего.
+     * РўРµСЃС‚ РІРѕР·РІСЂР°С‰Р°РµС‚ РІС‚РѕСЂРѕРµ С‡РёСЃР»Рѕ, РµСЃР»Рё РѕРЅРѕ Р±РѕР»СЊС€Рµ РїРµСЂРІРѕРіРѕ Рё С‚СЂРµС‚СЊРµРіРѕ.
      */
     @Test
     public void whenTheSecondMoreThanTheFirstAndThirdTheSecondReturn() {
@@ -69,7 +69,7 @@ public class MaxTest {
     }
 
     /**
-     * Тест возвращает второе число, если оно больше первого и третьего.
+     * РўРµСЃС‚ РІРѕР·РІСЂР°С‰Р°РµС‚ РІС‚РѕСЂРѕРµ С‡РёСЃР»Рѕ, РµСЃР»Рё РѕРЅРѕ Р±РѕР»СЊС€Рµ РїРµСЂРІРѕРіРѕ Рё С‚СЂРµС‚СЊРµРіРѕ.
      */
     @Test
     public void whenTheThirdMoreThanTheFirstAndSecondTheThirdReturn() {
@@ -81,7 +81,7 @@ public class MaxTest {
     }
 
     /**
-     * Тест возвращает второе число, если оно больше первого и третьего.
+     * РўРµСЃС‚ РІРѕР·РІСЂР°С‰Р°РµС‚ РІС‚РѕСЂРѕРµ С‡РёСЃР»Рѕ, РµСЃР»Рё РѕРЅРѕ Р±РѕР»СЊС€Рµ РїРµСЂРІРѕРіРѕ Рё С‚СЂРµС‚СЊРµРіРѕ.
      */
     @Test
     public void whenTheFirstAndSecondAndThirdEqualsThenFirstReturn() {

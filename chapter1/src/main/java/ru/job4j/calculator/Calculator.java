@@ -7,45 +7,45 @@ package ru.job4j.calculator;
 public class Calculator {
 
     /**
-     * Содержит результат вычислений.
+     * вЂ”РѕРґРµСЂР¶РёС‚ СЂРµР·СѓР»СЊС‚Р°С‚ РІС‹С‡РёСЃР»РµРЅРёР№.
      */
     private double result;
 
     /**
-     * Метод складывает 2 числа.
-     * @param firstNumber первое число.
-     * @param secondNumber второе число.
-     * записывает в поле result сумму двух чисел.
+     * С›РµС‚РѕРґ СЃРєР»Р°РґС‹РІР°РµС‚ 2 С‡РёСЃР»Р°.
+     * @param firstNumber РїРµСЂРІРѕРµ С‡РёСЃР»Рѕ.
+     * @param secondNumber РІС‚РѕСЂРѕРµ С‡РёСЃР»Рѕ.
+     * Р·Р°РїРёСЃС‹РІР°РµС‚ РІ РїРѕР»Рµ result СЃСѓРјРјСѓ РґРІСѓС… С‡РёСЃРµР».
      */
     public void add(double firstNumber, double secondNumber) {
         this.result = firstNumber + secondNumber;
     }
 
     /**
-     * Метод вычитает второе число из первого.
-     * @param firstNumber первое число.
-     * @param secondNumber второе число.
-     * записывает в поле result получившийся после вычитания результат.
+     * С›РµС‚РѕРґ РІС‹С‡РёС‚Р°РµС‚ РІС‚РѕСЂРѕРµ С‡РёСЃР»Рѕ РёР· РїРµСЂРІРѕРіРѕ.
+     * @param firstNumber РїРµСЂРІРѕРµ С‡РёСЃР»Рѕ.
+     * @param secondNumber РІС‚РѕСЂРѕРµ С‡РёСЃР»Рѕ.
+     * Р·Р°РїРёСЃС‹РІР°РµС‚ РІ РїРѕР»Рµ result РїРѕР»СѓС‡РёРІС€РёР№СЃВ¤ РїРѕСЃР»Рµ РІС‹С‡РёС‚Р°РЅРёВ¤ СЂРµР·СѓР»СЊС‚Р°С‚.
      */
     public void subtract(double firstNumber, double secondNumber) {
         this.result = firstNumber - secondNumber;
     }
 
     /**
-     * Метод делит первое число на второе.
-     * @param firstNumber первое число.
-     * @param secondNumber второе число.
-     * записывает в поле result получившийся после деления результат.
+     * С›РµС‚РѕРґ РґРµР»РёС‚ РїРµСЂРІРѕРµ С‡РёСЃР»Рѕ РЅР° РІС‚РѕСЂРѕРµ.
+     * @param firstNumber РїРµСЂРІРѕРµ С‡РёСЃР»Рѕ.
+     * @param secondNumber РІС‚РѕСЂРѕРµ С‡РёСЃР»Рѕ.
+     * Р·Р°РїРёСЃС‹РІР°РµС‚ РІ РїРѕР»Рµ result РїРѕР»СѓС‡РёРІС€РёР№СЃВ¤ РїРѕСЃР»Рµ РґРµР»РµРЅРёВ¤ СЂРµР·СѓР»СЊС‚Р°С‚.
      */
     public void divide(double firstNumber, double secondNumber) {
         this.result = firstNumber / secondNumber;
     }
 
     /**
-     * Метод умножает 2 числа.
-     * @param firstNumber первое число.
-     * @param secondNumber второе число.
-     * записывает в поле result результат умножения.
+     * С›РµС‚РѕРґ СѓРјРЅРѕР¶Р°РµС‚ 2 С‡РёСЃР»Р°.
+     * @param firstNumber РїРµСЂРІРѕРµ С‡РёСЃР»Рѕ.
+     * @param secondNumber РІС‚РѕСЂРѕРµ С‡РёСЃР»Рѕ.
+     * Р·Р°РїРёСЃС‹РІР°РµС‚ РІ РїРѕР»Рµ result СЂРµР·СѓР»СЊС‚Р°С‚ СѓРјРЅРѕР¶РµРЅРёВ¤.
      */
     public void multiply(double firstNumber, double secondNumber) {
         this.result = firstNumber * secondNumber;
@@ -53,7 +53,7 @@ public class Calculator {
 
     /**
      *
-     * @return возвращает result.
+     * @return РІРѕР·РІСЂР°С‰Р°РµС‚ result.
      */
     public double getResult() {
         return this.result;

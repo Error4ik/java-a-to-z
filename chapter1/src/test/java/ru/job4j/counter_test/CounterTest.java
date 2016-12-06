@@ -6,12 +6,12 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 /**
- * Тест класса Counter.
+ * РўРµСЃС‚ РєР»Р°СЃСЃР° Counter.
  */
 public class CounterTest {
 
     /**
-     * Тест для метода который возвращает сумму всех четных чисел в диапазоне от first до second.
+     * РўРµСЃС‚ РґР»СЏ РјРµС‚РѕРґР° РєРѕС‚РѕСЂС‹Р№ РІРѕР·РІСЂР°С‰Р°РµС‚ СЃСѓРјРјСѓ РІСЃРµС… С‡РµС‚РЅС‹С… С‡РёСЃРµР» РІ РґРёР°РїР°Р·РѕРЅРµ РѕС‚ first РґРѕ second.
      */
     @Test
     public void testAdd() {

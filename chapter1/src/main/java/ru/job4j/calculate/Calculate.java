@@ -8,8 +8,8 @@ package ru.job4j.calculate;
  */
 public class Calculate {
    /**
-    * @param text любой текст.
-    * @return Возвращает строку в которой текст повторяется три раза.
+    * @param text Р»СЋР±РѕР№ С‚РµРєСЃС‚.
+    * @return Р’РѕР·РІСЂР°С‰Р°РµС‚ СЃС‚СЂРѕРєСѓ РІ РєРѕС‚РѕСЂРѕР№ С‚РµРєСЃС‚ РїРѕРІС‚РѕСЂСЏРµС‚СЃСЏ С‚СЂРё СЂР°Р·Р°.
     */
    public String showText(String text) {
         return String.format("%s %s %s", text, text, text);

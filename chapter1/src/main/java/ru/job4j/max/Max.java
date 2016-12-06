@@ -1,26 +1,26 @@
 package ru.job4j.max;
 
 /**
- * Клас для нахождения максимального числа.
+ * РљР»Р°СЃ РґР»СЏ РЅР°С…РѕР¶РґРµРЅРёСЏ РјР°РєСЃРёРјР°Р»СЊРЅРѕРіРѕ С‡РёСЃР»Р°.
  */
 public class Max {
 
     /**
-     * Метод получает на вход 2 числа и возвращает то которое больше.
-     * @param first первое число.
-     * @param second второе число.
-     * @return возвращает большее число.
+     * РњРµС‚РѕРґ РїРѕР»СѓС‡Р°РµС‚ РЅР° РІС…РѕРґ 2 С‡РёСЃР»Р° Рё РІРѕР·РІСЂР°С‰Р°РµС‚ С‚Рѕ РєРѕС‚РѕСЂРѕРµ Р±РѕР»СЊС€Рµ.
+     * @param first РїРµСЂРІРѕРµ С‡РёСЃР»Рѕ.
+     * @param second РІС‚РѕСЂРѕРµ С‡РёСЃР»Рѕ.
+     * @return РІРѕР·РІСЂР°С‰Р°РµС‚ Р±РѕР»СЊС€РµРµ С‡РёСЃР»Рѕ.
      */
     public int findMaxTwoNumber(final int first, final int second) {
         return first > second ? first : second;
     }
 
     /**
-     * Находит большее из трех чисел.
-     * @param first первое число.
-     * @param second второе число.
-     * @param third третье число.
-     * @return возвращает большее из трех чисел.
+     * РќР°С…РѕРґРёС‚ Р±РѕР»СЊС€РµРµ РёР· С‚СЂРµС… С‡РёСЃРµР».
+     * @param first РїРµСЂРІРѕРµ С‡РёСЃР»Рѕ.
+     * @param second РІС‚РѕСЂРѕРµ С‡РёСЃР»Рѕ.
+     * @param third С‚СЂРµС‚СЊРµ С‡РёСЃР»Рѕ.
+     * @return РІРѕР·РІСЂР°С‰Р°РµС‚ Р±РѕР»СЊС€РµРµ РёР· С‚СЂРµС… С‡РёСЃРµР».
      */
     public int findLargeNumberOfThree(final int first, final int second, final int third) {
         return findMaxTwoNumber(findMaxTwoNumber(first, second), third);

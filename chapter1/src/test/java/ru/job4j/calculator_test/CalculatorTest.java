@@ -7,23 +7,23 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 /**
- *  Тестирует основные операции калькулятора.
- *  Сложение, Вычитание, Умножение, Деление.
+ *  РўРµСЃС‚РёСЂСѓРµС‚ РѕСЃРЅРѕРІРЅС‹Рµ РѕРїРµСЂР°С†РёРё РєР°Р»СЊРєСѓР»СЏС‚РѕСЂР°.
+ *  РЎР»РѕР¶РµРЅРёРµ, Р’С‹С‡РёС‚Р°РЅРёРµ, РЈРјРЅРѕР¶РµРЅРёРµ, Р”РµР»РµРЅРёРµ.
  */
 public class CalculatorTest {
 
     /**
-     * Первое число для теста.
+     * РџРµСЂРІРѕРµ С‡РёСЃР»Рѕ РґР»СЏ С‚РµСЃС‚Р°.
      */
     private final double first = 5.0;
 
     /**
-     * Второе число для теста.
+     * Р’С‚РѕСЂРѕРµ С‡РёСЃР»Рѕ РґР»СЏ С‚РµСЃС‚Р°.
      */
     private final double second = 5.0;
 
     /**
-     * Тест сложения 2 чисел.
+     * РўРµСЃС‚ СЃР»РѕР¶РµРЅРёСЏ 2 С‡РёСЃРµР».
      */
     @Test
     public void testAdd() {
@@ -34,7 +34,7 @@ public class CalculatorTest {
     }
 
     /**
-     * Тест вычитания 2 чисел.
+     * РўРµСЃС‚ РІС‹С‡РёС‚Р°РЅРёСЏ 2 С‡РёСЃРµР».
      */
     @Test
     public void testSubtract() {
@@ -45,7 +45,7 @@ public class CalculatorTest {
     }
 
     /**
-     * Тест деления 2 чисел.
+     * РўРµСЃС‚ РґРµР»РµРЅРёСЏ 2 С‡РёСЃРµР».
      */
     @Test
     public void testDivide() {
@@ -56,7 +56,7 @@ public class CalculatorTest {
     }
 
     /**
-     * Тест умножения 2 чисел.
+     * РўРµСЃС‚ СѓРјРЅРѕР¶РµРЅРёСЏ 2 С‡РёСЃРµР».
      */
     @Test
     public void testMultiply() {
@@ -67,7 +67,7 @@ public class CalculatorTest {
     }
 
     /**
-     * Тест возврата поля result.
+     * РўРµСЃС‚ РІРѕР·РІСЂР°С‚Р° РїРѕР»СЏ result.
      */
     @Test
     public void testGetResult() {

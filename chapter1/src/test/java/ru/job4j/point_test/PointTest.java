@@ -6,12 +6,12 @@ import static org.hamcrest.number.IsCloseTo.closeTo;
 import static org.junit.Assert.assertThat;
 
 /**
- * Тест.
+ * РўРµСЃС‚.
  */
 public class PointTest {
 
     /**
-     * Тест метода distanceTo.
+     * РўРµСЃС‚ РјРµС‚РѕРґР° distanceTo.
      */
     @Test
     public void testDistanceTo() {

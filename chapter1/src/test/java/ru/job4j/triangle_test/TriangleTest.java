@@ -7,13 +7,13 @@ import static org.junit.Assert.assertThat;
 import static org.hamcrest.number.IsCloseTo.closeTo;
 
 /**
- * Тест вычисления площади треугольника.
+ * РўРµСЃС‚ РІС‹С‡РёСЃР»РµРЅРёСЏ РїР»РѕС‰Р°РґРё С‚СЂРµСѓРіРѕР»СЊРЅРёРєР°.
  * @author Alexey.
  */
 public class TriangleTest {
 
     /**
-     * Тест площади треугольнка с координатами больше 0.
+     * РўРµСЃС‚ РїР»РѕС‰Р°РґРё С‚СЂРµСѓРіРѕР»СЊРЅРєР° СЃ РєРѕРѕСЂРґРёРЅР°С‚Р°РјРё Р±РѕР»СЊС€Рµ 0.
      */
     @Test
     public void thenAreaTriangleThatValidPoint() {
@@ -27,7 +27,7 @@ public class TriangleTest {
     }
 
     /**
-     * Тест площади треугольнка с координатами равными 0.
+     * РўРµСЃС‚ РїР»РѕС‰Р°РґРё С‚СЂРµСѓРіРѕР»СЊРЅРєР° СЃ РєРѕРѕСЂРґРёРЅР°С‚Р°РјРё СЂР°РІРЅС‹РјРё 0.
      */
     @Test
     public void thenAreaTriangleThatZeroPoint() {
