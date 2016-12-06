@@ -1,5 +1,6 @@
-package ru.job4j.max;
+package ru.job4j.max_test;
 
+import ru.job4j.max.Max;
 import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;

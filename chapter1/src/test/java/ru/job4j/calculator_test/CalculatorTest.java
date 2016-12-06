@@ -1,7 +1,7 @@
-package ru.job4j.calculator;
+package ru.job4j.calculator_test;
 
 
-
+import ru.job4j.calculator.Calculator;
 import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;

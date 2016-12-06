@@ -4,4 +4,4 @@
  * @since 1.0
  */
 
-package ru.job4j.triangle;
+package ru.job4j.counter;

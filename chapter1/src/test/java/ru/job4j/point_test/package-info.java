@@ -4,4 +4,4 @@
  * @since 1.0
  */
 
-package ru.job4j.calculator;
+package ru.job4j.point_test;

@@ -4,4 +4,4 @@
  * @since 1.0
  */
 
-package ru.job4j.point;
+package ru.job4j.counter_test;

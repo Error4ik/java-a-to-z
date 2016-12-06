@@ -4,4 +4,4 @@
  * @since 1.0
  */
 
-package ru.job4j.max;
+package ru.job4j.triangle_test;
