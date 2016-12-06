@@ -1,4 +1,6 @@
-package ru.avoronin;
+package ru.job4j.triangle;
+
+import ru.job4j.point.Point;
 
 /**
  * Класс для вычисления площади треугольника.

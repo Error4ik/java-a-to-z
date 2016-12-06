@@ -4,4 +4,4 @@
  * @since 1.0
  */
 
-package ru.avoronin;
+package ru.job4j.max;

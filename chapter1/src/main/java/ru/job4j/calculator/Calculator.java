@@ -1,4 +1,4 @@
-package ru.avoronin;
+package ru.job4j.calculator;
 
 /**
  * class Calculator.

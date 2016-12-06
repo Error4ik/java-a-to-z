@@ -1,4 +1,4 @@
-package ru.avoronin;
+package ru.job4j.point;
 
 /**
  * Класс описывает точку в системе координат.
@@ -34,6 +34,6 @@ public class Point {
     public double distanceTo(Point point) {
         double distanceX = this.x - point.x;
         double distanceY = this.y - point.y;
-        return Math.sqrt((distanceX * distanceX) + (distanceY * distanceY));
+        return Math.sqrt(distanceX * distanceX + distanceY * distanceY);
     }
 }

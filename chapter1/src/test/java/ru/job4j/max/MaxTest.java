@@ -1,4 +1,4 @@
-package ru.avoronin;
+package ru.job4j.max;
 
 import org.junit.Test;
 import static org.hamcrest.core.Is.is;

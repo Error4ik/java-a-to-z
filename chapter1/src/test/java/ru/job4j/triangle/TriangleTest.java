@@ -1,5 +1,6 @@
-package ru.avoronin;
+package ru.job4j.triangle;
 
+import ru.job4j.point.Point;
 import org.junit.Test;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.number.IsCloseTo.closeTo;
