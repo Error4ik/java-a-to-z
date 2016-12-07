@@ -42,7 +42,7 @@ public class PaintTest {
     public void whenHeightMoreThatOneThenReturnString() {
         final Paint p = new Paint();
         final int height = 2;
-        String result = " ^ \r\n^ ^ \r\n";
+        String result = " ^ " + System.getProperty("line.separator") + "^ ^ " +  System.getProperty("line.separator");
         assertThat(result, is(p.piramide(height)));
     }
 }
