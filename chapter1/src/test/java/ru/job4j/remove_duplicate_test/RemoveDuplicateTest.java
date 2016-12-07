@@ -18,6 +18,6 @@ public class RemoveDuplicateTest {
         final String[] actual = new String[] {"Игорь", "Вася", "Алексей", "Миша", "Саша", "Игорь", "Алексей", "Саша", "Игорь", "Алексей", "Миша"};
         final String[] expected = new String[] {"Игорь", "Вася", "Алексей", "Миша", "Саша"};
         RemoveDuplicate removeDuplicate = new RemoveDuplicate();
-        assertThat(expected, is(removeDuplicate.removeDuplicate(actual)));
+        assertThat(removeDuplicate.removeDuplicate(actual), is(expected));
     }
 }

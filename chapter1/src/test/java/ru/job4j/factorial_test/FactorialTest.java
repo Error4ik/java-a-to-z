@@ -18,6 +18,6 @@ public class FactorialTest {
         Factorial factorial = new Factorial();
         final int number = 5;
         final int factorialFive = 120;
-        assertThat(factorialFive, is(factorial.findFactorial(number)));
+        assertThat(factorial.findFactorial(number), is(factorialFive));
     }
 }

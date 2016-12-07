@@ -15,12 +15,12 @@ public class CalculatorTest {
     /**
      * Первое число для теста.
      */
-    private final double first = 5.0;
+    private final double first = 5d;
 
     /**
      * Второе число для теста.
      */
-    private final double second = 5.0;
+    private final double second = 5d;
 
     /**
      * Тест сложения 2 чисел.
@@ -28,9 +28,9 @@ public class CalculatorTest {
     @Test
     public void testAdd() {
         Calculator calc = new Calculator();
-        final double resultAdd = 10.0;
+        final double resultAdd = 10d;
         calc.add(first, second);
-        assertThat(resultAdd, is(calc.getResult()));
+        assertThat(calc.getResult(), is(resultAdd));
     }
 
     /**
@@ -39,9 +39,9 @@ public class CalculatorTest {
     @Test
     public void testSubtract() {
         Calculator calc = new Calculator();
-        final double resultSubtract = 0.0;
+        final double resultSubtract = 0d;
         calc.subtract(first, second);
-        assertThat(resultSubtract, is(calc.getResult()));
+        assertThat(calc.getResult(), is(resultSubtract));
     }
 
     /**
@@ -50,9 +50,9 @@ public class CalculatorTest {
     @Test
     public void testDivide() {
         Calculator calc = new Calculator();
-        final double resultDivide = 1.0;
+        final double resultDivide = 1d;
         calc.divide(first, second);
-        assertThat(resultDivide, is(calc.getResult()));
+        assertThat(calc.getResult(), is(resultDivide));
     }
 
     /**
@@ -63,7 +63,7 @@ public class CalculatorTest {
         Calculator calc = new Calculator();
         final double resultMultiply = 25.0;
         calc.multiply(first, second);
-        assertThat(resultMultiply, is(calc.getResult()));
+        assertThat(calc.getResult(), is(resultMultiply));
     }
 
     /**
@@ -72,6 +72,6 @@ public class CalculatorTest {
     @Test
     public void testGetResult() {
         Calculator calc = new Calculator();
-        assertThat(0.0, is(calc.getResult()));
+        assertThat(calc.getResult(), is(0d));
     }
 }

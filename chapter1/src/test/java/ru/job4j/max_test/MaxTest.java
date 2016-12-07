@@ -18,7 +18,7 @@ public class MaxTest {
         Max max = new Max();
         final int first = 5;
         final int second = 3;
-        assertThat(first, is(max.findMaxTwoNumber(first, second)));
+        assertThat(max.findMaxTwoNumber(first, second), is(first));
     }
 
     /**
@@ -29,7 +29,7 @@ public class MaxTest {
         Max max = new Max();
         final int first = 7;
         final int second = 9;
-        assertThat(second, is(max.findMaxTwoNumber(first, second)));
+        assertThat(max.findMaxTwoNumber(first, second), is(second));
     }
 
     /**
@@ -40,7 +40,7 @@ public class MaxTest {
         Max max = new Max();
         final int first = 5;
         final int second = 5;
-        assertThat(first, is(max.findMaxTwoNumber(first, second)));
+        assertThat(max.findMaxTwoNumber(first, second), is(first));
     }
 
 
@@ -53,7 +53,7 @@ public class MaxTest {
         final int first = 5;
         final int second = 3;
         final int third = 4;
-        assertThat(first, is(max.findLargeNumberOfThree(first, second, third)));
+        assertThat(max.findLargeNumberOfThree(first, second, third), is(first));
     }
 
     /**
@@ -65,7 +65,7 @@ public class MaxTest {
         final int first = 5;
         final int second = 7;
         final int third = 4;
-        assertThat(second, is(max.findLargeNumberOfThree(first, second, third)));
+        assertThat(max.findLargeNumberOfThree(first, second, third), is(second));
     }
 
     /**
@@ -77,7 +77,7 @@ public class MaxTest {
         final int first = 5;
         final int second = 7;
         final int third = 11;
-        assertThat(third, is(max.findLargeNumberOfThree(first, second, third)));
+        assertThat(max.findLargeNumberOfThree(first, second, third), is(third));
     }
 
     /**
@@ -89,6 +89,6 @@ public class MaxTest {
         final int first = 5;
         final int second = 5;
         final int third = 5;
-        assertThat(first, is(max.findLargeNumberOfThree(first, second, third)));
+        assertThat(max.findLargeNumberOfThree(first, second, third), is(first));
     }
 }

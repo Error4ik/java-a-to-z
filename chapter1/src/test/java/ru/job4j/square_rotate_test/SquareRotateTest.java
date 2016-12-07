@@ -18,6 +18,6 @@ public class SquareRotateTest {
         final SquareRotate rotate = new SquareRotate();
         final int[][] actualArray = new int[][] {{0, 1, 2}, {3, 4, 5}, {6, 7, 8}};
         final int[][] expectedArray = new int[][] {{2, 5, 8}, {1, 4, 7}, {0, 3, 6}};
-        assertThat(expectedArray, is(rotate.squareRotate(actualArray)));
+        assertThat(rotate.squareRotate(actualArray), is(expectedArray));
     }
 }

@@ -19,6 +19,6 @@ public class CounterTest {
         final int first = 1;
         final int second = 10;
         final int result = 30;
-        assertThat(result, is(counter.add(first, second)));
+        assertThat(counter.add(first, second), is(result));
     }
 }

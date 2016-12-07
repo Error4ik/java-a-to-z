@@ -18,6 +18,6 @@ public class TurnTest {
         final Turn turn = new Turn();
         int[] array = new int[] {0, 1, 2};
         int[] expectedArray = new int[] {2, 1, 0};
-        assertThat(expectedArray, is(turn.back(array)));
+        assertThat(turn.back(array), is(expectedArray));
     }
 }

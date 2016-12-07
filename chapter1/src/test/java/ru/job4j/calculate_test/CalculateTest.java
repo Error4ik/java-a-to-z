@@ -20,6 +20,7 @@ public class CalculateTest {
     public void testShowText() {
         Calculate calc = new Calculate();
         String actualText = calc.showText("World");
-        assertThat(actualText, is("World World World"));
+        String expected = "World World World";
+        assertThat(expected, is(actualText));
     }
 }

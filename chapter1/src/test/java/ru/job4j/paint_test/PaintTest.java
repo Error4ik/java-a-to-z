@@ -19,7 +19,7 @@ public class PaintTest {
         final Paint p = new Paint();
         final int height = 0;
         String result = "";
-        assertThat(result, is(p.piramide(height)));
+        assertThat(p.piramide(height), is(result));
     }
 
     /**
@@ -31,7 +31,7 @@ public class PaintTest {
         final Paint p = new Paint();
         final int height = 1;
         String result = "^ " + System.getProperty("line.separator");
-        assertThat(result, is(p.piramide(height)));
+        assertThat(p.piramide(height), is(result));
     }
 
     /**
@@ -43,6 +43,6 @@ public class PaintTest {
         final Paint p = new Paint();
         final int height = 2;
         String result = " ^ " + System.getProperty("line.separator") + "^ ^ " +  System.getProperty("line.separator");
-        assertThat(result, is(p.piramide(height)));
+        assertThat(p.piramide(height), is(result));
     }
 }
