@@ -30,7 +30,7 @@ public class PaintTest {
     public void whenHeightEqualsOneThenReturnOneSymbolString() {
         final Paint p = new Paint();
         final int height = 1;
-        String result = "^ \r\n";
+        String result = "^ " + System.getProperty("line.separator");
         assertThat(result, is(p.piramide(height)));
     }
 
