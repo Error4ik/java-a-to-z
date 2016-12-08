@@ -1,23 +1,24 @@
 <project>
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>ru.job4j</groupId>
-        <artifactId>junior</artifactId>
-	<packaging>pom</packaging>
-	<version>2.0</version>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>ru.job4j</groupId>
+    <artifactId>junior</artifactId>
+    <packaging>pom</packaging>
+    <version>2.0</version>
 
-	<properties>
-        	<maven.compiler.source>1.8</maven.compiler.source>
-        	<maven.compiler.target>1.8</maven.compiler.target>
-        	<project.build.sourceencoding>UTF-8</project.build.sourceencoding>
-    	</properties>
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceencoding>UTF-8</project.build.sourceencoding>
+    </properties>
 
 
-	<modules>
-	 <module>chapter1</module>
-	</modules>
-	
+    <modules>
+        <module>chapter1</module>
+        <module>chapter2</module>
+    </modules>
 
-	<dependencies>
+
+    <dependencies>
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-all</artifactId>
