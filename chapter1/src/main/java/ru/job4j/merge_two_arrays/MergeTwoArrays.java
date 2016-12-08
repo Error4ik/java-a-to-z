@@ -15,7 +15,6 @@ class MergeTwoArrays {
     int[] mergeTwoArrays(final int[] one, final int[] two) {
         int oneLength = one.length;
         int twoLength = two.length;
-
         final int[] array = new int[oneLength + twoLength];
         for (int i = 0; i < oneLength; i++) {
             array[i] = one[i];
@@ -40,7 +39,6 @@ class MergeTwoArrays {
         int lengthTwo = two.length;
 
         final int[] array = new int[lengthOne + lengthTwo];
-
         System.arraycopy(one, 0, array, 0, lengthOne);
         System.arraycopy(two, 0, array, lengthOne, lengthTwo);
         return array;
