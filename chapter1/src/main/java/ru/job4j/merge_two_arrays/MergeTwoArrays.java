@@ -1,46 +1,49 @@
 package ru.job4j.merge_two_arrays;
 
 /**
- * Класс для объеденения двух массивом.
+ * Класс для объеденения двух отсортированных массивов.
  */
 class MergeTwoArrays {
 
     /**
-     * Метод объеденяет 2 массива и копирует с помощью циклов.
+     * Метод объеденяет 2 отсортированных массива.
      *
-     * @param one первый массив.
-     * @param two второй массив.
-     * @return Возвращает массив содержащий оба переданных.
+     * @param first  первый отсортированный массив.
+     * @param second второй отсортированный массив.
+     * @return возвращает отсортированный новый массив который содержит первый и второй массивы.
      */
-    int[] mergeTwoArrays(final int[] one, final int[] two) {
-        int oneLength = one.length;
-        int twoLength = two.length;
-        final int[] array = new int[oneLength + twoLength];
-        for (int i = 0; i < oneLength; i++) {
-            array[i] = one[i];
+    public int[] mergeTwoArrays(int[] first, int[] second) {
+        int firstLen = first.length;
+        int secondLen = second.length;
+
+        final int[] resultArray = new int[firstLen + secondLen];
+
+        int indexFirstArray = 0;
+        int indexSecondArray = 0;
+        int indexResultArray = 0;
+
+        while (indexFirstArray < firstLen && indexSecondArray < secondLen) {
+            if (first[indexFirstArray] < second[indexSecondArray]) {
+                resultArray[indexResultArray] = first[indexFirstArray];
+                indexFirstArray++;
+            } else {
+                resultArray[indexResultArray] = second[indexSecondArray];
+                indexSecondArray++;
+            }
+            indexResultArray++;
         }
 
-        int i = 0;
-        for (int k = oneLength; k < array.length; k++) {
-            array[k] = two[i++];
+        while (indexFirstArray < firstLen) {
+            resultArray[indexResultArray] = first[indexFirstArray];
+            indexFirstArray++;
+            indexResultArray++;
         }
-        return array;
-    }
 
-    /**
-     * Метод объеденяет 2 массива с помощью System.arraycopy.
-     *
-     * @param one первый массив.
-     * @param two второй массив.
-     * @return Возвращает массив содержащий оба переданных.
-     */
-    int[] mergeTwoArrays2(final int[] one, final int[] two) {
-        int lengthOne = one.length;
-        int lengthTwo = two.length;
-
-        final int[] array = new int[lengthOne + lengthTwo];
-        System.arraycopy(one, 0, array, 0, lengthOne);
-        System.arraycopy(two, 0, array, lengthOne, lengthTwo);
-        return array;
+        while (indexSecondArray < secondLen) {
+            resultArray[indexResultArray] = second[indexSecondArray];
+            indexSecondArray++;
+            indexResultArray++;
+        }
+        return resultArray;
     }
 }
