@@ -36,7 +36,7 @@ public class TrackerTest {
         final Tracker tracker = new Tracker();
         tracker.addTask(task);
         final boolean result = true;
-        assertThat(tracker.remove(task), is(result));
+        assertThat(tracker.removeTask(task), is(result));
     }
 
     /**

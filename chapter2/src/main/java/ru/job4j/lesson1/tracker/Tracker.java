@@ -53,7 +53,7 @@ public class Tracker {
      * @param task заявка которую нужно удалить.
      * @return возвращает true если заявка была удалена, в противном случае false.
      */
-    public boolean remove(final Task task) {
+    public boolean removeTask(final Task task) {
         boolean result = false;
         for (int i = 0; i < getCountTask(); i++) {
             if (this.tasks[i].equals(task)) {

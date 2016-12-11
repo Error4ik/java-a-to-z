@@ -107,6 +107,7 @@ public class Task {
 
     /**
      * Устанавливает название заявки.
+     *
      * @param name название заявки.
      */
     public void setName(String name) {
@@ -124,6 +125,7 @@ public class Task {
 
     /**
      * Устанавливает описание заявки.
+     *
      * @param description описание заявки.
      */
     public void setDescription(final String description) {
@@ -135,7 +137,7 @@ public class Task {
      *
      * @return createDate.
      */
-    protected Date getDate() {
+    protected Date getCreateDate() {
         return this.createDate;
     }
 
@@ -194,10 +196,10 @@ public class Task {
         }
         Task task = (Task) o;
         return DEFAULT_SIZE_COMMENTS == task.DEFAULT_SIZE_COMMENTS
-                &&  getCountComment() == task.getCountComment()
+                && getCountComment() == task.getCountComment()
                 && Objects.equals(getName(), task.getName())
                 && Objects.equals(getDescription(), task.getDescription())
-                && Objects.equals(getDate(), task.getDate())
+                && Objects.equals(getCreateDate(), task.getCreateDate())
                 && Objects.equals(getId(), task.getId())
                 && Arrays.equals(comments, task.comments);
     }
@@ -209,7 +211,7 @@ public class Task {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(DEFAULT_SIZE_COMMENTS, getName(), getDescription(), getDate(), comments, getCountComment(), getId());
+        return Objects.hash(DEFAULT_SIZE_COMMENTS, getName(), getDescription(), getCreateDate(), comments, getCountComment(), getId());
     }
 
     /**
@@ -224,7 +226,7 @@ public class Task {
                 + ", Task descriptions: "
                 + this.getDescription()
                 + ", Created Date: "
-                + this.getDate()
+                + this.getCreateDate()
                 + ", Count comments: "
                 + this.getCountComment()
                 + ", id: " + this.getId()

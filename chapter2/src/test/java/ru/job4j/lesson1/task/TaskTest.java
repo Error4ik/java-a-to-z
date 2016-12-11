@@ -78,7 +78,7 @@ public class TaskTest {
         final Date actualDate = new Date();
         final Date expectedDate = actualDate;
         final Task task = new Task(null, null, 0);
-        assertThat(task.getDate(), is(expectedDate));
+        assertThat(task.getCreateDate(), is(expectedDate));
     }
 
     /**
