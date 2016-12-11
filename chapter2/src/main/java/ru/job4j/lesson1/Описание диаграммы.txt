@@ -1,0 +1,42 @@
+Пакет models.
+1. Comment - Класс является моделью комментария.
+Поля: 
+String comment - которое хранит в себе комментарий.
+Методы: 
+getComment() - возвращает комментарий.
+setComment() - устанавливает комментарий.
+
+2. Task - Класс является моделью заявки.
+Поля:
+String name - хранит название заявки.
+String description - хранит описание заявки.
+Date createDate - хранит дату создания заявки.
+Comment[] comments - хранит комментарии к заявке.
+int countComment - хранит количество добавленных комментариев.
+long id - хранит номер заявки.
+Методы:
+boolean addComment(Comment comment) - добавляет комментарий к заявке и возвращает true если комментарий добавлен.
+boolean removeComment(Comment comment) - удаляет комментарий к заявке и возвращает true если комментарий удален, и false если нет.
+Comment[] getAllComment() - возвращает все комментарии к заявке.
+setName(String name) - устанавливает имя заявки.
+setDescription(String description) - устанавливает описание заявки.
+getName() - возвращает имя заявки.
+getDescriptio() - возвращает описание заявки.
+getCountComment() -  возвращает количество комментариев.
+getCreateDate() - возвращает дату создания заявки.
+
+Пакет tracker.
+3. Tracker - Класс хранит в себе заявки.
+Поля:
+Task[] task - хранит заявки.
+int countTask - хранит количество заявок.
+Методы:
+boolean addTask(Task task) - добавляет заявку и возвращает true.
+boolean removeTask(Task task) - удаляет заявку и возвращает true если удалил и false если удаления не произошло.
+void addComment(Task task, Comment comment) - добавляет комментарий к заявке, принимает на вход заявку к которой нужно добавить комментарий и сам комментарий.
+boolean editTask(Task task, String name, String description) - редактирует имя и описание у заявки, на вход принимает заявку новое имя и новый комментарий.
+Task[] filteredTask(String name) - возвращает все заявки которые совпадают по имени с параметром name.
+long generateId() - генерирует id для заявки.
+Task[] getAllTask() - возвращает все заявки.
+boolean contains(Task task) - проверяет содержится ли заявка в трекере, если да то возвращает true если нет то false.
+int getCountTask() - возвращает количество заявок.
