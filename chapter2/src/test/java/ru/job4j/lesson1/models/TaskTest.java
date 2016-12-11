@@ -1,4 +1,4 @@
-package ru.job4j.lesson1.task;
+package ru.job4j.lesson1.models;
 
 import org.junit.Test;
 import static org.hamcrest.core.Is.is;
@@ -96,29 +96,6 @@ public class TaskTest {
         task.addComment(comment1);
         task.addComment(comment2);
         assertThat(task.getAllComments(), is(expectedArray));
-    }
-
-    /**
-     * Тест метода getComment.
-     * Если комментарий есть то он возвращается.
-     */
-    @Test
-    public void getComment() {
-        final Task task = new Task(null, null, 0);
-        final Comment comment = new Comment("Hello");
-        task.addComment(comment);
-        assertThat(task.getComment(0), is(comment));
-    }
-
-    /**
-     * Тест метода getComment.
-     * Если комментария нет то возвращает новый пустой коммент.
-     */
-    @Test
-    public void whenCommentIsNotListThenReturnEmptyComment() {
-        final Task task = new Task(null, null, 0);
-        final Comment emptyComment = new Comment("Empty");
-        assertThat(task.getComment(1), is(emptyComment));
     }
 
     /**

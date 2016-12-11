@@ -1,4 +1,4 @@
-package ru.job4j.lesson1.task;
+package ru.job4j.lesson1.models;
 
 import java.util.Objects;
 

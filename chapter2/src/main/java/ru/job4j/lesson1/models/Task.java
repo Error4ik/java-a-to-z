@@ -1,4 +1,4 @@
-package ru.job4j.lesson1.task;
+package ru.job4j.lesson1.models;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -150,16 +150,6 @@ public class Task {
         final Comment[] arrayComments = new Comment[this.countComment];
         System.arraycopy(this.comments, 0, arrayComments, 0, arrayComments.length);
         return arrayComments;
-    }
-
-    /**
-     * Возвращает комментарий по индексу.
-     *
-     * @param index индекс комментария который нужно вернуть.
-     * @return если индекс не валидный то возвращает пустой комментарий, если валидный возвращает комментарий по индексу.
-     */
-    public Comment getComment(final int index) {
-        return index >= countComment ? new Comment() : this.comments[index];
     }
 
     /**

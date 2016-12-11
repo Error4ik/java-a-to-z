@@ -1,8 +1,8 @@
 package ru.job4j.lesson1.tracker;
 
 import org.junit.Test;
-import ru.job4j.lesson1.task.Comment;
-import ru.job4j.lesson1.task.Task;
+import ru.job4j.lesson1.models.Comment;
+import ru.job4j.lesson1.models.Task;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -49,7 +49,9 @@ public class TrackerTest {
         final Task actualTask = new Task(null, null, 0);
         tracker.addTask(actualTask);
         tracker.addCommentTask(actualTask, expectedComment);
-        assertThat(actualTask.getComment(0), is(expectedComment));
+        final Comment[] comments = actualTask.getAllComments();
+        final Comment comment = comments[0];
+        assertThat(comment, is(expectedComment));
     }
 
     /**
