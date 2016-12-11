@@ -1,8 +1,8 @@
-package ru.job4j.tracker;
+package ru.job4j.lesson1.tracker;
 
 import org.junit.Test;
-import ru.job4j.tracker.task.Comment;
-import ru.job4j.tracker.task.Task;
+import ru.job4j.lesson1.task.Comment;
+import ru.job4j.lesson1.task.Task;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;

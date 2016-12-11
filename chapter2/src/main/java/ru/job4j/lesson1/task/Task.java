@@ -1,4 +1,4 @@
-package ru.job4j.tracker.task;
+package ru.job4j.lesson1.task;
 
 import java.util.Arrays;
 import java.util.Date;

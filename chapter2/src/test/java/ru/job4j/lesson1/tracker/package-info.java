@@ -4,4 +4,4 @@
  * @since 1.0
  */
 
-package ru.job4j.tracker;
+package ru.job4j.lesson1.tracker;
