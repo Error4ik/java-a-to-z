@@ -44,7 +44,7 @@ public class TaskTest {
         task.addComment(comment1);
         task.addComment(comment2);
         task.addComment(comment3);
-        task.remove(comment2);
+        task.removeComment(comment2);
         assertThat(task.getAllComments(), is(expectedArray));
     }
 
@@ -151,7 +151,7 @@ public class TaskTest {
         task.addComment(comment1);
         task.addComment(comment2);
         task.addComment(comment3);
-        task.remove(comment2);
+        task.removeComment(comment2);
         assertThat(task.getCountComment(), is(expectedCount));
     }
 

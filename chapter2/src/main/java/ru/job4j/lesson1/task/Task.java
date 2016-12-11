@@ -82,7 +82,7 @@ public class Task {
      * @param comment коментарий который нужно удалить.
      * @return возвращает true если элемент удалось удалить.
      */
-    public boolean remove(final Comment comment) {
+    public boolean removeComment(final Comment comment) {
         boolean result = false;
         for (int i = 0; i < getCountComment(); i++) {
             if (this.comments[i].equals(comment)) {
