@@ -17,7 +17,7 @@ public class TrackerTest {
      */
     @Test
     public void addTaskTest() {
-        final Task task = new Task(null, null, 0);
+        final Task task = new Task(null, null);
         final Task[] expectedArray = new Task[1];
         expectedArray[0] = task;
 
@@ -32,7 +32,7 @@ public class TrackerTest {
      */
     @Test
     public void removeTest() {
-        final Task task = new Task(null, null, 0);
+        final Task task = new Task(null, null);
         final Tracker tracker = new Tracker();
         tracker.addTask(task);
         final boolean result = true;
@@ -46,7 +46,7 @@ public class TrackerTest {
     public void addCommentTaskTest() {
         final Comment expectedComment = new Comment("555");
         final Tracker tracker = new Tracker();
-        final Task actualTask = new Task(null, null, 0);
+        final Task actualTask = new Task(null, null);
         tracker.addTask(actualTask);
         tracker.addCommentTask(actualTask, expectedComment);
         final Comment[] comments = actualTask.getAllComments();
@@ -55,20 +55,16 @@ public class TrackerTest {
     }
 
     /**
-     * Тест изменения имени и описания задачи.
+     * Тест редактирования задачи.
      */
     @Test
     public void editTaskTest() {
-        final long id = 10;
-        final boolean result = true;
-        final Task actualTask = new Task("Garry", "Bug Fix", id);
-        final Task expectedTask = new Task("Max", "Nice", id);
-
         final Tracker tracker = new Tracker();
-        tracker.addTask(actualTask);
-        tracker.editTask(actualTask, "Max", "Nice");
-        final Task[] array = tracker.getAllTasks();
-        assertThat(array[0].equals(expectedTask), is(result));
+        final Task task = new Task("Garry", "World");
+        tracker.addTask(task);
+        task.setName("Alex");
+        task.setDescription("Hello");
+        assertThat(tracker.editTask(task), is(true));
     }
 
     /**
@@ -77,11 +73,11 @@ public class TrackerTest {
     @Test
     public void filteredTaskToNameTest() {
         Tracker tracker = new Tracker();
-        final Task task1 = new Task("Garry", "Bug Fix", tracker.generateId());
-        final Task task2 = new Task("Max", "Bug Fix", tracker.generateId());
-        final Task task3 = new Task("Alex", "Bug Fix", tracker.generateId());
-        final Task task4 = new Task("Garry", "Bug Fix", tracker.generateId());
-        final Task task5 = new Task("Garry", "Bug Fix", tracker.generateId());
+        final Task task1 = new Task("Garry", "Bug Fix");
+        final Task task2 = new Task("Max", "Bug Fix");
+        final Task task3 = new Task("Alex", "Bug Fix");
+        final Task task4 = new Task("Garry", "Bug Fix");
+        final Task task5 = new Task("Garry", "Bug Fix");
         final int count = 3;
         final Task[] expectedArrayTask = new Task[count];
         expectedArrayTask[0] = task1;
@@ -98,26 +94,13 @@ public class TrackerTest {
     }
 
     /**
-     * Тест метода generateIdTest. Должен сгенерировать id для задачи.
-     * Сравниваю id с тем что сгенерил этот метод.
-     */
-    @Test
-    public void generateIdTest() {
-        final long expectedId =  (System.currentTimeMillis() / 1000);
-        final Tracker tracker = new Tracker();
-        final Task task = new Task(null, null, tracker.generateId());
-        final long actualId = task.getId();
-        assertThat(actualId, is(expectedId));
-    }
-
-    /**
      * Тест для метода getAllTasks, Должен возвращать массив заявок.
      */
     @Test
     public void getAllTasksTest() {
-        final Task task1 = new Task(null, null, 0);
-        final Task task2 = new Task(null, null, 0);
-        final Task task3 = new Task(null, null, 0);
+        final Task task1 = new Task(null, null);
+        final Task task2 = new Task(null, null);
+        final Task task3 = new Task(null, null);
         final int count = 3;
         final Task[] expectedArray = new Task[count];
         expectedArray[0] = task1;
@@ -140,11 +123,11 @@ public class TrackerTest {
         final int id = 10;
         final boolean result = true;
         Tracker tracker = new Tracker();
-        Task task1 = new Task("Garry", "Bug Fix", id);
+        Task task1 = new Task("Garry", "Bug Fix");
 
-        tracker.addTask(new Task(null, null, 0));
+        tracker.addTask(new Task(null, null));
         tracker.addTask(task1);
-        tracker.addTask(new Task(null, null, 0));
+        tracker.addTask(new Task(null, null));
 
         assertThat(tracker.contains(task1), is(result));
     }
@@ -155,11 +138,11 @@ public class TrackerTest {
     @Test
     public void getCountTaskTest() {
         Tracker tracker = new Tracker();
-        tracker.addTask(new Task(null, null, 0));
-        tracker.addTask(new Task(null, null, 0));
-        tracker.addTask(new Task(null, null, 0));
-        tracker.addTask(new Task(null, null, 0));
-        tracker.addTask(new Task(null, null, 0));
+        tracker.addTask(new Task(null, null));
+        tracker.addTask(new Task(null, null));
+        tracker.addTask(new Task(null, null));
+        tracker.addTask(new Task(null, null));
+        tracker.addTask(new Task(null, null));
         final int expectedCount = 5;
 
         assertThat(tracker.getCountTask(), is(expectedCount));

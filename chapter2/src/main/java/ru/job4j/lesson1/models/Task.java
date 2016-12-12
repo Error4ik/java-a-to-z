@@ -10,6 +10,11 @@ import java.util.Objects;
 public class Task {
 
     /**
+     * Статическая переменная хранит количество сохданных объектов Task.
+     */
+    private static int countCreatedTask;
+
+    /**
      * Размер массива Комментариев по умолчанию.
      */
     private static final int DEFAULT_SIZE_COMMENTS = 3;
@@ -42,20 +47,19 @@ public class Task {
     /**
      * Идентификатор для заявки.
      */
-    private long id;
+    private int id;
 
     /**
      * Конструктор создает заявку.
      *
      * @param name        имя заявки.
      * @param description описание заявки.
-     * @param id          идентификатор для заявки.
      */
-    public Task(String name, String description, long id) {
+    public Task(String name, String description) {
         this.name = name;
         this.description = description;
         this.createDate = new Date();
-        this.id = id;
+        this.id = getCountCreatedTask();
 
         this.comments = new Comment[DEFAULT_SIZE_COMMENTS];
     }
@@ -166,7 +170,7 @@ public class Task {
      *
      * @return id.
      */
-    public long getId() {
+    public int getId() {
         return id;
     }
 
@@ -221,5 +225,13 @@ public class Task {
                 + this.getCountComment()
                 + ", id: " + this.getId()
                 + System.getProperty("line.separator");
+    }
+
+    /**
+     * Геттер для статического поля.
+     * @return возвращает число созданных объектов Task.
+     */
+    private static int getCountCreatedTask() {
+        return ++countCreatedTask;
     }
 }

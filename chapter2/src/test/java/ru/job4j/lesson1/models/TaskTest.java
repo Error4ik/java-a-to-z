@@ -16,7 +16,7 @@ public class TaskTest {
      */
     @Test
     public void whenTheCommentsMoreThatTheDefaultValueThenIncreasingArrayReturnCountComment() {
-        Task task = new Task(null, null, 0);
+        Task task = new Task(null, null);
         task.addComment(new Comment());
         task.addComment(new Comment());
         task.addComment(new Comment());
@@ -40,7 +40,7 @@ public class TaskTest {
         expectedArray[0] = comment1;
         expectedArray[1] = comment3;
 
-        Task task = new Task(null, null, 0);
+        Task task = new Task(null, null);
         task.addComment(comment1);
         task.addComment(comment2);
         task.addComment(comment3);
@@ -55,7 +55,7 @@ public class TaskTest {
     public void getName() {
         final String actualName = "Garry";
         final String expectedName = actualName;
-        final Task task = new Task(actualName, null, 0);
+        final Task task = new Task(actualName, null);
         assertThat(task.getName(), is(expectedName));
     }
 
@@ -66,7 +66,7 @@ public class TaskTest {
     public void getDescription() {
         final String actualDesc = "Fix Bug";
         final String expectedDesc = actualDesc;
-        final Task task = new Task(null, actualDesc, 0);
+        final Task task = new Task(null, actualDesc);
         assertThat(task.getDescription(), is(expectedDesc));
     }
 
@@ -77,7 +77,7 @@ public class TaskTest {
     public void getCreateDate() {
         final Date actualDate = new Date();
         final Date expectedDate = actualDate;
-        final Task task = new Task(null, null, 0);
+        final Task task = new Task(null, null);
         assertThat(task.getCreateDate(), is(expectedDate));
     }
 
@@ -92,7 +92,7 @@ public class TaskTest {
         final Comment[] expectedArray = new Comment[2];
         expectedArray[0] = comment1;
         expectedArray[1] = comment2;
-        final Task task = new Task(null, null, 0);
+        final Task task = new Task(null, null);
         task.addComment(comment1);
         task.addComment(comment2);
         assertThat(task.getAllComments(), is(expectedArray));
@@ -104,7 +104,7 @@ public class TaskTest {
     @Test
     public void whenAddCommentCountIncrementThenReturnCountComment() {
         final String commentOne = "CommentOne";
-        final Task task = new Task(null, null, 0);
+        final Task task = new Task(null, null);
         task.addComment(new Comment(commentOne));
         task.addComment(new Comment(commentOne));
         task.addComment(new Comment(commentOne));
@@ -119,12 +119,11 @@ public class TaskTest {
     @Test
     public void whenRemoveCommentCountDecreasesThenReturnCountComment() {
         final int expectedCount = 2;
-
         final Comment comment1 = new Comment("Hello");
         final Comment comment2 = new Comment("Max");
         final Comment comment3 = new Comment("Garry");
 
-        final Task task = new Task(null, null, 0);
+        final Task task = new Task(null, null);
         task.addComment(comment1);
         task.addComment(comment2);
         task.addComment(comment3);
@@ -136,18 +135,31 @@ public class TaskTest {
      * Проверяет что 2 задачи идентичны.
      */
     @Test
-    public void equalsTest() {
+    public void whenNotEqualsThenReturnFalse() {
         final Comment comment = new Comment("Garry");
         final String name = "Garry";
         final String description = "Fix Bug";
         final Date date = new Date();
-        final long id = 10;
 
+        boolean expected = false;
+
+        Task task = new Task(name, description);
+        Task task2 = new Task(name, description);
+        assertThat(task.equals(task2), is(expected));
+    }
+
+    /**
+     * Проверяет что 2 задачи идентичны.
+     */
+    @Test
+    public void whenEqualsThenReturnTrue() {
+        final Comment comment = new Comment("Garry");
+        final String name = "Garry";
+        final String description = "Fix Bug";
         boolean expected = true;
 
-        Task task = new Task(name, description, id);
-        Task task2 = new Task(name, description, id);
-        assertThat(task.equals(task2), is(true));
+        Task task = new Task(name, description);
+        assertThat(task.equals(task), is(expected));
     }
 
     /**
@@ -155,18 +167,16 @@ public class TaskTest {
      */
     @Test
     public void toStringTest() {
-        final Comment comment = new Comment("Garry");
         final String name = "Garry";
         final String description = "Fix Bug";
         final Date date = new Date();
-        final long id = 10;
 
+        Task task = new Task(name, description);
         final String expected = "Task name: Garry,"
                 + " Task descriptions: Fix Bug, Created Date: " + date
-                + ", Count comments: 0, id: 10"
+                + ", Count comments: 0, id: " + task.getId()
                 + System.getProperty("line.separator");
 
-        Task task = new Task(name, description, id);
         assertThat(task.toString(), is(expected));
 
     }

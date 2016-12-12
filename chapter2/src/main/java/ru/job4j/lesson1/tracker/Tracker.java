@@ -82,19 +82,19 @@ public class Tracker {
     }
 
     /**
-     * Метод меняет имя и описание у существующей задачи.
+     * Метод редактирует задачу.
      *
      * @param task        задачу которую нужно отредавктировать.
-     * @param name        новое имя задачу.
-     * @param description новое описание задачи.
      * @return возвращает true если задачу удалось отредактировать, если нет то false.
      */
-    public boolean editTask(final Task task, final String name, final String description) {
+    public boolean editTask(final Task task) {
         boolean result = false;
-        if (this.contains(task)) {
-            task.setName(name);
-            task.setDescription(description);
-            result = true;
+        for (int i = 0; i < this.getCountTask(); i++) {
+            if (this.tasks[i].getId() == task.getId()) {
+                this.tasks[i] = task;
+                result = true;
+                break;
+            }
         }
         return result;
     }
@@ -114,15 +114,6 @@ public class Tracker {
             }
         }
         return Arrays.copyOf(filteredArray, countIndex);
-    }
-
-    /**
-     * Генерирует айди.
-     * @return возвращает id.
-     */
-    public long generateId() {
-        final int d = 1000;
-        return System.currentTimeMillis() / d;
     }
 
     /**
