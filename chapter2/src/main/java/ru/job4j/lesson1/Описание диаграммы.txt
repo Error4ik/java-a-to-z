@@ -1,13 +1,16 @@
 Пакет models.
 1. Comment - Класс является моделью комментария.
-Поля: 
+Поля:
+static int countCreateComment - Хранит количество созданных объектов класса Comment.
 String comment - которое хранит в себе комментарий.
 Методы: 
 getComment() - возвращает комментарий.
 setComment() - устанавливает комментарий.
+private getCountCreateComment - возвращает количество созданных объектов Comment.
 
 2. Task - Класс является моделью заявки.
 Поля:
+static countCreatedTask - Хранит количество созданных объектов класса Task.
 String name - хранит название заявки.
 String description - хранит описание заявки.
 Date createDate - хранит дату создания заявки.
@@ -24,6 +27,7 @@ getName() - возвращает имя заявки.
 getDescriptio() - возвращает описание заявки.
 getCountComment() -  возвращает количество комментариев.
 getCreateDate() - возвращает дату создания заявки.
+getCountCreatedTask - возвращает количество созданных объектов Task.
 
 Пакет tracker.
 3. Tracker - Класс хранит в себе заявки.
@@ -34,9 +38,8 @@ int countTask - хранит количество заявок.
 boolean addTask(Task task) - добавляет заявку и возвращает true.
 boolean removeTask(Task task) - удаляет заявку и возвращает true если удалил и false если удаления не произошло.
 void addComment(Task task, Comment comment) - добавляет комментарий к заявке, принимает на вход заявку к которой нужно добавить комментарий и сам комментарий.
-boolean editTask(Task task, String name, String description) - редактирует имя и описание у заявки, на вход принимает заявку новое имя и новый комментарий.
+boolean editTask(Task task) - редактирует заявку.
 Task[] filteredTask(String name) - возвращает все заявки которые совпадают по имени с параметром name.
-long generateId() - генерирует id для заявки.
 Task[] getAllTask() - возвращает все заявки.
 boolean contains(Task task) - проверяет содержится ли заявка в трекере, если да то возвращает true если нет то false.
 int getCountTask() - возвращает количество заявок.
