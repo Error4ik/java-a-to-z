@@ -189,8 +189,7 @@ public class Task {
             return false;
         }
         Task task = (Task) o;
-        return DEFAULT_SIZE_COMMENTS == task.DEFAULT_SIZE_COMMENTS
-                && getCountComment() == task.getCountComment()
+        return getCountComment() == task.getCountComment()
                 && Objects.equals(getName(), task.getName())
                 && Objects.equals(getDescription(), task.getDescription())
                 && Objects.equals(getCreateDate(), task.getCreateDate())
