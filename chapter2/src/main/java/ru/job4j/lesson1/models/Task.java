@@ -3,16 +3,12 @@ package ru.job4j.lesson1.models;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Objects;
+import java.util.Random;
 
 /**
  * Класс заявок.
  */
 public class Task {
-
-    /**
-     * Статическая переменная хранит количество сохданных объектов Task.
-     */
-    private static int countCreatedTask;
 
     /**
      * Размер массива Комментариев по умолчанию.
@@ -59,7 +55,7 @@ public class Task {
         this.name = name;
         this.description = description;
         this.createDate = new Date();
-        this.id = getCountCreatedTask();
+        this.id = createIdTask();
 
         this.comments = new Comment[DEFAULT_SIZE_COMMENTS];
     }
@@ -214,23 +210,24 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "Task name: "
+        return "{Task name: "
                 + this.getName()
-                + ", Task descriptions: "
+                + "}, {Task descriptions: "
                 + this.getDescription()
-                + ", Created Date: "
+                + "}, {Created Date: "
                 + this.getCreateDate()
-                + ", Count comments: "
+                + "}, {Count comments: "
                 + this.getCountComment()
-                + ", id: " + this.getId()
+                + "}, {id: " + this.getId() + "}"
                 + System.getProperty("line.separator");
     }
 
     /**
-     * Геттер для статического поля.
-     * @return возвращает число созданных объектов Task.
+     * @return возвращает id созданный из даты создания заявки .
      */
-    private static int getCountCreatedTask() {
-        return ++countCreatedTask;
+    private int createIdTask() {
+        final int d = 1000;
+        final int randomNumber = (int) (new Random().nextInt(d) * 1.3);
+        return (int) (getCreateDate().getTime() / d) / randomNumber;
     }
 }
