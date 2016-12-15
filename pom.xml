@@ -1,10 +1,10 @@
 <project>
     <modelVersion>4.0.0</modelVersion>
     <groupId>ru.job4j</groupId>
-    <artifactId>junior</artifactId>
+    <artifactId>java-a-to-z</artifactId>
     <packaging>pom</packaging>
     <version>2.0</version>
-	<name>junior</name>
+	<name>java-a-to-z</name>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
