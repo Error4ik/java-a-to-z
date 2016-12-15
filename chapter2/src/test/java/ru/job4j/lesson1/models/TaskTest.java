@@ -172,9 +172,9 @@ public class TaskTest {
         final Date date = new Date();
 
         Task task = new Task(name, description);
-        final String expected = "Task name: Garry,"
-                + " Task descriptions: Fix Bug, Created Date: " + date
-                + ", Count comments: 0, id: " + task.getId()
+        final String expected = "{Task name: Garry},"
+                + " {Task descriptions: Fix Bug}, {Created Date: " + date
+                + "}, {Count comments: 0}, {id: " + task.getId() + "}"
                 + System.getProperty("line.separator");
 
         assertThat(task.toString(), is(expected));
