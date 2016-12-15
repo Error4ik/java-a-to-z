@@ -90,7 +90,7 @@ public class Tracker {
     public boolean editTask(final Task task) {
         boolean result = false;
         for (int i = 0; i < this.getCountTask(); i++) {
-            if (this.tasks[i].getId() == task.getId()) {
+            if (task.getId() == this.tasks[i].getId()) {
                 this.tasks[i] = task;
                 result = true;
                 break;
@@ -109,7 +109,7 @@ public class Tracker {
         final Task[] filteredArray = new Task[this.countTask];
         int countIndex = 0;
         for (int i = 0; i < countTask; i++) {
-            if (this.tasks[i].getName().contains(string)) {
+            if (this.tasks[i].getName().toLowerCase().contains(string.toLowerCase())) {
                 filteredArray[countIndex++] = this.tasks[i];
             }
         }
