@@ -13,7 +13,7 @@ public class Task {
     /**
      * Размер массива Комментариев по умолчанию.
      */
-    private final int defaultSizeComments = 3;
+    private static final int DEFAULT_SIZE_COMMENTS = 3;
 
     /**
      * Название заявки.
@@ -57,7 +57,7 @@ public class Task {
         this.createDate = new Date();
         this.id = createIdTask();
 
-        this.comments = new Comment[defaultSizeComments];
+        this.comments = new Comment[DEFAULT_SIZE_COMMENTS];
     }
 
     /**
@@ -200,7 +200,7 @@ public class Task {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(defaultSizeComments, getName(), getDescription(), getCreateDate(), comments, getCountComment(), getId());
+        return Objects.hash(DEFAULT_SIZE_COMMENTS, getName(), getDescription(), getCreateDate(), comments, getCountComment(), getId());
     }
 
     /**
