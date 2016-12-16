@@ -13,7 +13,7 @@ public class Tracker {
     /**
      * Размер массива заявок по умолчанию.
      */
-    private final int defaultTaskCount = 3;
+    private static final int DEFAULT_TASK_COUNT = 3;
 
     /**
      * Массив для хранения заявок.
@@ -29,7 +29,7 @@ public class Tracker {
      * Конструктор создает массив для заявок размером по умолчанию.
      */
     public Tracker() {
-        this.tasks = new Task[defaultTaskCount];
+        this.tasks = new Task[DEFAULT_TASK_COUNT];
     }
 
     /**
