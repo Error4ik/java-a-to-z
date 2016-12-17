@@ -31,7 +31,7 @@ public class ShowAllCommentTask extends BaseAction {
         final int id = Integer.parseInt(inputData.getInput("Enter the task ID at which you want to show comments: ").trim());
         for (Task task : tracker.getAllTasks()) {
             if (task.getId() == id) {
-                System.out.println("Comments to the task id: " + task.getName());
+                System.out.println("Comments to the task id: " + task.getId());
                 dividingLine();
                 if (task.getCountComment() == 0) {
                     System.out.println("In this task, there are no comments.");
