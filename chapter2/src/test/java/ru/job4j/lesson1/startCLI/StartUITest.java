@@ -286,4 +286,15 @@ public class StartUITest {
         final ConsoleInputData inputData = new ConsoleInputData();
         inputData.getInput("");
     }
+
+    /**
+     * Тест проверят кидаетс ли исключение, когда у пользователя просится ввести число, а он вводит символ.
+     */
+    @Test(expected = NumberFormatException.class)
+    public void testThrowNumberFormatException() {
+        final String simulateInput = "aw";
+        System.setIn(new ByteArrayInputStream(simulateInput.getBytes()));
+        final ConsoleInputData inputData = new ConsoleInputData();
+        final int expected = Integer.parseInt(inputData.getInput("aaa"));
+    }
 }
