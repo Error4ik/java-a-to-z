@@ -30,6 +30,11 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+        <!--<dependency>-->
+        <!--<groupId>com.github.stefanbirkner</groupId>-->
+        <!--<artifactId>system-rules</artifactId>-->
+        <!--<version>1.3.0</version>-->
+        <!--</dependency>-->
     </dependencies>
 
     <build>
@@ -141,26 +146,6 @@
                         <goals>
                             <goal>analyze</goal>
                         </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>2.4.3</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration>
-                            <transformers>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>ru.job4j.lesson1.startCLI.StartTracker</mainClass>
-                                </transformer>
-                            </transformers>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
