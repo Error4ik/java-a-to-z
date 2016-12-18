@@ -48,7 +48,7 @@ public class StartUI {
             } catch (NumberFormatException e) {
                 System.out.println("This is not a number, try again!");
             } catch (MenuOutException e) {
-                System.out.println("error");
+                System.out.print("");
             }
         } while (value != exitNumber);
     }
