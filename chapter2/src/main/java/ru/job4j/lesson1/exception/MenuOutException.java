@@ -10,6 +10,6 @@ public class MenuOutException extends RuntimeException {
      * @param msg сообщение.
      */
     public MenuOutException(final String msg) {
-        System.out.println(msg);
+        System.out.print(msg);
     }
 }

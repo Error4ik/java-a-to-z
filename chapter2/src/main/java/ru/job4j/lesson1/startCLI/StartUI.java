@@ -48,7 +48,7 @@ public class StartUI {
             } catch (NumberFormatException e) {
                 System.out.println("This is not a number, try again!");
             } catch (MenuOutException e) {
-                System.out.print("");
+                System.out.println("Error number is not acceptable, try again");
             }
         } while (value != exitNumber);
     }
@@ -91,7 +91,7 @@ public class StartUI {
         if (valid) {
             menuTracker.select(number);
         } else {
-            throw new MenuOutException("Error number is not acceptable, try again");
+            throw new MenuOutException("");
         }
     }
 }
