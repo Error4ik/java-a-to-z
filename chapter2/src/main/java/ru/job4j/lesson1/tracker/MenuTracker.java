@@ -78,7 +78,7 @@ public class MenuTracker {
     public int[] getMenuNumbers() {
         final int[] menuNumbers = new int[this.getCountAction()];
         for (int i = 0; i < this.getCountAction(); i++) {
-            menuNumbers[i] = actions[i].getItemNumber();
+            menuNumbers[i] = Integer.parseInt(actions[i].getId());
         }
         return menuNumbers;
     }
@@ -115,7 +115,7 @@ public class MenuTracker {
      */
     public void select(final int value) {
         for (int i = 0; i < this.getCountAction(); i++) {
-            if (this.actions[i].getItemNumber() == value) {
+            if (Integer.parseInt(this.actions[i].getId()) == value) {
                 this.actions[i].execute(tracker, inputData);
             }
         }

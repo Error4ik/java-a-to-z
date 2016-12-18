@@ -26,15 +26,6 @@ public abstract class BaseAction implements Action {
     }
 
     /**
-     * Возвращает номер под которым данное действие находится в меню.
-     * @return номер.
-     */
-    @Override
-    public int getItemNumber() {
-        return Integer.parseInt(this.getId());
-    }
-
-    /**
      * Метод для отображения порядкового номера и названия действия.
      * @return строку с номером и именем действия.
      */
@@ -55,6 +46,7 @@ public abstract class BaseAction implements Action {
      * геттер для id действия.
      * @return id.
      */
+    @Override
     public String getId() {
         return this.id;
     }
