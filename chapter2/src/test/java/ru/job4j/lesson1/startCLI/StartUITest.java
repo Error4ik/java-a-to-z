@@ -175,9 +175,9 @@ public class StartUITest {
     public void showAllTaskTest() {
         final Tracker tracker = new Tracker();
         tracker.addTask(new Task("name", "desc"));
-        tracker.addTask(new Task("name", "desc"));
-        tracker.addTask(new Task("name", "desc"));
-        tracker.addTask(new Task("name", "desc"));
+        tracker.addTask(new Task("name1", "desc1"));
+        tracker.addTask(new Task("name2", "desc2"));
+        tracker.addTask(new Task("name3", "desc3"));
         final Input input = new StubInput(new String[]{"6"});
         final MenuTracker menuTracker = new MenuTracker(tracker, input);
 
