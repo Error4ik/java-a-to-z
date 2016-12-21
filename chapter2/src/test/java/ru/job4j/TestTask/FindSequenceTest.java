@@ -31,4 +31,15 @@ public class FindSequenceTest {
         assertThat(findSequence.find(sequence), is(result));
     }
 
+    /**
+     * Возвращает false если последователность не правильная.
+     */
+    @Test
+    public void whenFirstInvalidThenReturnFalse() {
+        final FindSequence findSequence = new FindSequence();
+        final String sequence = ")(()()((((())))))";
+        final boolean result = false;
+        assertThat(findSequence.find(sequence), is(result));
+    }
+
 }

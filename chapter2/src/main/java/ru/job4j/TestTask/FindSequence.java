@@ -15,6 +15,9 @@ public class FindSequence {
         final char[] chars = string.toCharArray();
         int count = 0;
         for (int i = 0; i < chars.length; i++) {
+            if (chars[0] == ')') {
+                return false;
+            }
             if (chars[i] == '(') {
                 count++;
             } else if (chars[i] == ')') {
