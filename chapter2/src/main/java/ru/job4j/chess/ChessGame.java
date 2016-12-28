@@ -79,9 +79,9 @@ public class ChessGame {
 
         final Figure currentFigure = getBoard().getFigure(current);
         final Point[] points = currentFigure.way(move);
-        if (currentFigure instanceof Pawn) {
+        if (currentFigure.getType().equals("Pawn")) {
             pawnMove(points, currentFigure, move);
-        } else if (currentFigure instanceof Knight) {
+        } else if (currentFigure.getType().equals("Knight")) {
             knightMove(currentFigure, move);
         } else {
             moveOtherFigure(points, currentFigure, move);

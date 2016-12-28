@@ -436,4 +436,14 @@ public class ChessGameTest {
         chessGame.getBoard().addFigure(new Rock(new Point(0, 0), false, "Rock"));
         chessGame.moveFigure(new Point(0, 0), new Point(7, 7));
     }
+
+    /**
+     * Тест метода getType у фигуры.
+     */
+    @Test
+    public void getTypeFigureTest() {
+        final Figure figure = new Pawn(new Point(1, 1), false, "Pawn");
+        final String expected = "Pawn";
+        assertThat(figure.getType(), is(expected));
+    }
 }

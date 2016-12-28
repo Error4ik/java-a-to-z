@@ -68,6 +68,14 @@ public abstract class Figure {
     }
 
     /**
+     * Геттер для поля тип.
+     * @return type.
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
      * Возвращает описание фигуры.
      * @return ячейка, цвет и тип.
      */
