@@ -18,7 +18,7 @@ public class CheckByteStreamTest {
     @Test
     public void whenEvenNumberThatReturnTrue() {
         final CheckByteStream cb = new CheckByteStream();
-        final String string = "40";
+        final String string = "4756";
         final InputStream input = new ByteArrayInputStream(string.getBytes());
         final boolean expected = true;
         assertThat(cb.isNumber(input), is(expected));
@@ -30,7 +30,7 @@ public class CheckByteStreamTest {
     @Test
     public void whenOddNumberThenReturnFalse() {
         final CheckByteStream cb = new CheckByteStream();
-        final String string = "39";
+        final String string = "39685";
         final InputStream input = new ByteArrayInputStream(string.getBytes());
         final boolean expected = false;
         assertThat(cb.isNumber(input), is(expected));
