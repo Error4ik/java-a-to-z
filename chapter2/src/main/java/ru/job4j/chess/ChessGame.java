@@ -79,85 +79,21 @@ public class ChessGame {
 
         final Figure currentFigure = getBoard().getFigure(current);
         final Point[] points = currentFigure.way(move);
-        if (currentFigure.getType().equals("Pawn")) {
-            pawnMove(points, currentFigure, move);
-        } else if (currentFigure.getType().equals("Knight")) {
-            knightMove(currentFigure, move);
-        } else {
-            moveOtherFigure(points, currentFigure, move);
-        }
-    }
 
-    /**
-     * Метод для хода всех фигур кроме пешки и коня.
-     *
-     * @param points Массив клеток которые дожна пройти фигура что бы оказаться в конечной точке.
-     * @param figure фигура которая делает ход.
-     * @param move   конечна точка.
-     * @throws IllegalMoveException бросает если ход не валидный.
-     */
-    private void moveOtherFigure(final Point[] points, final Figure figure, final Point move) throws IllegalMoveException {
-        for (int i = 0; i < points.length; i++) {
-            if (this.getBoard().getFigures()[points[i].getX()][points[i].getY()] != null && i != points.length - 1) {
-                throw new IllegalMoveException("Путь фигуры не свободен!");
-            }
-        }
-        if (this.getBoard().getFigure(move) != null && figure.isWhite() == this.getBoard().getFigure(move).isWhite()) {
+
+
+
+        if (this.getBoard().getFigure(move) != null && currentFigure.isWhite() == this.getBoard().getFigure(move).isWhite()) {
             throw new IllegalMoveException("Вы не можете ставить фигуру на место где стоит ваша фигура!");
-        }
-
-        this.board.removeFigure(figure);
-        figure.setPoint(move);
-        this.board.addFigure(figure);
-    }
-
-    /**
-     * Метод хода для пешки.
-     *
-     * @param points массив ячеек которые нужно пройти что бы оказаться в конечной точке.
-     * @param figure фигура которой делается ход.
-     * @param move   конечная точка.
-     * @throws IllegalMoveException бросает если ход не валидный.
-     */
-    private void pawnMove(final Point[] points, final Figure figure, final Point move) throws IllegalMoveException {
-        if (figure.getPoint().getY() == move.getY()) {
-            for (Point point : points) {
-                if (this.board.getFigure(point) != null) {
+        } else {
+            for (int i = 0; i < points.length; i++) {
+                if (this.getBoard().getFigures()[points[i].getX()][points[i].getY()] != null && i != points.length - 1) {
                     throw new IllegalMoveException("Путь фигуры не свободен!");
                 }
             }
-
-            this.board.removeFigure(figure);
-            figure.setPoint(move);
-            this.board.addFigure(figure);
-        } else {
-            if (this.board.getFigure(move) == null) {
-                throw new IllegalMoveException("Данная фигура не может так ходить!");
-            } else if (this.board.getFigure(move) != null && figure.isWhite() == this.board.getFigure(move).isWhite()) {
-                throw new IllegalMoveException("Вы не можете ставить фигуру на место где стоит ваша фигура!");
-            }
-
-            this.board.removeFigure(figure);
-            figure.setPoint(move);
-            this.board.addFigure(figure);
-        }
-    }
-
-    /**
-     * Метод хода коня.
-     *
-     * @param figure Фигура которой нужно сделать ход.
-     * @param move   конечная точка.
-     * @throws IllegalMoveException бросает если ход не валидный.
-     */
-    private void knightMove(final Figure figure, final Point move) throws IllegalMoveException {
-        if (this.getBoard().getFigure(move) != null && board.getFigure(move).isWhite() == figure.isWhite()) {
-            throw new IllegalMoveException("Нельзя ставить фигуру на место где стоит ваша фигура!");
         }
 
-        board.removeFigure(figure);
-        figure.setPoint(move);
-        board.addFigure(figure);
+        this.getBoard().replace(currentFigure, currentFigure.clone(move));
     }
 
     /**

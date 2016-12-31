@@ -29,4 +29,14 @@ public class Bishop extends Figure {
     public Point[] way(Point end) throws IllegalMoveException {
         return new DiagonalMove().move(this.getPoint(), end);
     }
+
+    /**
+     * Возвращает новую фигуру с теми же характиристиками но другой координатай.
+     * @param point новые координаты.
+     * @return фигура.
+     */
+    @Override
+    public Figure clone(Point point) {
+        return new Bishop(point, this.isWhite(), this.getType());
+    }
 }

@@ -38,11 +38,21 @@ public class King extends Figure {
             if (Math.abs(this.getPoint().getX() - end.getX()) == 1 && Math.abs(this.getPoint().getY() - end.getY()) == 1) {
                 points[0] = new Point(end.getX(), end.getY());
             } else {
-                throw new IllegalMoveException("Эта фигура не может так ходить!");
+                throw new IllegalMoveException("Invalid move figure!");
             }
         } else {
-            throw new IllegalMoveException("Стартовая точка совпадает с конечной!");
+            throw new IllegalMoveException("You to not move!");
         }
         return points;
+    }
+
+    /**
+     * Возвращает новую фигуру с теми же характиристиками но другой координатай.
+     * @param point новые координаты.
+     * @return фигура.
+     */
+    @Override
+    public Figure clone(Point point) {
+        return new King(point, this.isWhite(), this.getType());
     }
 }

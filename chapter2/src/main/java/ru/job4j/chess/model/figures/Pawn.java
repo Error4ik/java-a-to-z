@@ -82,8 +82,18 @@ public class Pawn extends Figure {
                 }
             }
         } else {
-            throw new IllegalMoveException("Данная фигура не может так ходить.");
+            throw new IllegalMoveException("Invalid move figure!");
         }
         return points;
+    }
+
+    /**
+     * Возвращает новую фигуру с теми же характиристиками но другой координатай.
+     * @param point новые координаты.
+     * @return фигура.
+     */
+    @Override
+    public Figure clone(Point point) {
+        return new Pawn(point, this.isWhite(), this.getType());
     }
 }

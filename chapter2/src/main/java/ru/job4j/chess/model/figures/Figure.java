@@ -3,6 +3,8 @@ package ru.job4j.chess.model.figures;
 import ru.job4j.chess.model.Point;
 import ru.job4j.chess.exception.IllegalMoveException;
 
+import java.util.Objects;
+
 /**
  *
  */
@@ -60,12 +62,11 @@ public abstract class Figure {
     }
 
     /**
-     * Метод устанавливает ячейку на поле для текущей фигуры.
-     * @param point ячейка.
+     * Копирует текущую фигуру изменяя её координаты.
+     * @param point новые координаты.
+     * @return фигуру.
      */
-    public void setPoint(Point point) {
-        this.point = point;
-    }
+    public abstract Figure clone(final Point point);
 
     /**
      * Геттер для поля тип.
@@ -90,5 +91,23 @@ public abstract class Figure {
                 + type
                 + '\''
                 + '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Figure)) {
+            return false;
+        }
+        Figure figure = (Figure) o;
+        return isWhite() == figure.isWhite()
+                && Objects.equals(getType(), figure.getType());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(isWhite(), getType());
     }
 }

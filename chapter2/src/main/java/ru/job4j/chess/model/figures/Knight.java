@@ -32,8 +32,18 @@ public class Knight extends Figure {
                 || Math.abs(this.getPoint().getX() - end.getX()) == 1 && Math.abs(this.getPoint().getY() - end.getY()) == 2) {
             points[0] = new Point(end.getX(), end.getY());
         } else {
-            throw new IllegalMoveException("Эта фигура не может так ходить");
+            throw new IllegalMoveException("Invalid move figure!");
         }
         return points;
+    }
+
+    /**
+     * Возвращает новую фигуру с теми же характиристиками но другой координатай.
+     * @param point новые координаты.
+     * @return фигура.
+     */
+    @Override
+    public Figure clone(Point point) {
+        return new Knight(point, this.isWhite(), this.getType());
     }
 }

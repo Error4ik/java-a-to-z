@@ -53,6 +53,16 @@ public class Board {
     }
 
     /**
+     * Меняет фигуру в массиве в зависимости от хода.
+     * @param oldFigure старая фигура.
+     * @param newFigure новая фигура.
+     */
+    public void replace(final Figure oldFigure, final Figure newFigure) {
+        this.addFigure(newFigure);
+        this.removeFigure(oldFigure);
+    }
+
+    /**
      * Возвращает массив всего поля.
      * @return поле фигур.
      */

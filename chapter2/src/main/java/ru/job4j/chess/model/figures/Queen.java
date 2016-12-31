@@ -38,4 +38,14 @@ public class Queen extends Figure {
 
         return points;
     }
+
+    /**
+     * Возвращает новую фигуру с теми же характиристиками но другой координатай.
+     * @param point новые координаты.
+     * @return фигура.
+     */
+    @Override
+    public Figure clone(Point point) {
+        return new Queen(point, this.isWhite(), this.getType());
+    }
 }

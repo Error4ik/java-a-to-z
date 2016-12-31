@@ -43,7 +43,7 @@ public class LineMove implements IMove {
                 }
             }
         } else {
-            throw new IllegalMoveException("Эта фигура не может так ходить!");
+            throw new IllegalMoveException("Invalid move figure!");
         }
 
         return points;

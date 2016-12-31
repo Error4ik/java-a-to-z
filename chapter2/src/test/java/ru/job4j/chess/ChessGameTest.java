@@ -14,7 +14,7 @@ import ru.job4j.chess.model.figures.Figure;
 import ru.job4j.chess.model.figures.King;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 /**
  *
@@ -124,18 +124,6 @@ public class ChessGameTest {
         chessGame.fillBoard();
         chessGame.moveFigure(new Point(1, 0), new Point(3, 0));
         chessGame.moveFigure(new Point(0, 0), new Point(3, 0));
-    }
-
-    /**
-     * Бросает исключение если ход пешки не валидный.
-     * @throws IllegalMoveException Если ход не валидный.
-     * @throws NoFigureException Если не выбрана фигура для хода.
-     */
-    @Test(expected = IllegalMoveException.class)
-    public void whenLeftMoveBlackPawnInvalidThenDropException() throws IllegalMoveException, NoFigureException {
-        final ChessGame chessGame = new ChessGame(new Board(boardSize));
-        chessGame.getBoard().addFigure(new Pawn(new Point(1, 1), false, "Pawn"));
-        chessGame.moveFigure(new Point(1, 1), new Point(2, 0));
     }
 
     /**
@@ -271,6 +259,18 @@ public class ChessGameTest {
         final ChessGame chessGame = new ChessGame(new Board(boardSize));
         chessGame.getBoard().addFigure(new Pawn(new Point(6, 5), true, "Pawn"));
         chessGame.moveFigure(new Point(6, 5), new Point(4, 3));
+    }
+
+    /**
+     * Тест хода по диагонали.
+     */
+    @Test
+    public void whenMoveDiagonalThenValidMove() throws IllegalMoveException, NoFigureException {
+        final ChessGame chessGame = new ChessGame(new Board(boardSize));
+        chessGame.getBoard().addFigure(new Pawn(new Point(3, 4), false, "Pawn"));
+        chessGame.getBoard().addFigure(new Pawn(new Point(4, 3), true, "Pawn"));
+        chessGame.moveFigure(new Point(3, 4), new Point(4, 3));
+        assertFalse(chessGame.getBoard().getFigure(new Point(4, 3)).isWhite());
     }
 
     /**
@@ -445,5 +445,36 @@ public class ChessGameTest {
         final Figure figure = new Pawn(new Point(1, 1), false, "Pawn");
         final String expected = "Pawn";
         assertThat(figure.getType(), is(expected));
+    }
+
+    /**
+     * Тест метода equals возвращает true если фигуры равны.
+     */
+    @Test
+    public void whenTwoFigureEqualsThenReturnTrue() {
+        final Figure figure = new Pawn(new Point(1, 1), false, "Pawn");
+        final Figure figure2 = new Pawn(new Point(1, 1), false, "Pawn");
+        final boolean expected = true;
+        assertThat(figure.equals(figure2), is(expected));
+    }
+
+    /**
+     * Тест метода equals возвращает false если фигуры не равны.
+     */
+    @Test
+    public void whenTwoFigureNotEqualsThenReturnFalse() {
+        final Figure figure = new Pawn(new Point(1, 1), false, "Pawn");
+        final Figure figure2 = new Pawn(new Point(1, 1), true, "Pawn");
+        final boolean expected = false;
+        assertThat(figure.equals(figure2), is(expected));
+    }
+
+    /**
+     * Тест метода клон.
+     */
+    @Test
+    public void cloneFigureTest() {
+        final Figure figure = new Rock(new Point(1, 1), false, "Rock");
+        assertThat(figure.clone(new Point(1, 2)), is(figure));
     }
 }
