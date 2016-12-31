@@ -14,7 +14,8 @@ import ru.job4j.chess.model.figures.Figure;
 import ru.job4j.chess.model.figures.King;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThat;
 
 /**
  *
@@ -262,7 +263,9 @@ public class ChessGameTest {
     }
 
     /**
-     * Тест хода по диагонали.
+     * Тест хода по диагонали пешки.
+     * @throws IllegalMoveException если ход не валидный.
+     * @throws NoFigureException если не выбрана фигура.
      */
     @Test
     public void whenMoveDiagonalThenValidMove() throws IllegalMoveException, NoFigureException {

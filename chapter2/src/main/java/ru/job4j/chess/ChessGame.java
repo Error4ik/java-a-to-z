@@ -70,25 +70,22 @@ public class ChessGame {
      */
     public void moveFigure(final Point current, final Point move) throws IllegalMoveException, NoFigureException {
         if (this.getBoard().getFigure(current) == null) {
-            throw new NoFigureException("Вы не выбрали фигуру для хода!");
+            throw new NoFigureException("You did not choose the figure for the course!");
         }
         if (!(move.getX() >= 0 && move.getX() < this.board.getSizeBoard()
                 && move.getY() >= 0 && move.getY() < this.board.getSizeBoard())) {
-            throw new IllegalMoveException("Выход за рамки поля!");
+            throw new IllegalMoveException("Going beyond the field!");
         }
 
         final Figure currentFigure = getBoard().getFigure(current);
         final Point[] points = currentFigure.way(move);
 
-
-
-
         if (this.getBoard().getFigure(move) != null && currentFigure.isWhite() == this.getBoard().getFigure(move).isWhite()) {
-            throw new IllegalMoveException("Вы не можете ставить фигуру на место где стоит ваша фигура!");
+            throw new IllegalMoveException("You can not put a figure on the place where your figure is!");
         } else {
             for (int i = 0; i < points.length; i++) {
                 if (this.getBoard().getFigures()[points[i].getX()][points[i].getY()] != null && i != points.length - 1) {
-                    throw new IllegalMoveException("Путь фигуры не свободен!");
+                    throw new IllegalMoveException("Figures path is not free!");
                 }
             }
         }
