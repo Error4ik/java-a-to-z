@@ -19,17 +19,15 @@ public class FilterStream {
      * @param abuses       слова которые нужно удалить.
      */
     public void dropAbuses(final InputStream inputStream, final OutputStream outputStream, final String[] abuses) {
-        try {
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    for (String abuse : abuses) {
-                        if (line.contains(abuse)) {
-                            line = line.replace(abuse, "").replace("  ", " ").trim();
-                        }
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                for (String abuse : abuses) {
+                    if (line.contains(abuse)) {
+                        line = line.replace(abuse, "").replace("  ", " ").trim();
                     }
-                    outputStream.write(line.getBytes());
                 }
+                outputStream.write(line.getBytes());
             }
         } catch (IOException e) {
             System.out.println("Error I/O: " + e);
