@@ -136,10 +136,8 @@ public class TaskTest {
      */
     @Test
     public void whenNotEqualsThenReturnFalse() {
-        final Comment comment = new Comment("Garry");
         final String name = "Garry";
         final String description = "Fix Bug";
-        final Date date = new Date();
 
         boolean expected = false;
 
@@ -153,7 +151,6 @@ public class TaskTest {
      */
     @Test
     public void whenEqualsThenReturnTrue() {
-        final Comment comment = new Comment("Garry");
         final String name = "Garry";
         final String description = "Fix Bug";
         boolean expected = true;
