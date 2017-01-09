@@ -4,7 +4,7 @@
     <artifactId>java-a-to-z</artifactId>
     <packaging>pom</packaging>
     <version>2.0</version>
-	<name>java-a-to-z</name>
+    <name>java-a-to-z</name>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -12,11 +12,11 @@
         <project.build.sourceencoding>UTF-8</project.build.sourceencoding>
     </properties>
 
-	<modules>
-		<module>chapter1</module>
-		<module>chapter2</module>
-		<module>chapter3</module>
-	</modules>
+    <modules>
+        <module>chapter1</module>
+        <module>chapter2</module>
+        <module>chapter3</module>
+    </modules>
 
     <dependencies>
         <dependency>

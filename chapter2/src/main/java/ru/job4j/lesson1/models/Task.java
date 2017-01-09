@@ -226,7 +226,7 @@ public class Task {
      * @return возвращает id созданный из даты создания заявки .
      */
     private int createIdTask() {
-        final int d = 1000;
+        final int d = 999;
         final int randomNumber = (int) (new Random().nextInt(d) * 1.3);
         return (int) ((getCreateDate().getTime() / d) / randomNumber) / d;
     }

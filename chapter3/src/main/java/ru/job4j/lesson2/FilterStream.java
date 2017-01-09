@@ -30,7 +30,7 @@ public class FilterStream {
                 outputStream.write(line.getBytes());
             }
         } catch (IOException e) {
-            System.out.println("Error I/O: " + e);
+            e.printStackTrace();
         }
     }
 }
