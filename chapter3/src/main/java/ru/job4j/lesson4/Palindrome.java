@@ -24,7 +24,9 @@ public class Palindrome {
                 }
             }
 
-            result = (count == word.length() / 2);
+            if (count == word.length() / 2) {
+                result = true;
+            }
 
         } else {
             System.out.print("В слове должно быть не четное количество букв!");

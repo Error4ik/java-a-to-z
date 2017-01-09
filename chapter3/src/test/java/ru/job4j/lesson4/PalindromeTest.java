@@ -20,8 +20,8 @@ public class PalindromeTest {
     @Test
     public void whenIsPalindromeThenReturnTrue() {
         final Palindrome p = new Palindrome();
-        final String word = "РОтОР";
-        assertThat(p.isPalindrome(word), is(true));
+        String string = "РОТОР";
+        assertThat(p.isPalindrome(string), is(true));
     }
 
     /**
