@@ -16,7 +16,7 @@ public class TaskTest {
      */
     @Test
     public void whenTheCommentsMoreThatTheDefaultValueThenIncreasingArrayReturnCountComment() {
-        Task task = new Task(null, null);
+        Task task = new Task("name", "desc");
         task.addComment(new Comment());
         task.addComment(new Comment());
         task.addComment(new Comment());
@@ -40,7 +40,7 @@ public class TaskTest {
         expectedArray[0] = comment1;
         expectedArray[1] = comment3;
 
-        Task task = new Task(null, null);
+        Task task = new Task("name", "desc");
         task.addComment(comment1);
         task.addComment(comment2);
         task.addComment(comment3);
@@ -92,7 +92,7 @@ public class TaskTest {
         final Comment[] expectedArray = new Comment[2];
         expectedArray[0] = comment1;
         expectedArray[1] = comment2;
-        final Task task = new Task(null, null);
+        final Task task = new Task("name", "desc");
         task.addComment(comment1);
         task.addComment(comment2);
         assertThat(task.getAllComments(), is(expectedArray));
@@ -104,7 +104,7 @@ public class TaskTest {
     @Test
     public void whenAddCommentCountIncrementThenReturnCountComment() {
         final String commentOne = "CommentOne";
-        final Task task = new Task(null, null);
+        final Task task = new Task("name", "desc");
         task.addComment(new Comment(commentOne));
         task.addComment(new Comment(commentOne));
         task.addComment(new Comment(commentOne));
@@ -123,7 +123,7 @@ public class TaskTest {
         final Comment comment2 = new Comment("Max");
         final Comment comment3 = new Comment("Garry");
 
-        final Task task = new Task(null, null);
+        final Task task = new Task("name", "desc");
         task.addComment(comment1);
         task.addComment(comment2);
         task.addComment(comment3);

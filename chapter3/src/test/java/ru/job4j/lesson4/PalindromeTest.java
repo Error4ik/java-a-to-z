@@ -41,7 +41,7 @@ public class PalindromeTest {
     @Test
     public void whenInvalidWordThenPrintMessage() {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(out, Boolean.parseBoolean(System.getProperty("console.encoding", "utf-8"))));
+        System.setOut(new PrintStream(out));
         String expected = "В слове должно быть не четное количество букв!";
         Palindrome palindrome = new Palindrome();
         palindrome.isPalindrome("privet");
