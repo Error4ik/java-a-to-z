@@ -166,6 +166,7 @@
                     <checkRuntimeClasspath>true</checkRuntimeClasspath>
                     <checkCompileClasspath>true</checkCompileClasspath>
         <project.build.sourceencoding>UTF-8</project.build.sourceencoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
                             <configLocation>checkstyle.xml</configLocation>
                     <failBuildInCaseOfConflict>false</failBuildInCaseOfConflict>
                     <bootClasspathProperty>sun.boot.class.path</bootClasspathProperty>

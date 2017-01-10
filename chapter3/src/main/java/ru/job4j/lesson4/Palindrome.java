@@ -11,7 +11,7 @@ public class Palindrome {
      * @param word слово которое нужно проверить.
      * @return возвращает true если является, и false если нет.
      */
-    public boolean isPalindrome(String word) {
+    public boolean isPalindrome(final String word) {
         boolean result = false;
 
         if (word.length() % 2 != 0) {
