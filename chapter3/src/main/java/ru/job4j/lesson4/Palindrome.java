@@ -12,24 +12,13 @@ public class Palindrome {
      * @return возвращает true если является, и false если нет.
      */
     public boolean isPalindrome(final String word) {
-        boolean result = false;
+        boolean result = true;
+        char[] chars = word.toLowerCase().toCharArray();
 
-        if (word.length() % 2 != 0) {
-            char[] chars = word.toLowerCase().toCharArray();
-            int count = 0;
-
-            for (int i = 0; i < chars.length / 2; i++) {
-                if (chars[i] == chars[chars.length - 1 - i]) {
-                    count++;
-                }
+        for (int i = 0; i < chars.length / 2; i++) {
+            if (chars[i] != chars[chars.length - 1 - i]) {
+                result = false;
             }
-
-            if (count == word.length() / 2) {
-                result = true;
-            }
-
-        } else {
-            System.out.print("В слове должно быть не четное количество букв!");
         }
         return result;
     }

@@ -20,7 +20,7 @@ public class PalindromeTest {
     @Test
     public void whenIsPalindromeThenReturnTrue() {
         final Palindrome p = new Palindrome();
-        final String string = "ШаЛАш";
+        final String string = "ШалАш";
         assertThat(p.isPalindrome(string), is(true));
     }
 
@@ -33,18 +33,5 @@ public class PalindromeTest {
         final String word = "Короб";
         final boolean expected = false;
         assertThat(p.isPalindrome(word), is(expected));
-    }
-
-    /**
-     * Тест проверяет выводится ли сообщение об ошибке если в слове четное количество букв.
-     */
-    @Test
-    public void whenInvalidWordThenPrintMessage() {
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(out));
-        String expected = "В слове должно быть не четное количество букв!";
-        Palindrome palindrome = new Palindrome();
-        palindrome.isPalindrome("privet");
-        assertThat(out.toString(), is(expected));
     }
 }
