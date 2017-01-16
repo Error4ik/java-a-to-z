@@ -32,7 +32,7 @@ public class TrackerTest {
      */
     @Test
     public void removeTest() {
-        final Task task = new Task(null, null);
+        final Task task = new Task("name", "desc");
         final Tracker tracker = new Tracker();
         tracker.addTask(task);
         final boolean result = true;
@@ -46,7 +46,7 @@ public class TrackerTest {
     public void addCommentTaskTest() {
         final Comment expectedComment = new Comment("555");
         final Tracker tracker = new Tracker();
-        final Task actualTask = new Task(null, null);
+        final Task actualTask = new Task("name", "desc");
         tracker.addTask(actualTask);
         tracker.addCommentTask(actualTask, expectedComment);
         final Comment[] comments = actualTask.getAllComments();
@@ -98,9 +98,9 @@ public class TrackerTest {
      */
     @Test
     public void getAllTasksTest() {
-        final Task task1 = new Task(null, null);
-        final Task task2 = new Task(null, null);
-        final Task task3 = new Task(null, null);
+        final Task task1 = new Task("name", "desc");
+        final Task task2 = new Task("name", "desc");
+        final Task task3 = new Task("name", "desc");
         final int count = 3;
         final Task[] expectedArray = new Task[count];
         expectedArray[0] = task1;
@@ -125,9 +125,9 @@ public class TrackerTest {
         Tracker tracker = new Tracker();
         Task task1 = new Task("Garry", "Bug Fix");
 
-        tracker.addTask(new Task(null, null));
+        tracker.addTask(new Task("name", "desc"));
         tracker.addTask(task1);
-        tracker.addTask(new Task(null, null));
+        tracker.addTask(new Task("name", "desc"));
 
         assertThat(tracker.contains(task1), is(result));
     }
@@ -138,11 +138,11 @@ public class TrackerTest {
     @Test
     public void getCountTaskTest() {
         Tracker tracker = new Tracker();
-        tracker.addTask(new Task(null, null));
-        tracker.addTask(new Task(null, null));
-        tracker.addTask(new Task(null, null));
-        tracker.addTask(new Task(null, null));
-        tracker.addTask(new Task(null, null));
+        tracker.addTask(new Task("name", "desc"));
+        tracker.addTask(new Task("name", "desc"));
+        tracker.addTask(new Task("name", "desc"));
+        tracker.addTask(new Task("name", "desc"));
+        tracker.addTask(new Task("name", "desc"));
         final int expectedCount = 5;
 
         assertThat(tracker.getCountTask(), is(expectedCount));
