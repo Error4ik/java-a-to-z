@@ -2,7 +2,14 @@ package ru.job4j.lesson5;
 
 import org.junit.Test;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.BufferedWriter;
+import java.io.OutputStreamWriter;
+import java.io.FileOutputStream;
+import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,7 +38,7 @@ public class ConsoleChatTest {
         final File in = File.createTempFile("tmp", "txt");
         final File out = new File(outFile);
 
-        try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(in)))){
+        try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(in)))) {
             writer.write("Привет");
         }
 
@@ -51,6 +58,7 @@ public class ConsoleChatTest {
 
     /**
      * Тест броска исключения если фаил не найден.
+     *
      * @throws IOException ошибка ввода вывода.
      */
     @Test(expected = IOException.class)
