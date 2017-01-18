@@ -10,6 +10,7 @@ import java.io.BufferedWriter;
 import java.io.OutputStreamWriter;
 import java.io.FileOutputStream;
 import java.io.BufferedReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -38,7 +39,7 @@ public class ConsoleChatTest {
         final File in = File.createTempFile("tmp", "txt");
         final File out = new File(outFile);
 
-        try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(in)))) {
+        try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(in), StandardCharsets.UTF_8))) {
             writer.write("Привет");
         }
 
@@ -47,7 +48,7 @@ public class ConsoleChatTest {
         final List<String> expected = Arrays.asList("hi", "Привет", "стоп", "ответь", "продолжить", "Привет", "Закончить");
         final List<String> actual = new ArrayList<>();
 
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(out)))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(out), StandardCharsets.UTF_8))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 actual.add(line);

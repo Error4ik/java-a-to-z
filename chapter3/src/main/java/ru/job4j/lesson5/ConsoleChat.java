@@ -8,6 +8,7 @@ import java.io.RandomAccessFile;
 import java.io.OutputStreamWriter;
 import java.io.InputStreamReader;
 import java.io.FileInputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 import java.util.Random;
 
@@ -76,7 +77,7 @@ public class ConsoleChat {
      */
     public void runChat() throws IOException {
         try (RandomAccessFile reader = new RandomAccessFile(answer, "r");
-             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(log)))) {
+             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(log), StandardCharsets.UTF_8))) {
 
             System.out.println("Отключить бота - стоп.");
             System.out.println("Включить бота - продолжить.");
