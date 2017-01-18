@@ -1,12 +1,9 @@
 package ru.job4j.lesson5;
 
-import java.io.IOException;
-import java.io.File;
-import java.io.RandomAccessFile;
-import java.io.BufferedWriter;
-import java.io.OutputStreamWriter;
-import java.io.FileOutputStream;
+import java.io.*;
+import java.util.Properties;
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  * Консольный чат.
@@ -110,19 +107,19 @@ public class ConsoleChat {
         }
     }
 
-//    /**
-//     * Основной метод запуска.
-//     *
-//     * @param args аргументы.
-//     * @throws IOException ошибка ввода вывода.
-//     */
-//    public static void main(String[] args) throws IOException {
-//        Properties prop = new Properties();
-//        prop.load(new InputStreamReader(new FileInputStream(new File("chapter3/app.properties"))));
-//        ConsoleInput input = new ConsoleInput();
-//        File in = new File(prop.getProperty("pathIn"));
-//        File out = new File(prop.getProperty("pathOut"));
-//        ConsoleChat consoleChat = new ConsoleChat(in, out, input);
-//        consoleChat.runChat();
-//    }
+    /**
+     * Основной метод запуска.
+     *
+     * @param args аргументы.
+     * @throws IOException ошибка ввода вывода.
+     */
+    public static void main(String[] args) throws IOException {
+        Properties prop = new Properties();
+        prop.load(new InputStreamReader(new FileInputStream(new File("chapter3/app.properties"))));
+        ConsoleInput input = new ConsoleInput();
+        File in = new File(prop.getProperty("pathIn"));
+        File out = new File(prop.getProperty("pathOut"));
+        ConsoleChat consoleChat = new ConsoleChat(in, out, input);
+        consoleChat.runChat();
+    }
 }
