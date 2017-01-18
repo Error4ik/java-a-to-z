@@ -5,7 +5,7 @@ import java.util.Scanner;
 /**
  * Пользовательский ввод.
  */
-public class ConsoleInput implements Input{
+public class ConsoleInput implements Input {
 
     /**
      * Читает ввод с консоли.
@@ -14,6 +14,7 @@ public class ConsoleInput implements Input{
 
     /**
      * Метод читает пользовательский ввод и возвращает его.
+     *
      * @return возвращает строку введенную в консоль.
      */
     @Override

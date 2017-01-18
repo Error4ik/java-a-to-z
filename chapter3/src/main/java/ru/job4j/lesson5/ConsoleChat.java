@@ -1,9 +1,15 @@
 package ru.job4j.lesson5;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.File;
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.RandomAccessFile;
+import java.io.OutputStreamWriter;
+import java.io.InputStreamReader;
+import java.io.FileInputStream;
 import java.util.Properties;
 import java.util.Random;
-import java.util.Scanner;
 
 /**
  * Консольный чат.
@@ -76,7 +82,9 @@ public class ConsoleChat {
             System.out.println("Включить бота - продолжить.");
             System.out.println("Выйти из программы - закончить.");
             System.out.println("Введите любую фразу.");
+
             String human = input.getInput().toLowerCase();
+
             while (!exit.equals(human)) {
                 writer.write(String.format("%s%s", human, separator));
 

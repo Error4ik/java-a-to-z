@@ -2,11 +2,7 @@ package ru.job4j.lesson5;
 
 import org.junit.Test;
 
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.FileInputStream;
-import java.io.File;
-import java.io.BufferedReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,8 +27,14 @@ public class ConsoleChatTest {
         prop.load(new InputStreamReader(new FileInputStream(new File("app.properties"))));
         final String[] test = new String[]{"Hi", "стоп", "Ответь", "Продолжить", "Закончить"};
         final StubInput stubInput = new StubInput(test);
-        final File in = new File(prop.getProperty("pathIn"));
-        final File out = new File(prop.getProperty("pathOut"));
+        String outFile = "../" + prop.getProperty("pathOut");
+        final File in = File.createTempFile("tmp", "txt");
+        final File out = new File(outFile);
+
+        try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(in)))){
+            writer.write("Привет");
+        }
+
         final ConsoleChat consoleChat = new ConsoleChat(in, out, stubInput);
         consoleChat.runChat();
         final List<String> expected = Arrays.asList("hi", "Привет", "стоп", "ответь", "продолжить", "Привет", "Закончить");
