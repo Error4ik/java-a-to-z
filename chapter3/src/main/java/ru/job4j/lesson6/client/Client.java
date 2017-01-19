@@ -2,9 +2,6 @@ package ru.job4j.lesson6.client;
 
 import java.io.*;
 import java.net.Socket;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 /**
  *
@@ -33,14 +30,14 @@ public class Client {
                 if ("download".equals(line)) {
                     System.out.println(in.readUTF());
                     name = reader.readLine();
-                    poluchitFile(in, out);
+                    getFile(in, out);
                 }
 
             }
         }
     }
 
-    private static void poluchitFile(DataInputStream in, DataOutputStream out) throws IOException {
+    private static void getFile(DataInputStream in, DataOutputStream out) throws IOException {
         out.writeUTF(name);
         long length = in.readLong();
         System.out.println(length);
