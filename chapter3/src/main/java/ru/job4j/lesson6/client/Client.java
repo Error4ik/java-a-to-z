@@ -19,11 +19,10 @@ public class Client {
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             String line;
             while (true) {
-                line = reader.readLine();
-                out.writeUTF(line);
                 line = input.readUTF();
                 System.out.println(line);
-                out.flush();
+                line = reader.readLine();
+                out.writeUTF(line);
             }
         }
     }
