@@ -31,6 +31,8 @@ public class Client {
                     System.out.println(in.readUTF());
                     name = reader.readLine();
                     getFile(in, out);
+                } else {
+                    out.writeUTF(line);
                 }
             }
         }
