@@ -53,15 +53,10 @@ public class Client {
                 while ((c = in.read(buffer)) > 0) {
                     outputStream.write(buffer, 0, c);
                     if (file.length() == length) {
+                        System.out.println("Ok");
                         break;
                     }
                 }
-            }
-
-            if (file.length() == length) {
-                System.out.println("Ok");
-            } else {
-                System.out.println("Not Ok");
             }
         }
     }
