@@ -47,7 +47,7 @@ public class Client {
         System.out.println(length);
         long start = System.nanoTime();
         long end;
-        double time;
+        long time;
         if (length > -1) {
             File file = new File("c:/download_test" + "/" + name);
             try (FileOutputStream outputStream = new FileOutputStream(new File("c:/download_test" + "/" + name))) {
@@ -58,7 +58,7 @@ public class Client {
                     if (file.length() == length) {
                         System.out.println("Ok");
                         end = System.nanoTime();
-                        time = end - start / 1000000000.0;
+                        time = (end - start) / 1000000000;
                         System.out.println(time);
                         break;
                     }
