@@ -12,7 +12,6 @@ public class Client {
     private static String name;
 
 
-
     public static void main(String[] args) throws IOException {
         try (Socket socket = new Socket("192.168.1.168", port)) {
 
@@ -22,19 +21,23 @@ public class Client {
             System.out.println("Введите команду для отправки на сервер.");
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-            String line;
             System.out.println(in.readUTF());
-            while (!("exit".equals(line = reader.readLine()))) {
-                out.writeUTF(line);
-                out.flush();
-                if ("download".equals(line)) {
+            String line = reader.readLine();
+
+            do {
+                if ("1".equals(line)) {
+                    out.writeUTF(line);
+                    out.flush();
+                }
+                if ("2".equals(line)) {
+                    out.writeUTF(line);
                     System.out.println(in.readUTF());
                     name = reader.readLine();
                     getFile(in, out);
                 } else {
                     out.writeUTF(line);
                 }
-            }
+            } while (!("exit".equals(line = reader.readLine())));
         }
     }
 
