@@ -35,7 +35,7 @@ public class Client {
                     getFile(in, out);
                 }
 
-            } while (!("exit".equals(line = reader.readLine())));
+            } while (!("exit".equals(line)));
         }
     }
 
@@ -43,22 +43,24 @@ public class Client {
         out.writeUTF(name);
         long length = in.readLong();
         System.out.println(length);
-        if (length >= 0) {
+        if (length > -1) {
+            File file = new File("./chapter1/" + "/" + name);
             try (FileOutputStream outputStream = new FileOutputStream(new File("./chapter1/" + "/" + name))) {
-                byte[] buffer = new byte[(int) length];
-                int c;
-                while ((c = in.read(buffer)) != -1) {
+                byte[] buffer = new byte[8 * 1024];
+                int c = 0;
+                while ((c = in.read(buffer)) > 0) {
                     outputStream.write(buffer, 0, c);
+                    if (file.length() == length) {
+                        break;
+                    }
                 }
             }
-        }
 
-        File file = new File("./chapter1/" + "/" + name);
-        if (file.length() == length) {
-            System.out.println("ok");
-        } else {
-            System.out.println("not ok");
+            if (file.length() == length) {
+                System.out.println("Ok");
+            } else {
+                System.out.println("Not Ok");
+            }
         }
-
     }
 }
