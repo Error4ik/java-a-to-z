@@ -45,15 +45,21 @@ public class Client {
         out.writeUTF(name);
         long length = in.readLong();
         System.out.println(length);
+        long start = System.currentTimeMillis();
+        long end;
+        long time;
         if (length > -1) {
             File file = new File("c:/download_test" + "/" + name);
             try (FileOutputStream outputStream = new FileOutputStream(new File("c:/download_test" + "/" + name))) {
-                byte[] buffer = new byte[8 * 1024];
+                byte[] buffer = new byte[64 * 1024];
                 int c = 0;
                 while ((c = in.read(buffer)) > 0) {
                     outputStream.write(buffer, 0, c);
                     if (file.length() == length) {
                         System.out.println("Ok");
+                        end = System.currentTimeMillis();
+                        time = end - start / 1000;
+                        System.out.println(time);
                         break;
                     }
                 }
