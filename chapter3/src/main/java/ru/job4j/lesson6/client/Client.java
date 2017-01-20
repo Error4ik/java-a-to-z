@@ -20,11 +20,11 @@ public class Client {
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-            System.out.println(in.readUTF());
             String line;
 
             do {
-                System.out.println("Введите команду для отправки на сервер.");
+                System.out.println(in.readUTF());
+                System.out.println("Выберите действие.");
                 line = reader.readLine();
                 out.writeUTF(line);
                 out.flush();
