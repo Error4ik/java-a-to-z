@@ -18,25 +18,23 @@ public class Client {
             DataInputStream in = new DataInputStream(socket.getInputStream());
             DataOutputStream out = new DataOutputStream(socket.getOutputStream());
 
-            System.out.println("Введите команду для отправки на сервер.");
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
             System.out.println(in.readUTF());
-            String line = reader.readLine();
+            String line;
 
             do {
-                if ("1".equals(line)) {
-                    out.writeUTF(line);
-                    out.flush();
-                }
+                System.out.println("Введите команду для отправки на сервер.");
+                line = reader.readLine();
+                out.writeUTF(line);
+                out.flush();
+
                 if ("2".equals(line)) {
-                    out.writeUTF(line);
                     System.out.println(in.readUTF());
                     name = reader.readLine();
                     getFile(in, out);
-                } else {
-                    out.writeUTF(line);
                 }
+
             } while (!("exit".equals(line = reader.readLine())));
         }
     }
