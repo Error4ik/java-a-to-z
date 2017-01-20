@@ -46,8 +46,8 @@ public class Client {
         long length = in.readLong();
         System.out.println(length);
         if (length > -1) {
-            File file = new File("./chapter1/" + "/" + name);
-            try (FileOutputStream outputStream = new FileOutputStream(new File("./chapter1/" + "/" + name))) {
+            File file = new File("c:/download_test" + "/" + name);
+            try (FileOutputStream outputStream = new FileOutputStream(new File("c:/download_test" + "/" + name))) {
                 byte[] buffer = new byte[8 * 1024];
                 int c = 0;
                 while ((c = in.read(buffer)) > 0) {
