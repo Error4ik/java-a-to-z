@@ -45,7 +45,7 @@ public class Client {
         out.writeUTF(name);
         long length = in.readLong();
         System.out.println(length);
-        long start = System.currentTimeMillis();
+        long start = System.nanoTime();
         long end;
         long time;
         if (length > -1) {
@@ -57,8 +57,8 @@ public class Client {
                     outputStream.write(buffer, 0, c);
                     if (file.length() == length) {
                         System.out.println("Ok");
-                        end = System.currentTimeMillis();
-                        time = end - start / 1000;
+                        end = System.nanoTime();
+                        time = end - start;
                         System.out.println(time);
                         break;
                     }
