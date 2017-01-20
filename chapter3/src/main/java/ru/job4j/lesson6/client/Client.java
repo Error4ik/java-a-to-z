@@ -21,14 +21,16 @@ public class Client {
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
             String line;
+            System.out.println(in.readUTF());
 
             do {
-                System.out.println(in.readUTF());
                 System.out.println("Выберите действие.");
                 line = reader.readLine();
                 out.writeUTF(line);
                 out.flush();
-
+                if ("1".equals(line)) {
+                    System.out.println(in.readUTF());
+                }
                 if ("2".equals(line)) {
                     System.out.println(in.readUTF());
                     name = reader.readLine();
