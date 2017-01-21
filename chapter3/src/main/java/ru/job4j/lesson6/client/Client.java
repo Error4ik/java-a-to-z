@@ -23,8 +23,18 @@ public class Client {
      */
     private BufferedReader reader;
 
-    private File currentDir = new File("/");
+    /**
+     *
+     */
+    private File currentDir;
 
+    /**
+     * Конструктор
+     * @param path
+     */
+    public Client(final String path) {
+        currentDir = new File(path);
+    }
     /**
      *
      * @throws IOException
@@ -69,8 +79,9 @@ public class Client {
         System.out.println("Введите путь и имя файла для отправки.");
         System.out.println("Например: download/image/5.jpg");
         name = reader.readLine();
-        File file = new File(name);
-        if (file.exists() && file.isFile()) {
+        System.out.println(name);
+        File file = new File(currentDir + name);
+        //if (file.exists() && file.isFile()) {
             out.writeUTF(file.getName());
             out.writeLong(file.length());
             try (FileInputStream fis = new FileInputStream(file)) {
@@ -80,9 +91,9 @@ public class Client {
                     out.write(buffer, 0, c);
                 }
             }
-        } else {
-            out.writeLong(-1L);
-        }
+//        } else {
+//            out.writeLong(-1L);
+//        }
     }
 
     /**
@@ -123,7 +134,7 @@ public class Client {
      * @throws IOException
      */
     public static void main(String[] args) throws IOException {
-        Client client = new Client();
+        Client client = new Client("/");
         client.runClient();
     }
 }
