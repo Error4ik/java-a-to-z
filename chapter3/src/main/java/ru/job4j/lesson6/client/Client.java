@@ -23,6 +23,8 @@ public class Client {
      */
     private BufferedReader reader;
 
+    private File currentDir = new File("/");
+
     /**
      *
      * @throws IOException
@@ -50,7 +52,6 @@ public class Client {
                     getFile(in, out);
                 }
                 if ("3".equals(line)) {
-                    System.out.println(in.readUTF());
                     sendFile(in, out);
                 }
 
@@ -65,6 +66,8 @@ public class Client {
      * @throws IOException
      */
     private void sendFile(DataInputStream in, DataOutputStream out) throws IOException {
+        System.out.println("Введите путь и имя файла для отправки.");
+        System.out.println("Например: download/image/5.jpg");
         name = reader.readLine();
         File file = new File(name);
         if (file.exists() && file.isFile()) {
