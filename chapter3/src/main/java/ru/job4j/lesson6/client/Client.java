@@ -7,18 +7,33 @@ import java.net.Socket;
  *
  */
 public class Client {
-    private final static int port = 5000;
 
-    private static String name;
+    /**
+     *
+     */
+    private final int port = 5000;
 
+    /**
+     *
+     */
+    private String name;
 
-    public static void main(String[] args) throws IOException {
+    /**
+     *
+     */
+    private BufferedReader reader;
+
+    /**
+     *
+     * @throws IOException
+     */
+    public void runClient() throws IOException {
         try (Socket socket = new Socket("192.168.1.168", port)) {
 
             DataInputStream in = new DataInputStream(socket.getInputStream());
             DataOutputStream out = new DataOutputStream(socket.getOutputStream());
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            reader = new BufferedReader(new InputStreamReader(System.in));
 
             String line;
             System.out.println(in.readUTF());
@@ -32,16 +47,48 @@ public class Client {
                     System.out.println(in.readUTF());
                 }
                 if ("2".equals(line)) {
-                    System.out.println(in.readUTF());
-                    name = reader.readLine();
                     getFile(in, out);
+                }
+                if ("3".equals(line)) {
+                    System.out.println(in.readUTF());
+                    sendFile(in, out);
                 }
 
             } while (!("exit".equals(line)));
         }
     }
 
-    private static void getFile(DataInputStream in, DataOutputStream out) throws IOException {
+    /**
+     *
+     * @param in
+     * @param out
+     * @throws IOException
+     */
+    private void sendFile(DataInputStream in, DataOutputStream out) throws IOException {
+        name = reader.readLine();
+        File file = new File(name);
+        if (file.exists() && file.isFile()) {
+            out.writeUTF(file.getName());
+            out.writeLong(file.length());
+            try (FileInputStream fis = new FileInputStream(file)) {
+                byte[] buffer = new byte[64 * 1024];
+                int c;
+                while ((c = fis.read(buffer)) != -1) {
+                    out.write(buffer, 0, c);
+                }
+            }
+        } else {
+            out.writeLong(-1L);
+        }
+    }
+
+    /**
+     *
+     * @param in
+     * @param out
+     * @throws IOException
+     */
+    private void getFile(DataInputStream in, DataOutputStream out) throws IOException {
         out.writeUTF(name);
         long length = in.readLong();
         System.out.println(length);
@@ -50,11 +97,11 @@ public class Client {
         long time;
         if (length > -1) {
             File file = new File("c:/download_test" + "/" + name);
-            try (FileOutputStream outputStream = new FileOutputStream(new File("c:/download_test" + "/" + name))) {
+            try (FileOutputStream fos = new FileOutputStream(file)) {
                 byte[] buffer = new byte[64 * 1024];
-                int c = 0;
-                while ((c = in.read(buffer)) > 0) {
-                    outputStream.write(buffer, 0, c);
+                int c;
+                while ((c = in.read(buffer)) != -1) {
+                    fos.write(buffer, 0, c);
                     if (file.length() == length) {
                         System.out.println("Ok");
                         end = System.nanoTime();
@@ -65,5 +112,15 @@ public class Client {
                 }
             }
         }
+    }
+
+    /**
+     *
+     * @param args
+     * @throws IOException
+     */
+    public static void main(String[] args) throws IOException {
+        Client client = new Client();
+        client.runClient();
     }
 }
