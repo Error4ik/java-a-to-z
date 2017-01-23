@@ -1,6 +1,8 @@
 package ru.job4j.lesson6.server;
 
 
+import ru.job4j.lesson6.settings.Settings;
+
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
@@ -14,7 +16,7 @@ public class Server {
     /**
      *
      */
-    private static final int port = 5000;
+    private int port;
 
     /**
      *
@@ -24,12 +26,12 @@ public class Server {
     /**
      *
      */
-    private boolean flag = true;
+    private File serverDir;
 
     /**
      *
      */
-    private File currentDirectory;
+    private File uploadDir;
 
     /**
      *
@@ -46,13 +48,11 @@ public class Server {
      */
     private DataOutputStream out;
 
-    /**
-     * Конструктор.
-     *
-     * @param path
-     */
-    public Server(final String path) {
-        currentDirectory = new File(path);
+
+    public Server(final String server, final int port, final File upload) {
+        this.serverDir = new File(server);
+        this.port = port;
+        this.uploadDir = upload;
     }
 
     /**
@@ -75,19 +75,15 @@ public class Server {
 
             while (!("exit".equals(line))) {
                 line = in.readUTF();
-                System.out.println("Получено: " + line);
+                System.out.println("Получен запрос: " + line);
                 if ("1".equals(line)) {
                     out.writeUTF(showDirectory());
                 } else if ("2".equals(line)) {
-                    out.writeUTF("Введите название файла который нужно скачать.");
-                    sendFile(in.readUTF());
+                    this.sendFile(in, out);
                 } else if ("3".equals(line)) {
-                    out.writeUTF("Введите пут ьи название файла для загрузки");
-                    getFile(in, out);
+                    this.getFile(in, out);
                 } else if ("4".equals(line)) {
-                    out.writeUTF("Введите имя дириктории");
-                    this.changeDirectory(in.readUTF());
-                    out.writeUTF(showDirectory());
+                    this.changeDirectory(in, out);
                 } else {
                     out.writeUTF("Вы ввели не коректные данные, попробуйте еще раз.");
                 }
@@ -96,13 +92,12 @@ public class Server {
     }
 
     /**
-     *
      * @param in
      * @param out
      * @throws IOException
      */
-    private void getFile(DataInputStream in, DataOutputStream out) throws IOException {
-        File file = new File(currentDirectory + "/" + in.readUTF());
+    private void getFile(final DataInputStream in, final DataOutputStream out) throws IOException {
+        File file = new File(uploadDir + "/" + in.readUTF());
         long length = in.readLong();
         System.out.println("Загружается файл длинной: " + length);
         long start = System.nanoTime();
@@ -114,10 +109,10 @@ public class Server {
             while ((c = in.read(buffer)) != -1) {
                 fos.write(buffer, 0, c);
                 if (file.length() == length) {
-                    System.out.println("Ok");
+                    out.writeUTF("Ok");
                     end = System.nanoTime();
                     time = (end - start) / 1000000000;
-                    System.out.println(time);
+                    System.out.println("Время загрузки: " + time + " сек.");
                     break;
                 }
             }
@@ -125,15 +120,20 @@ public class Server {
     }
 
     /**
-     *
-     * @param path
      * @throws IOException
      */
-    private void sendFile(final String path) throws IOException {
-        File file = new File(path);
-        if (file.exists() && file.isFile()) {
-            out.writeLong(file.length());
-            try (FileInputStream fis = new FileInputStream(file)) {
+    private void sendFile(final DataInputStream in, final DataOutputStream out) throws IOException {
+        out.writeUTF("Введите название файла который нужно скачать.");
+        String line = in.readUTF();
+        File serverFile;
+        if (serverDir.getParent() == null) {
+            serverFile = new File(serverDir + line);
+        } else {
+            serverFile = new File(serverDir + "/" + line);
+        }
+        if (serverFile.exists() && serverFile.isFile()) {
+            out.writeLong(serverFile.length());
+            try (FileInputStream fis = new FileInputStream(serverFile)) {
                 byte[] buffer = new byte[64 * 1024];
                 int c;
                 while ((c = fis.read(buffer)) != -1) {
@@ -148,14 +148,36 @@ public class Server {
     /**
      * Метод для перемещения по дирикториям.
      *
-     * @param directory дириктория куда нужно перейти.
      * @throws IOException Ошибка ввода вывода.
      */
-    private void changeDirectory(final String directory) throws IOException {
-        if ("..".equals(directory)) {
-            currentDirectory = new File(currentDirectory.getParent());
+    private void changeDirectory(final DataInputStream in, final DataOutputStream out) throws IOException {
+        out.writeUTF("Введите имя дириктории");
+        String line = in.readUTF();
+        if ("..".equals(line)) {
+            if (serverDir.getParent() == null) {
+                out.writeUTF("Вы находитесь в корневом каталоге.");
+            } else {
+                serverDir = new File(serverDir.getParent());
+                out.writeUTF(serverDir.getAbsolutePath());
+            }
         } else {
-            currentDirectory = new File(currentDirectory.getPath() + "/" + directory);
+            if (serverDir.getParent() == null) {
+                File tmp = new File(serverDir.getPath() + line);
+                if (tmp.exists() && tmp.isDirectory()) {
+                    serverDir = new File(serverDir.getPath() + line);
+                    out.writeUTF(serverDir.getAbsolutePath());
+                } else {
+                    out.writeUTF("Не верная дириктория");
+                }
+            } else {
+                File tmp = new File(serverDir.getPath() + "/" + line);
+                if (tmp.exists() && tmp.isDirectory()) {
+                    serverDir = new File(serverDir.getPath() + "/" + line);
+                    out.writeUTF(serverDir.getAbsolutePath());
+                } else {
+                    out.writeUTF("Не верная дириктория");
+                }
+            }
         }
     }
 
@@ -166,7 +188,7 @@ public class Server {
      */
     private String showDirectory() {
         StringBuilder sb = new StringBuilder();
-        for (File sub : currentDirectory.listFiles()) {
+        for (File sub : serverDir.listFiles()) {
             if (sub.isDirectory()) {
                 sb.append("/");
             }
@@ -205,8 +227,18 @@ public class Server {
      * @throws IOException ошибка ввода вывода.
      */
     public static void main(String[] args) throws IOException {
-        Server server = new Server("./");
-        server.init();
-        server.run();
+        Settings settings = new Settings();
+        ClassLoader loader = Settings.class.getClassLoader();
+        try (InputStream fis = loader.getResourceAsStream("app.properties")) {
+            settings.load(fis);
+        }
+
+        File upload = new File(settings.getValue("server"));
+        upload.mkdirs();
+        int port = Integer.parseInt(settings.getValue("port"));
+
+        Server ser = new Server("/", port, upload);
+        ser.init();
+        ser.run();
     }
 }
