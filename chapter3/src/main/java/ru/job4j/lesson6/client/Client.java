@@ -1,5 +1,7 @@
 package ru.job4j.lesson6.client;
 
+import ru.job4j.lesson6.settings.Settings;
+
 import java.io.*;
 import java.net.Socket;
 
@@ -11,7 +13,12 @@ public class Client {
     /**
      *
      */
-    private final int port = 5000;
+    private String separator = System.getProperty("line.separator");
+
+    /**
+     *
+     */
+    private int port;
 
     /**
      *
@@ -29,18 +36,24 @@ public class Client {
     private File currentDir;
 
     /**
-     * Конструктор
-     * @param path
+     *
      */
-    public Client(final String path) {
-        currentDir = new File(path);
+    private File downloadDir;
+
+    /**
+     * Конструктор
+     */
+    public Client(final String path, final int port, final File download) {
+        this.currentDir = new File(path);
+        this.port = port;
+        this.downloadDir = download;
     }
     /**
      *
      * @throws IOException
      */
     public void runClient() throws IOException {
-        try (Socket socket = new Socket("192.168.1.168", port)) {
+        try (Socket socket = new Socket("localhost", port)) {
 
             DataInputStream in = new DataInputStream(socket.getInputStream());
             DataOutputStream out = new DataOutputStream(socket.getOutputStream());
@@ -59,12 +72,19 @@ public class Client {
                     System.out.println(in.readUTF());
                 }
                 if ("2".equals(line)) {
+                    System.out.println(in.readUTF());
+                    name = reader.readLine();
                     getFile(in, out);
                 }
                 if ("3".equals(line)) {
                     sendFile(in, out);
                 }
-
+                if ("4".equals(line)) {
+                    System.out.println(in.readUTF());
+                    name = reader.readLine();
+                    out.writeUTF(name);
+                    System.out.println(in.readUTF());
+                }
             } while (!("exit".equals(line)));
         }
     }
@@ -76,24 +96,23 @@ public class Client {
      * @throws IOException
      */
     private void sendFile(DataInputStream in, DataOutputStream out) throws IOException {
-        System.out.println("Введите путь и имя файла для отправки.");
-        System.out.println("Например: download/image/5.jpg");
+        System.out.println("Введите имя файла для отправки.");
         name = reader.readLine();
-        System.out.println(name);
-        File file = new File(currentDir + name);
-        //if (file.exists() && file.isFile()) {
-            out.writeUTF(file.getName());
-            out.writeLong(file.length());
-            try (FileInputStream fis = new FileInputStream(file)) {
+        File clientFile = new File(currentDir + name);
+        if (clientFile.exists() && clientFile.isFile()) {
+            out.writeUTF(clientFile.getName());
+            out.writeLong(clientFile.length());
+            try (FileInputStream fis = new FileInputStream(clientFile)) {
                 byte[] buffer = new byte[64 * 1024];
                 int c;
                 while ((c = fis.read(buffer)) != -1) {
                     out.write(buffer, 0, c);
                 }
             }
-//        } else {
-//            out.writeLong(-1L);
-//        }
+        } else {
+            out.writeLong(-1L);
+        }
+        System.out.println(in.readUTF());
     }
 
     /**
@@ -110,7 +129,7 @@ public class Client {
         long end;
         long time;
         if (length > -1) {
-            File file = new File("c:/download_test" + "/" + name);
+            File file = new File(downloadDir + "/" + name);
             try (FileOutputStream fos = new FileOutputStream(file)) {
                 byte[] buffer = new byte[64 * 1024];
                 int c;
@@ -120,7 +139,7 @@ public class Client {
                         System.out.println("Ok");
                         end = System.nanoTime();
                         time = (end - start) / 1000000000;
-                        System.out.println(time);
+                        System.out.println("Время загрузки: " + time + " сек.");
                         break;
                     }
                 }
@@ -134,7 +153,16 @@ public class Client {
      * @throws IOException
      */
     public static void main(String[] args) throws IOException {
-        Client client = new Client("/");
+        Settings settings = new Settings();
+        ClassLoader loader = Settings.class.getClassLoader();
+        try (InputStream fis = loader.getResourceAsStream("app.properties")) {
+            settings.load(fis);
+        }
+        File downlod = new File(settings.getValue("client"));
+        downlod.mkdirs();
+        int port = Integer.parseInt(settings.getValue("port"));
+
+        Client client = new Client("/", port, downlod);
         client.runClient();
     }
 }
