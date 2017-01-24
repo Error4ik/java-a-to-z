@@ -1,61 +1,61 @@
 package ru.job4j.lesson6.server;
 
-
 import ru.job4j.lesson6.settings.Settings;
 
-import java.io.*;
-import java.net.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.IOException;
+import java.io.File;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.net.Socket;
+import java.net.ServerSocket;
 
 /**
- *
+ * Класс сервера.
  */
 public class Server {
 
     /**
-     *
+     * Порт.
      */
     private int port;
 
     /**
-     *
-     */
-    private List<String> listAction;
-
-    /**
-     *
+     * Корневая дириктория.
      */
     private File serverDir;
 
     /**
-     *
+     * Дириктория куда помещаются загруженные на сервер файлы.
      */
     private File uploadDir;
 
     /**
-     *
+     * Разделитель.
      */
     private String separator = System.getProperty("line.separator");
 
-    /**
-     *
-     */
-    private DataInputStream in;
 
     /**
+     * Конструктор.
      *
+     * @param path   Путь к корневому каталогу.
+     * @param port   порт.
+     * @param upload папка для загрузок на сервер.
      */
-    private DataOutputStream out;
-
-
-    public Server(final String server, final int port, final File upload) {
-        this.serverDir = new File(server);
+    public Server(final String path, final int port, final File upload) {
+        this.serverDir = new File(path);
         this.port = port;
         this.uploadDir = upload;
     }
 
-
+    /**
+     * Метод запуска клиента.
+     *
+     * @throws IOException ошибка ввода вывода.
+     */
     public void run() throws IOException {
         try (ServerSocket server = new ServerSocket(port)) {
 
@@ -63,8 +63,8 @@ public class Server {
             Socket socket = server.accept();
             System.out.println("Joined: " + socket.getLocalAddress());
 
-            in = new DataInputStream(socket.getInputStream());
-            out = new DataOutputStream(socket.getOutputStream());
+            DataInputStream in = new DataInputStream(socket.getInputStream());
+            DataOutputStream out = new DataOutputStream(socket.getOutputStream());
 
             out.writeUTF(showMenu());
             String line = null;
@@ -87,7 +87,13 @@ public class Server {
         }
     }
 
-
+    /**
+     * Метод получения файла.
+     *
+     * @param in  входной поток.
+     * @param out выходной поток.
+     * @throws IOException ошибка ввода вывода.
+     */
     private void getFile(final DataInputStream in, final DataOutputStream out) throws IOException {
         File file = new File(uploadDir + "/" + in.readUTF());
         long length = in.readLong();
@@ -111,7 +117,13 @@ public class Server {
         }
     }
 
-
+    /**
+     * Метод отправки файла.
+     *
+     * @param in  входной поток.
+     * @param out выходной поток.
+     * @throws IOException ошибка ввода вывода.
+     */
     private void sendFile(final DataInputStream in, final DataOutputStream out) throws IOException {
         out.writeUTF("Enter name download file.");
         String line = in.readUTF();
@@ -135,7 +147,13 @@ public class Server {
         }
     }
 
-
+    /**
+     * Метод смены дириктории.
+     *
+     * @param in  входной поток.
+     * @param out выходной поток.
+     * @throws IOException ошибка ввода вывода.
+     */
     private void changeDirectory(final DataInputStream in, final DataOutputStream out) throws IOException {
         out.writeUTF("Enter directory name.");
         String line = in.readUTF();
@@ -165,7 +183,11 @@ public class Server {
         out.writeUTF(separator + "Are you here " + serverDir.getAbsolutePath());
     }
 
-
+    /**
+     * Метод получает список дирикторий и записывает их в строку.
+     *
+     * @return строку.
+     */
     private String showDirectory() {
         StringBuilder sb = new StringBuilder();
         for (File sub : serverDir.listFiles()) {
@@ -179,28 +201,28 @@ public class Server {
         return sb.toString();
     }
 
-
+    /**
+     * Метод формирует стрку с меню.
+     * @return строку меню.
+     */
     private String showMenu() {
-        StringBuilder sb = new StringBuilder();
-        for (String s : listAction) {
-            sb.append(s).append(separator);
-        }
-        sb.append(separator).append("Are you here " + serverDir.getAbsolutePath()).append(separator);
-        return sb.toString();
+        return new StringBuilder()
+                .append("1: Show Directory").append(separator)
+                .append("2: Download").append(separator)
+                .append("3: Upload").append(separator)
+                .append("4: Change Directory").append(separator)
+                .append("0: Exit").append(separator)
+                .append("Are you here ")
+                .append(serverDir.getAbsolutePath())
+                .append(separator)
+                .toString();
     }
 
-
-    public void init() {
-        listAction = new ArrayList<>();
-        listAction.add("1: Show Directory");
-        listAction.add("2: Download");
-        listAction.add("3: Upload");
-        listAction.add("4: Change Directory");
-        listAction.add("0: Exit");
-    }
-
-
-
+    /**
+     * Точка входа.
+     * @param args аргументы.
+     * @throws IOException ошибка ввода вывода.
+     */
     public static void main(String[] args) throws IOException {
         Settings settings = new Settings();
         ClassLoader loader = Settings.class.getClassLoader();
@@ -213,7 +235,6 @@ public class Server {
         int port = Integer.parseInt(settings.getValue("port"));
 
         Server ser = new Server("/", port, upload);
-        ser.init();
         ser.run();
     }
 }

@@ -2,19 +2,19 @@ package ru.job4j.lesson5;
 
 import org.junit.Test;
 
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.File;
+import java.io.BufferedReader;
 import java.io.OutputStreamWriter;
 import java.io.FileOutputStream;
-import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Properties;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -31,11 +31,14 @@ public class ConsoleChatTest {
      */
     @Test
     public void runChat() throws IOException {
-        final Properties prop = new Properties();
-        prop.load(new InputStreamReader(new FileInputStream(new File("app.properties"))));
+        Settings settings = new Settings();
+        ClassLoader loader = Settings.class.getClassLoader();
+        try (InputStream fis = loader.getResourceAsStream("app.properties")) {
+            settings.load(fis);
+        }
         final String[] test = new String[]{"Hi", "стоп", "Ответь", "Продолжить", "Закончить"};
         final StubInput stubInput = new StubInput(test);
-        String outFile = "../" + prop.getProperty("pathOut");
+        String outFile = "../" + settings.getValue("pathOut");
         final File in = File.createTempFile("tmp", "txt");
         final File out = new File(outFile);
 
@@ -64,12 +67,15 @@ public class ConsoleChatTest {
      */
     @Test(expected = IOException.class)
     public void chatException() throws IOException {
-        final Properties prop = new Properties();
-        prop.load(new InputStreamReader(new FileInputStream(new File("../app.properties"))));
+        Settings settings = new Settings();
+        ClassLoader loader = Settings.class.getClassLoader();
+        try (InputStream fis = loader.getResourceAsStream("app.properties")) {
+            settings.load(fis);
+        }
         final String[] test = new String[]{"Hi", "стоп", "Ответь", "Продолжить", "Закончить"};
         final StubInput stubInput = new StubInput(test);
         final File in = new File("empty");
-        final File out = new File(prop.getProperty("pathOut"));
+        final File out = new File(settings.getValue("pathOut"));
         final ConsoleChat consoleChat = new ConsoleChat(in, out, stubInput);
         consoleChat.runChat();
     }

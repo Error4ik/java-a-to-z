@@ -6,10 +6,8 @@ import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.io.RandomAccessFile;
 import java.io.OutputStreamWriter;
-import java.io.InputStreamReader;
-import java.io.FileInputStream;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.Properties;
 import java.util.Random;
 
 /**
@@ -123,11 +121,14 @@ public class ConsoleChat {
      * @throws IOException ошибка ввода вывода.
      */
     public static void main(String[] args) throws IOException {
-        Properties prop = new Properties();
-        prop.load(new InputStreamReader(new FileInputStream(new File("chapter3/app.properties"))));
+        Settings settings = new Settings();
+        ClassLoader loader = Settings.class.getClassLoader();
+        try (InputStream fis = loader.getResourceAsStream("app.properties")) {
+            settings.load(fis);
+        }
         ConsoleInput input = new ConsoleInput();
-        File in = new File(prop.getProperty("pathIn"));
-        File out = new File(prop.getProperty("pathOut"));
+        File in = new File(settings.getValue("pathIn"));
+        File out = new File(settings.getValue("pathOut"));
         ConsoleChat consoleChat = new ConsoleChat(in, out, input);
         consoleChat.runChat();
     }
