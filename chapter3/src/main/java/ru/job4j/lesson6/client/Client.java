@@ -102,7 +102,7 @@ public class Client {
      * @param out выходящий поток.
      * @throws IOException Ошибка ввода вывода.
      */
-    private void sendFile(DataInputStream in, DataOutputStream out) throws IOException {
+    private void sendFile(final DataInputStream in, final DataOutputStream out) throws IOException {
         System.out.println("Enter path and line file to send");
         System.out.println("Eg movies/test.mp4, and documents/test.txt");
         line = reader.readLine();
@@ -131,7 +131,7 @@ public class Client {
      * @param out выходящий поток.
      * @throws IOException Ошибка ввода вывода.
      */
-    private void getFile(DataInputStream in, DataOutputStream out) throws IOException {
+    private void getFile(final DataInputStream in, final DataOutputStream out) throws IOException {
         out.writeUTF(line);
         long length = in.readLong();
         System.out.println("Download file length: " + length + " bytes");
