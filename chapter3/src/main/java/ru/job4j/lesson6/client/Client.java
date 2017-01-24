@@ -71,7 +71,7 @@ public class Client {
             System.out.println(in.readUTF());
 
             do {
-                System.out.println("Choose actions.");
+                System.out.println("Choose actions:");
                 line = reader.readLine();
                 out.writeUTF(line);
                 out.flush();
