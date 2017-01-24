@@ -64,7 +64,7 @@ public class Client {
             System.out.println(in.readUTF());
 
             do {
-                System.out.println("Выберите действие.");
+                System.out.println("Choose actions.");
                 line = reader.readLine();
                 out.writeUTF(line);
                 out.flush();
@@ -96,10 +96,12 @@ public class Client {
      * @throws IOException
      */
     private void sendFile(DataInputStream in, DataOutputStream out) throws IOException {
-        System.out.println("Введите имя файла для отправки.");
+        System.out.println("Enter path and name file to send");
+        System.out.println("Eg movies/test.mp4, and documents/test.txt");
         name = reader.readLine();
         File clientFile = new File(currentDir + name);
         if (clientFile.exists() && clientFile.isFile()) {
+            System.out.println("Upload file to server");
             out.writeUTF(clientFile.getName());
             out.writeLong(clientFile.length());
             try (FileInputStream fis = new FileInputStream(clientFile)) {
@@ -124,7 +126,7 @@ public class Client {
     private void getFile(DataInputStream in, DataOutputStream out) throws IOException {
         out.writeUTF(name);
         long length = in.readLong();
-        System.out.println(length);
+        System.out.println("Download file length: " + length + " bytes");
         long start = System.nanoTime();
         long end;
         long time;
@@ -136,10 +138,10 @@ public class Client {
                 while ((c = in.read(buffer)) != -1) {
                     fos.write(buffer, 0, c);
                     if (file.length() == length) {
-                        System.out.println("Ok");
                         end = System.nanoTime();
                         time = (end - start) / 1000000000;
-                        System.out.println("Время загрузки: " + time + " сек.");
+                        System.out.println("Download time: " + time + " seconds");
+                        System.out.println("The file is saved in the folder: /test folder/client download");
                         break;
                     }
                 }

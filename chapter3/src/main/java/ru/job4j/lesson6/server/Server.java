@@ -63,9 +63,9 @@ public class Server {
     public void run() throws IOException {
         try (ServerSocket server = new ServerSocket(port)) {
 
-            System.out.println("Ожидается подключение к серверу.");
+            System.out.println("Connection to the server is expected.");
             Socket socket = server.accept();
-            System.out.println("Присоеденился: " + socket.getLocalAddress());
+            System.out.println("Joined: " + socket.getLocalAddress());
 
             in = new DataInputStream(socket.getInputStream());
             out = new DataOutputStream(socket.getOutputStream());
@@ -85,7 +85,7 @@ public class Server {
                 } else if ("4".equals(line)) {
                     this.changeDirectory(in, out);
                 } else {
-                    out.writeUTF("Вы ввели не коректные данные, попробуйте еще раз.");
+                    out.writeUTF("Not the correct input.");
                 }
             }
         }
@@ -99,7 +99,7 @@ public class Server {
     private void getFile(final DataInputStream in, final DataOutputStream out) throws IOException {
         File file = new File(uploadDir + "/" + in.readUTF());
         long length = in.readLong();
-        System.out.println("Загружается файл длинной: " + length);
+        System.out.println("Download file length: " + length + " bytes");
         long start = System.nanoTime();
         long end;
         long time;
@@ -109,10 +109,10 @@ public class Server {
             while ((c = in.read(buffer)) != -1) {
                 fos.write(buffer, 0, c);
                 if (file.length() == length) {
-                    out.writeUTF("Ok");
+                    out.writeUTF("Ok!!!");
                     end = System.nanoTime();
                     time = (end - start) / 1000000000;
-                    System.out.println("Время загрузки: " + time + " сек.");
+                    System.out.println("Download time: " + time + " seconds");
                     break;
                 }
             }
@@ -123,7 +123,7 @@ public class Server {
      * @throws IOException
      */
     private void sendFile(final DataInputStream in, final DataOutputStream out) throws IOException {
-        out.writeUTF("Введите название файла который нужно скачать.");
+        out.writeUTF("Enter name file to send.");
         String line = in.readUTF();
         File serverFile;
         if (serverDir.getParent() == null) {
@@ -151,11 +151,11 @@ public class Server {
      * @throws IOException Ошибка ввода вывода.
      */
     private void changeDirectory(final DataInputStream in, final DataOutputStream out) throws IOException {
-        out.writeUTF("Введите имя дириктории");
+        out.writeUTF("Enter directory name.");
         String line = in.readUTF();
         if ("..".equals(line)) {
             if (serverDir.getParent() == null) {
-                out.writeUTF("Вы находитесь в корневом каталоге.");
+                out.writeUTF("You in the root catalog.");
             } else {
                 serverDir = new File(serverDir.getParent());
                 out.writeUTF(serverDir.getAbsolutePath());
@@ -167,7 +167,7 @@ public class Server {
                     serverDir = new File(serverDir.getPath() + line);
                     out.writeUTF(serverDir.getAbsolutePath());
                 } else {
-                    out.writeUTF("Не верная дириктория");
+                    out.writeUTF("Invalid name directory");
                 }
             } else {
                 File tmp = new File(serverDir.getPath() + "/" + line);
@@ -175,7 +175,7 @@ public class Server {
                     serverDir = new File(serverDir.getPath() + "/" + line);
                     out.writeUTF(serverDir.getAbsolutePath());
                 } else {
-                    out.writeUTF("Не верная дириктория");
+                    out.writeUTF("Invalid name directory");
                 }
             }
         }
