@@ -48,10 +48,8 @@ public class Client {
         this.port = port;
         this.downloadDir = download;
     }
-    /**
-     *
-     * @throws IOException
-     */
+
+
     public void runClient() throws IOException {
         try (Socket socket = new Socket("localhost", port)) {
 
@@ -85,23 +83,18 @@ public class Client {
                     out.writeUTF(name);
                     System.out.println(in.readUTF());
                 }
-            } while (!("exit".equals(line)));
+            } while (!("0".equals(line)));
         }
     }
 
-    /**
-     *
-     * @param in
-     * @param out
-     * @throws IOException
-     */
+
     private void sendFile(DataInputStream in, DataOutputStream out) throws IOException {
         System.out.println("Enter path and name file to send");
         System.out.println("Eg movies/test.mp4, and documents/test.txt");
         name = reader.readLine();
         File clientFile = new File(currentDir + name);
         if (clientFile.exists() && clientFile.isFile()) {
-            System.out.println("Upload file to server");
+            System.out.println("Uploading file to server...");
             out.writeUTF(clientFile.getName());
             out.writeLong(clientFile.length());
             try (FileInputStream fis = new FileInputStream(clientFile)) {
@@ -117,12 +110,7 @@ public class Client {
         System.out.println(in.readUTF());
     }
 
-    /**
-     *
-     * @param in
-     * @param out
-     * @throws IOException
-     */
+
     private void getFile(DataInputStream in, DataOutputStream out) throws IOException {
         out.writeUTF(name);
         long length = in.readLong();
@@ -141,7 +129,7 @@ public class Client {
                         end = System.nanoTime();
                         time = (end - start) / 1000000000;
                         System.out.println("Download time: " + time + " seconds");
-                        System.out.println("The file is saved in the folder: /test folder/client download");
+                        System.out.println("The file is saved in the folder: Your root - /TEST/download");
                         break;
                     }
                 }
@@ -149,11 +137,7 @@ public class Client {
         }
     }
 
-    /**
-     *
-     * @param args
-     * @throws IOException
-     */
+
     public static void main(String[] args) throws IOException {
         Settings settings = new Settings();
         ClassLoader loader = Settings.class.getClassLoader();

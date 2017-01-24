@@ -55,11 +55,7 @@ public class Server {
         this.uploadDir = upload;
     }
 
-    /**
-     * Метод запуска сервера.
-     *
-     * @throws IOException ошибка ввода вывода.
-     */
+
     public void run() throws IOException {
         try (ServerSocket server = new ServerSocket(port)) {
 
@@ -73,7 +69,7 @@ public class Server {
             out.writeUTF(showMenu());
             String line = null;
 
-            while (!("exit".equals(line))) {
+            while (!("0".equals(line))) {
                 line = in.readUTF();
                 System.out.println("Получен запрос: " + line);
                 if ("1".equals(line)) {
@@ -91,11 +87,7 @@ public class Server {
         }
     }
 
-    /**
-     * @param in
-     * @param out
-     * @throws IOException
-     */
+
     private void getFile(final DataInputStream in, final DataOutputStream out) throws IOException {
         File file = new File(uploadDir + "/" + in.readUTF());
         long length = in.readLong();
@@ -109,21 +101,19 @@ public class Server {
             while ((c = in.read(buffer)) != -1) {
                 fos.write(buffer, 0, c);
                 if (file.length() == length) {
-                    out.writeUTF("Ok!!!");
                     end = System.nanoTime();
                     time = (end - start) / 1000000000;
                     System.out.println("Download time: " + time + " seconds");
+                    out.writeUTF("Ok! Download time: " + time + " seconds");
                     break;
                 }
             }
         }
     }
 
-    /**
-     * @throws IOException
-     */
+
     private void sendFile(final DataInputStream in, final DataOutputStream out) throws IOException {
-        out.writeUTF("Enter name file to send.");
+        out.writeUTF("Enter name download file.");
         String line = in.readUTF();
         File serverFile;
         if (serverDir.getParent() == null) {
@@ -145,11 +135,7 @@ public class Server {
         }
     }
 
-    /**
-     * Метод для перемещения по дирикториям.
-     *
-     * @throws IOException Ошибка ввода вывода.
-     */
+
     private void changeDirectory(final DataInputStream in, final DataOutputStream out) throws IOException {
         out.writeUTF("Enter directory name.");
         String line = in.readUTF();
@@ -158,14 +144,12 @@ public class Server {
                 out.writeUTF("You in the root catalog.");
             } else {
                 serverDir = new File(serverDir.getParent());
-                out.writeUTF(serverDir.getAbsolutePath());
             }
         } else {
             if (serverDir.getParent() == null) {
                 File tmp = new File(serverDir.getPath() + line);
                 if (tmp.exists() && tmp.isDirectory()) {
                     serverDir = new File(serverDir.getPath() + line);
-                    out.writeUTF(serverDir.getAbsolutePath());
                 } else {
                     out.writeUTF("Invalid name directory");
                 }
@@ -173,59 +157,50 @@ public class Server {
                 File tmp = new File(serverDir.getPath() + "/" + line);
                 if (tmp.exists() && tmp.isDirectory()) {
                     serverDir = new File(serverDir.getPath() + "/" + line);
-                    out.writeUTF(serverDir.getAbsolutePath());
                 } else {
                     out.writeUTF("Invalid name directory");
                 }
             }
         }
+        out.writeUTF(separator + "Are you here " + serverDir.getAbsolutePath());
     }
 
-    /**
-     * Метод выводит на экран содержимое дириктории.
-     *
-     * @return возвращает строку в которой записано содержимое.
-     */
+
     private String showDirectory() {
         StringBuilder sb = new StringBuilder();
         for (File sub : serverDir.listFiles()) {
-            if (sub.isDirectory()) {
-                sb.append("/");
+            if (!sub.isHidden()) {
+                if (sub.isDirectory()) {
+                    sb.append("/");
+                }
+                sb.append(sub.getName()).append(separator);
             }
-            sb.append(sub.getName()).append(separator);
         }
         return sb.toString();
     }
 
-    /**
-     * Выводит на экран меню.
-     */
+
     private String showMenu() {
         StringBuilder sb = new StringBuilder();
         for (String s : listAction) {
             sb.append(s).append(separator);
         }
+        sb.append(separator).append("Are you here " + serverDir.getAbsolutePath()).append(separator);
         return sb.toString();
     }
 
-    /**
-     * Заполняет лист действиями.
-     */
+
     public void init() {
         listAction = new ArrayList<>();
         listAction.add("1: Show Directory");
         listAction.add("2: Download");
         listAction.add("3: Upload");
         listAction.add("4: Change Directory");
+        listAction.add("0: Exit");
     }
 
 
-    /**
-     * Точка входа.
-     *
-     * @param args аргументы.
-     * @throws IOException ошибка ввода вывода.
-     */
+
     public static void main(String[] args) throws IOException {
         Settings settings = new Settings();
         ClassLoader loader = Settings.class.getClassLoader();
