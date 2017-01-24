@@ -136,7 +136,7 @@ public class Server {
         if (serverFile.exists() && serverFile.isFile()) {
             out.writeLong(serverFile.length());
             try (FileInputStream fis = new FileInputStream(serverFile)) {
-                byte[] buffer = new byte[64 * 1024];
+                byte[] buffer = new byte[8192];
                 int c;
                 while ((c = fis.read(buffer)) != -1) {
                     out.write(buffer, 0, c);
