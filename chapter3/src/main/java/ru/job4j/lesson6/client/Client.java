@@ -19,9 +19,39 @@ import java.net.Socket;
 public class Client {
 
     /**
+     * Константа действия.
+     */
+    private static final String SHOW_DIRECTORY = "1";
+
+    /**
+     * Константа действия.
+     */
+    private static final String DOWNLOAD = "2";
+
+    /**
+     * Константа действия.
+     */
+    private static final String UPLOAD = "3";
+
+    /**
+     * Константа действия.
+     */
+    private static final String CHANGE_DIR = "4";
+
+    /**
+     * Константа действия.
+     */
+    private static final String EXIT = "0";
+
+    /**
      * Адрес порта.
      */
     private int port;
+
+    /**
+     * Хост.
+     */
+    private String host;
 
     /**
      * Хранит ввод пользователя.
@@ -48,11 +78,13 @@ public class Client {
      * @param path корневой путь.
      * @param port порт.
      * @param download дириктория для файлов.
+     * @param host Хост.
      */
-    public Client(final String path, final int port, final File download) {
+    public Client(final String path, final int port, final File download, final String host) {
         this.currentDir = new File(path);
         this.port = port;
         this.downloadDir = download;
+        this.host = host;
     }
 
     /**
@@ -60,7 +92,7 @@ public class Client {
      * @throws IOException Ошибка ввода вывода.
      */
     public void runClient() throws IOException {
-        try (Socket socket = new Socket("localhost", port)) {
+        try (Socket socket = new Socket(host, port)) {
 
             DataInputStream in = new DataInputStream(socket.getInputStream());
             DataOutputStream out = new DataOutputStream(socket.getOutputStream());
@@ -68,31 +100,31 @@ public class Client {
             reader = new BufferedReader(new InputStreamReader(System.in));
 
             String line;
-            System.out.println(in.readUTF());
+            System.out.printf("%s", in.readUTF());
 
             do {
-                System.out.println("Choose actions.");
+                System.out.printf("Choose actions.");
                 line = reader.readLine();
                 out.writeUTF(line);
                 out.flush();
-                if ("1".equals(line)) {
-                    System.out.println(in.readUTF());
+                if (SHOW_DIRECTORY.equals(line)) {
+                    System.out.printf("%s", in.readUTF());
                 }
-                if ("2".equals(line)) {
-                    System.out.println(in.readUTF());
+                if (DOWNLOAD.equals(line)) {
+                    System.out.printf("%s", in.readUTF());
                     this.line = reader.readLine();
                     getFile(in, out);
                 }
-                if ("3".equals(line)) {
+                if (UPLOAD.equals(line)) {
                     sendFile(in, out);
                 }
-                if ("4".equals(line)) {
-                    System.out.println(in.readUTF());
+                if (CHANGE_DIR.equals(line)) {
+                    System.out.printf("%s", in.readUTF());
                     this.line = reader.readLine();
                     out.writeUTF(this.line);
-                    System.out.println(in.readUTF());
+                    System.out.printf("%s", in.readUTF());
                 }
-            } while (!("0".equals(line)));
+            } while (!(EXIT.equals(line)));
         }
     }
 
@@ -103,12 +135,12 @@ public class Client {
      * @throws IOException Ошибка ввода вывода.
      */
     private void sendFile(final DataInputStream in, final DataOutputStream out) throws IOException {
-        System.out.println("Enter path and line file to send");
-        System.out.println("Eg movies/test.mp4, and documents/test.txt");
+        System.out.printf("Enter path and line file to send");
+        System.out.printf("Eg movies/test.mp4, and documents/test.txt");
         line = reader.readLine();
         File clientFile = new File(currentDir + line);
         if (clientFile.exists() && clientFile.isFile()) {
-            System.out.println("Uploading file to server...");
+            System.out.printf("Uploading file to server...");
             out.writeUTF(clientFile.getName());
             out.writeLong(clientFile.length());
             try (FileInputStream fis = new FileInputStream(clientFile)) {
@@ -121,7 +153,7 @@ public class Client {
         } else {
             out.writeLong(-1L);
         }
-        System.out.println(in.readUTF());
+        System.out.printf("%s", in.readUTF());
     }
 
 
@@ -134,7 +166,7 @@ public class Client {
     private void getFile(final DataInputStream in, final DataOutputStream out) throws IOException {
         out.writeUTF(line);
         long length = in.readLong();
-        System.out.println("Download file length: " + length + " bytes");
+        System.out.printf("Download file length: %s bytes", length);
         long start = System.nanoTime();
         long end;
         long time;
@@ -148,8 +180,8 @@ public class Client {
                     if (file.length() == length) {
                         end = System.nanoTime();
                         time = (end - start) / 1000000000;
-                        System.out.println("Download time: " + time + " seconds");
-                        System.out.println("The file is saved in the folder: Your root - /TEST/download");
+                        System.out.printf("Download time: %s seconds", time);
+                        System.out.printf("The file is saved in the folder: Your root - /TEST/download");
                         break;
                     }
                 }
@@ -172,8 +204,9 @@ public class Client {
         File download = new File(settings.getValue("client"));
         download.mkdirs();
         int port = Integer.parseInt(settings.getValue("port"));
+        String host = settings.getValue("localhost");
 
-        Client client = new Client("/", port, download);
+        Client client = new Client("/", port, download, host);
         client.runClient();
     }
 }

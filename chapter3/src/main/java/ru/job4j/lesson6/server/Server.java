@@ -18,6 +18,31 @@ import java.net.ServerSocket;
 public class Server {
 
     /**
+     * Константа действия.
+     */
+    private static final String SHOW_DIRECTORY = "1";
+
+    /**
+     * Константа действия.
+     */
+    private static final String DOWNLOAD = "2";
+
+    /**
+     * Константа действия.
+     */
+    private static final String UPLOAD = "3";
+
+    /**
+     * Константа действия.
+     */
+    private static final String CHANGE_DIR = "4";
+
+    /**
+     * Константа действия.
+     */
+    private static final String EXIT = "0";
+
+    /**
      * Порт.
      */
     private int port;
@@ -59,9 +84,9 @@ public class Server {
     public void run() throws IOException {
         try (ServerSocket server = new ServerSocket(port)) {
 
-            System.out.println("Connection to the server is expected.");
+            System.out.printf("Connection to the server is expected.");
             Socket socket = server.accept();
-            System.out.println("Joined: " + socket.getLocalAddress());
+            System.out.printf("Joined: %s", socket.getLocalAddress());
 
             DataInputStream in = new DataInputStream(socket.getInputStream());
             DataOutputStream out = new DataOutputStream(socket.getOutputStream());
@@ -69,16 +94,16 @@ public class Server {
             out.writeUTF(showMenu());
             String line = null;
 
-            while (!("0".equals(line))) {
+            while (!(EXIT.equals(line))) {
                 line = in.readUTF();
-                System.out.println("Получен запрос: " + line);
-                if ("1".equals(line)) {
+                System.out.printf("Получен запрос: %s", line);
+                if (SHOW_DIRECTORY.equals(line)) {
                     out.writeUTF(showDirectory());
-                } else if ("2".equals(line)) {
+                } else if (DOWNLOAD.equals(line)) {
                     this.sendFile(in, out);
-                } else if ("3".equals(line)) {
+                } else if (UPLOAD.equals(line)) {
                     this.getFile(in, out);
-                } else if ("4".equals(line)) {
+                } else if (CHANGE_DIR.equals(line)) {
                     this.changeDirectory(in, out);
                 } else {
                     out.writeUTF("Not the correct input.");
@@ -97,7 +122,7 @@ public class Server {
     private void getFile(final DataInputStream in, final DataOutputStream out) throws IOException {
         File file = new File(uploadDir + "/" + in.readUTF());
         long length = in.readLong();
-        System.out.println("Download file length: " + length + " bytes");
+        System.out.printf("Download file length: %s bytes", length);
         long start = System.nanoTime();
         long end;
         long time;
@@ -109,7 +134,7 @@ public class Server {
                 if (file.length() == length) {
                     end = System.nanoTime();
                     time = (end - start) / 1000000000;
-                    System.out.println("Download time: " + time + " seconds");
+                    System.out.printf("Download time: %s seconds", time);
                     out.writeUTF("Ok! Download time: " + time + " seconds");
                     break;
                 }
