@@ -125,7 +125,7 @@ public class Server {
      * @throws IOException ошибка ввода вывода.
      */
     private void sendFile(final DataInputStream in, final DataOutputStream out) throws IOException {
-        out.writeUTF("Enter name download file");
+        out.writeUTF("Enter name download file.");
         String line = in.readUTF();
         File serverFile;
         if (serverDir.getParent() == null) {
