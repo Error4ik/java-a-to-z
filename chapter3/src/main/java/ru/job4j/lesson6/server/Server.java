@@ -102,7 +102,7 @@ public class Server {
         long end;
         long time;
         try (FileOutputStream fos = new FileOutputStream(file)) {
-            byte[] buffer = new byte[64 * 1024];
+            byte[] buffer = new byte[8192];
             int c;
             while ((c = in.read(buffer)) != -1) {
                 fos.write(buffer, 0, c);
