@@ -24,7 +24,7 @@
 
   Most Checks are configurable, be sure to consult the documentation.
 
-  To completely disable a check, just comment it out or delete it from the file.
+  To completely disable a check, just comment it out or delete it from the searchFile.
 
   Finally, it is worth reading the documentation.
 
@@ -58,7 +58,7 @@
     <!-- Checks for Headers                                -->
     <!-- See http://checkstyle.sf.net/config_header.html   -->
     <!-- <module name="Header"> -->
-    <!--   <property name="headerFile" value="${checkstyle.header.file}"/> -->
+    <!--   <property name="headerFile" value="${checkstyle.header.searchFile}"/> -->
     <!--   <property name="fileExtensions" value="java"/> -->
     <!-- </module> -->
 

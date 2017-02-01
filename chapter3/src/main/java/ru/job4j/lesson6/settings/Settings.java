@@ -16,6 +16,7 @@ public class Settings {
 
     /**
      * Метод загружает настройки из файла.
+     *
      * @param io поток.
      */
     public void load(final InputStream io) {
@@ -28,6 +29,7 @@ public class Settings {
 
     /**
      * Метод возвращает значение по ключу.
+     *
      * @param key ключ.
      * @return значение.
      */
