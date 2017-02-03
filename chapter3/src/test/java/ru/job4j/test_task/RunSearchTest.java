@@ -28,9 +28,12 @@ public class RunSearchTest {
      */
     private final String root = String.valueOf(Paths.get("/").toAbsolutePath());
 
+    private String fileSep = System.getProperty("file.separator");
+
     /**
      * Перед началом тестов создается папка в корневой дириктории в которой создаются еще несколько подпапок,
      * и в них создаются файлы для проверки.
+     *
      * @throws IOException ошибка ввода вывода.
      */
     @Before
@@ -44,6 +47,7 @@ public class RunSearchTest {
 
     /**
      * После тестов удаляются файлы и папки созданные для теста.
+     *
      * @throws IOException ошибка ввода вывода.
      */
     @After
@@ -70,7 +74,9 @@ public class RunSearchTest {
     @Test
     public void whenAFileIsFoundOnTheMaskThenWritesTheCorrectResultInTheFile() throws Exception {
         String[] array = {"-d", "/5TEST3/", "-n", "*.txt", "-m", "-o", "log.txt"};
-        final String[] expected = {root + "5TEST3\\1\\2\\bbb.txt", root + "5TEST3\\1\\aaa.txt", root + "5TEST3\\aaa.txt"};
+        final String[] expected = {String.format("%s%s%s%s%s%s%s%s", root, "5TEST3", fileSep, 1, fileSep, 2, fileSep, "bbb.txt"),
+                String.format("%s%s%s%s%s%s", root, "5TEST3", fileSep, 1, fileSep, "aaa.txt"),
+                String.format("%s%s%s%s", root, "5TEST3", fileSep, "aaa.txt")};
         final String[] actual = new String[3];
 
         RunSearch runSearch = new RunSearch(array);
@@ -95,8 +101,7 @@ public class RunSearchTest {
     @Test
     public void whenAFileIsFoundNamedThenWritesTheCorrectResultInTheFile() throws Exception {
         String[] array = {"-d", "/5TEST3/", "-n", "555.docx", "-f", "-o", "log.txt"};
-        final Path path = Paths.get("/");
-        final String[] expected = {root + "5TEST3\\1\\2\\555.docx"};
+        final String[] expected = {String.format("%s%s%s%s%s%s%s%s", root, "5TEST3", fileSep, 1, fileSep, 2, fileSep, "555.docx")};
         final String[] actual = new String[1];
 
         RunSearch runSearch = new RunSearch(array);
@@ -125,8 +130,8 @@ public class RunSearchTest {
      * Метод по ключу возвращает значение.
      *
      * @param key ключ для получения данных из файла.
-     * @throws IOException ошибка ввода вывода.
      * @return Значеие по ключу.
+     * @throws IOException ошибка ввода вывода.
      */
     private String readFile(final String key) throws IOException {
         Settings settings = new Settings();
