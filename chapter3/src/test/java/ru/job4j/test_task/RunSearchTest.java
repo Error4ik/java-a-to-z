@@ -28,6 +28,9 @@ public class RunSearchTest {
      */
     private final String root = String.valueOf(Paths.get("/").toAbsolutePath());
 
+    /**
+     * Разделитель для дирикторий.
+     */
     private String fileSep = System.getProperty("file.separator");
 
     /**
