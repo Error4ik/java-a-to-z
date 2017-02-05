@@ -12,15 +12,23 @@ public class Settings {
     /**
      * Свойства.
      */
-    private Properties properties = new Properties();
+    private Properties properties;
+
+    /**
+     * Конструктор.
+     */
+    public Settings() {
+        this.properties = new Properties();
+        this.load();
+    }
 
     /**
      * Метод загружает настройки из файла.
-     * @param io поток.
      */
-    public void load(final InputStream io) {
-        try {
-            this.properties.load(io);
+    private void load() {
+        ClassLoader loader = this.getClass().getClassLoader();
+        try (InputStream is = loader.getResourceAsStream("app.properties")) {
+            this.properties.load(is);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -28,6 +36,7 @@ public class Settings {
 
     /**
      * Метод возвращает значение по ключу.
+     *
      * @param key ключ.
      * @return значение.
      */
