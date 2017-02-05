@@ -1,19 +1,18 @@
 package ru.job4j.test_task;
 
+import com.google.common.base.Joiner;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import ru.job4j.test_task.exception.InvalidKeyException;
+import ru.job4j.test_task.settings.Settings;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-import ru.job4j.test_task.exception.InvalidKeyException;
-import ru.job4j.test_task.settings.Settings;
-
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.Files;
@@ -77,9 +76,10 @@ public class RunSearchTest {
     @Test
     public void whenAFileIsFoundOnTheMaskThenWritesTheCorrectResultInTheFile() throws Exception {
         String[] array = {"-d", "/5TEST3/", "-n", "*.txt", "-m", "-o", "log.txt"};
-        final String[] expected = {String.format("%s%s%s%s%s%s%s%s", root, "5TEST3", fileSep, 1, fileSep, 2, fileSep, "bbb.txt"),
-                String.format("%s%s%s%s%s%s", root, "5TEST3", fileSep, 1, fileSep, "aaa.txt"),
-                String.format("%s%s%s%s", root, "5TEST3", fileSep, "aaa.txt")};
+        final String[] expected = {String.format("%s%s", root, Joiner.on(fileSep).join("5TEST3", "1", "2", "bbb.txt")),
+        String.format("%s%s", root, Joiner.on(fileSep).join("5TEST3", "1", "aaa.txt")),
+        String.format("%s%s", root, Joiner.on(fileSep).join("5TEST3", "aaa.txt"))};
+
         final String[] actual = new String[3];
 
         RunSearch runSearch = new RunSearch(array);
@@ -104,7 +104,7 @@ public class RunSearchTest {
     @Test
     public void whenAFileIsFoundNamedThenWritesTheCorrectResultInTheFile() throws Exception {
         String[] array = {"-d", "/5TEST3/", "-n", "555.docx", "-f", "-o", "log.txt"};
-        final String[] expected = {String.format("%s%s%s%s%s%s%s%s", root, "5TEST3", fileSep, 1, fileSep, 2, fileSep, "555.docx")};
+        final String[] expected = {String.format("%s%s", root, Joiner.on(fileSep).join("5TEST3", "1", "2", "555.docx"))};
         final String[] actual = new String[1];
 
         RunSearch runSearch = new RunSearch(array);
@@ -138,10 +138,6 @@ public class RunSearchTest {
      */
     private String readFile(final String key) throws IOException {
         Settings settings = new Settings();
-        ClassLoader loader = Settings.class.getClassLoader();
-        try (InputStream inputStream = loader.getResourceAsStream("app.properties")) {
-            settings.load(inputStream);
-        }
         return settings.getValue(key);
     }
 }
