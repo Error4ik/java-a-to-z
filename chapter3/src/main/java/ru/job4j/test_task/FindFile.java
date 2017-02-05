@@ -1,17 +1,12 @@
 package ru.job4j.test_task;
 
-
 import ru.job4j.test_task.settings.Settings;
 
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.InputStream;
-import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Files;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.FileVisitResult;
-import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -24,7 +19,12 @@ public class FindFile {
     /**
      * Разделить для строк.
      */
-    private String separator = System.getProperty("line.separator");
+    private final String sepLine = System.getProperty("line.separator");
+
+    /**
+     * Разделитель дирикторий.
+     */
+    private final String sepDir = System.getProperty("file.separator");
 
     /**
      * Проверяет на совпадение строки с шаблоном.
@@ -62,6 +62,11 @@ public class FindFile {
     private StringBuilder sb = new StringBuilder();
 
     /**
+     * Параметры из файла с настройками.
+     */
+    private Settings settings = new Settings();
+
+    /**
      * Конструктор.
      *
      * @param directory   дириктория в которой нужно найти файл.
@@ -88,15 +93,20 @@ public class FindFile {
                 public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
                     matches = pattern.matcher(String.valueOf(file.getFileName()));
                     if (matches.matches()) {
-                        sb.append(file.toAbsolutePath()).append(separator);
+                        sb.append(file.toAbsolutePath()).append(sepLine);
                     }
                     return FileVisitResult.CONTINUE;
                 }
+
+                @Override
+                public FileVisitResult visitFileFailed(Path file, IOException exc) throws IOException {
+                    return FileVisitResult.SKIP_SUBTREE;
+                }
             });
-            this.writeResultToFile(this.outFileName, sb.toString());
-            System.out.printf("%s%s%s/%s%s", "File search complete",
+            new WriteFile().writeResultToFile(this.outFileName, sb.toString());
+            System.out.printf("%s%s%s%s%s%s", "File search complete",
                     "Search results stored in the file: ",
-                    this.getFolderName("log.file.directory"), outFileName, separator);
+                    this.settings.getValue("log.file.directory"), sepDir, outFileName, sepLine);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -132,47 +142,5 @@ public class FindFile {
             result = fileName;
         }
         return result;
-    }
-
-    /**
-     * Метод записывает результат поиска в файл.
-     * Если файл существует, то он удаляется и создается заного.
-     *
-     * @param outFile фаил в который нужно записать.
-     * @param result  строка с данными для записи в файл.
-     */
-    private void writeResultToFile(final String outFile, final String result) {
-        File outFileDir = new File(this.getFolderName("log.file.directory"));
-        outFileDir.mkdir();
-
-        Path resultFile = Paths.get(outFileDir + System.getProperty("file.separator") + outFile);
-        try {
-            Files.deleteIfExists(resultFile);
-            //Files.createFile(outFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try (OutputStream out = Files.newOutputStream(resultFile)) {
-            out.write(result.getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Метод возвращает по ключу значение из файла app.properties.
-     *
-     * @param key ключ.
-     * @return значение.
-     */
-    private String getFolderName(final String key) {
-        Settings settings = new Settings();
-        ClassLoader loader = Settings.class.getClassLoader();
-        try (InputStream fis = loader.getResourceAsStream("app.properties")) {
-            settings.load(fis);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return settings.getValue(key);
     }
 }
