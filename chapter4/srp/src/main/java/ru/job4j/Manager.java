@@ -46,22 +46,19 @@ public class Manager {
         view.showMenu();
         CheckInput checkInput = new CheckInput();
 
-        try {
-            while (checkInput.checkInputValue(input.getInput())) {
+        while (checkInput.checkInputValue(input.getInput())) {
+            try {
                 checkInput.setResult(
                         calculator.runAction(checkInput.getTypeOperation(),
-                        checkInput.getFirstNumber(),
-                        checkInput.getSecondNumber())
+                                checkInput.getFirstNumber(),
+                                checkInput.getSecondNumber())
                 );
-
-                view.showResult(checkInput.getResult());
+            } catch (InvalidOperationException | DivideByZeroException e) {
+                System.out.printf("Error! %s", e.getMessage());
+                //e.printStackTrace();
             }
-        } catch (NumberFormatException e) {
-            System.out.printf("Error! %s\n", "Number format error.");
-            //e.printStackTrace();
-        } catch (InvalidOperationException | DivideByZeroException e) {
-            System.out.printf("Error! %s\n", e.getMessage());
-            //e.printStackTrace();
+
+            view.showResult(checkInput.getResult());
         }
     }
 }
