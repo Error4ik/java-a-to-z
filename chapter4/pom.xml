@@ -12,5 +12,6 @@
 
     <modules>
         <module>srp</module>
+        <module>ocp</module>
     </modules>
 </project>
