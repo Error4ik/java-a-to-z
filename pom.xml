@@ -16,7 +16,8 @@
     <modules>
         <!--<module>chapter1</module>-->
         <!--<module>chapter2</module>-->
-        <module>chapter3</module>
+        <!--<module>chapter3</module>-->
+        <module>chapter4</module>
     </modules>
 
     <dependencies>
@@ -38,11 +39,11 @@
             <!--<version>1.10.19</version>-->
             <!--<scope>test</scope>-->
         <!--</dependency>-->
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>19.0</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.google.guava</groupId>-->
+            <!--<artifactId>guava</artifactId>-->
+            <!--<version>19.0</version>-->
+        <!--</dependency>-->
         <!--<dependency>-->
         <!--<groupId>com.github.stefanbirkner</groupId>-->
         <!--<artifactId>system-rules</artifactId>-->
