@@ -15,7 +15,7 @@ public class ConsoleView implements IView {
      */
     @Override
     public void showMenu() {
-        System.out.printf("%s%s%s%s", "Enter arithmetic operation. Eg: 5 + 5", sep,
+        System.out.printf("%s%s%s%s", "Enter arithmetic operation. Eg: 5 + 5, and exit = exit the program", sep,
                 "For arithmetic operations with previous results. Eg: + 10", sep);
     }
 
