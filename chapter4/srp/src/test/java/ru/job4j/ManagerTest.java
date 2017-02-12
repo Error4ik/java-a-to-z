@@ -200,7 +200,7 @@ public class ManagerTest {
      */
     @Test
     public void whenCallMethodShowMenuThenPrintsMenu() {
-        final String expectedOut = String.format("%s%s%s%s", "Enter arithmetic operation. Eg: 5 + 5", sep,
+        final String expectedOut = String.format("%s%s%s%s", "Enter arithmetic operation. Eg: 5 + 5, and exit = exit the program", sep,
                 "For arithmetic operations with previous results. Eg: + 10", sep);
         final IView view = new ConsoleView();
 
