@@ -2,7 +2,6 @@ package ru.job4j.manager;
 
 import ru.job4j.food.IFoods;
 import ru.job4j.storage.IStorage;
-import ru.job4j.storage.Storage;
 
 import java.util.List;
 

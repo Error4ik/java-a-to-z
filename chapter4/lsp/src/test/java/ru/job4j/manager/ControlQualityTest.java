@@ -197,8 +197,7 @@ public class ControlQualityTest {
         final IFoods foods = new Milk(null, localDate.minusDays(10), localDate.plusDays(0), 0d);
         storage.addFood(foods);
         final String expectedValue =
-                String.format("Name storage: Trash%sThe number of products to warehouse:" +
-                        " 1%s{null, createDate: 2017-02-08, expireDate: 2017-02-18, price: 0.0}%s", sep, sep, sep);
+                String.format("Name storage: Trash%sThe number of products to warehouse: 1%s{null, createDate: 2017-02-08, expireDate: 2017-02-18, price: 0.0}%s", sep, sep, sep);
 
         assertThat(storage.toString(), is(expectedValue));
     }
