@@ -13,5 +13,6 @@
     <modules>
         <module>srp</module>
         <module>ocp</module>
+        <module>lsp</module>
     </modules>
 </project>
