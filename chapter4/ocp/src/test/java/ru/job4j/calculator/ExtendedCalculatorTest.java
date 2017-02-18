@@ -20,6 +20,9 @@ import static org.junit.Assert.assertThat;
  */
 public class ExtendedCalculatorTest {
 
+    /**
+     * Stub value.
+     */
     private final double stubValue = 0d;
 
     /**
