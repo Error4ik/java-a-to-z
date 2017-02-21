@@ -1,23 +1,23 @@
-package ru.job4j.storage;
+package ru.job4j.simple_control_quality.storage;
 
-import ru.job4j.food.IFoods;
+import ru.job4j.simple_control_quality.food.IFoods;
 
 /**
- *
+ * Simple warehouse.
  */
-public class Trash extends Storage {
+public class Warehouse extends Storage {
 
     /**
      * Condition in add food.
      */
-    private final double shelfLife = 0d;
+    private final double shelfLife = 75d;
 
     /**
      * Constructor.
      *
      * @param name name.
      */
-    public Trash(String name) {
+    public Warehouse(String name) {
         super(name);
     }
 
@@ -30,7 +30,7 @@ public class Trash extends Storage {
     @Override
     public boolean validatesFood(final IFoods food) {
         boolean flag = false;
-        if (food.checkShelfLife() == this.shelfLife) {
+        if (food.checkShelfLife() >= shelfLife) {
             flag = true;
         }
         return flag;

@@ -1,6 +1,6 @@
-package ru.job4j.storage;
+package ru.job4j.simple_control_quality.storage;
 
-import ru.job4j.food.IFoods;
+import ru.job4j.simple_control_quality.food.IFoods;
 
 import java.util.List;
 

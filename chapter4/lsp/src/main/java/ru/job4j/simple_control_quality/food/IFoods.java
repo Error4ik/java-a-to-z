@@ -1,4 +1,4 @@
-package ru.job4j.food;
+package ru.job4j.simple_control_quality.food;
 
 import java.time.LocalDate;
 

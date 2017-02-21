@@ -1,14 +1,14 @@
-package ru.job4j.manager;
+package ru.job4j.simple_control_quality.manager;
 
 import org.junit.Test;
-import ru.job4j.food.Foods;
-import ru.job4j.food.IFoods;
-import ru.job4j.food.Meat;
-import ru.job4j.food.Milk;
-import ru.job4j.storage.IStorage;
-import ru.job4j.storage.Shop;
-import ru.job4j.storage.Warehouse;
-import ru.job4j.storage.Trash;
+import ru.job4j.simple_control_quality.food.Foods;
+import ru.job4j.simple_control_quality.food.IFoods;
+import ru.job4j.simple_control_quality.food.Meat;
+import ru.job4j.simple_control_quality.food.Milk;
+import ru.job4j.simple_control_quality.storage.IStorage;
+import ru.job4j.simple_control_quality.storage.Shop;
+import ru.job4j.simple_control_quality.storage.Warehouse;
+import ru.job4j.simple_control_quality.storage.Trash;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -239,7 +239,7 @@ public class ControlQualityTest {
 
     /**
      * Test class ControlQuality.
-     * Method addStorage.
+     * Method addStorages.
      */
     @Test
     public void whenAddedStorageThenNumberIncreases() {
@@ -289,7 +289,7 @@ public class ControlQualityTest {
 
     /**
      * Test class ControlQuality.
-     * Method sortFoods.
+     * Method sortRecycleFoods.
      */
     @Test
     public void whenCallSortFoodsThenFoodsInDifferentRepositories() {

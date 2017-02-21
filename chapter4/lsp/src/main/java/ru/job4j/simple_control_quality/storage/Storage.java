@@ -1,6 +1,6 @@
-package ru.job4j.storage;
+package ru.job4j.simple_control_quality.storage;
 
-import ru.job4j.food.IFoods;
+import ru.job4j.simple_control_quality.food.IFoods;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +45,12 @@ public abstract class Storage implements IStorage {
         return flag;
     }
 
+    /**
+     * Check condition.
+     *
+     * @param food food.
+     * @return true if the foods can be added.
+     */
     @Override
     public abstract boolean validatesFood(final IFoods food);
 
