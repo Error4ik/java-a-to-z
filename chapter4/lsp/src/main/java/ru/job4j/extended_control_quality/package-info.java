@@ -4,4 +4,4 @@
  * @since 1.0
  */
 
-package ru.job4j.food;
+package ru.job4j.extended_control_quality;
