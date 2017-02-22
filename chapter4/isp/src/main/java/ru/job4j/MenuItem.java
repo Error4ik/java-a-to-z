@@ -103,7 +103,7 @@ public class MenuItem {
     }
 
     /**
-     * Обходит рекрсивно всех своих потомков и запрашивает имена.
+     * Show all children to menu.
      *
      * @param pref pref.
      * @return string.
