@@ -43,7 +43,7 @@ public class ExtendedControlQualityTest {
      */
     @Test
     public void whenCallGetCreateDateThenReturnValidValue() {
-        final int expectedValue = 42;
+        final int expectedValue = LocalDate.now().getDayOfYear() - 10;
 
         assertThat(chocolate.getCreateDate().getDayOfYear(), is(expectedValue));
     }
@@ -54,7 +54,7 @@ public class ExtendedControlQualityTest {
      */
     @Test
     public void whenCallGetExpireDateThenReturnValidValue() {
-        final int expectedValue = 62;
+        final int expectedValue = LocalDate.now().getDayOfYear() + 10;
 
         assertThat(chocolate.getExpireDate().getDayOfYear(), is(expectedValue));
     }
