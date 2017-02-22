@@ -11,9 +11,9 @@
     </parent>
 
     <modules>
-        <module>srp</module>
-        <module>ocp</module>
-        <module>lsp</module>
+        <!--<module>srp</module>-->
+        <!--<module>ocp</module>-->
+        <!--<module>lsp</module>-->
         <module>isp</module>
     </modules>
 </project>
