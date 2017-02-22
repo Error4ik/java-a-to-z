@@ -78,4 +78,20 @@ public class ControlQuality implements IControlQuality {
     public int getAmountOfStorages() {
         return this.storageList.size();
     }
+
+    /**
+     * Rearrangement products.
+     */
+    public void reSortProducts() {
+        final List<IFoods> list = new ArrayList<>();
+        for (IStorage iStorage : storageList) {
+            for (IFoods iFoods : iStorage.getFoodList()) {
+                list.add(iFoods);
+            }
+        }
+
+        for (IFoods iFoods : list) {
+            this.sortFoods(iFoods);
+        }
+    }
 }
