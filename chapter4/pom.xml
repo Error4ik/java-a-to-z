@@ -15,5 +15,6 @@
         <!--<module>ocp</module>-->
         <module>lsp</module>
         <module>isp</module>
+        <module>tdd</module>
     </modules>
 </project>
