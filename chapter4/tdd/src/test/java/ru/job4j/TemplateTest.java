@@ -53,7 +53,7 @@ public class TemplateTest {
      * Method generate.
      */
     @Test
-    public void whenTakeTextWithDataThenReplaceParameterToDataInText() {
+    public void whenTakePatternThenThenReturnModifiedString() {
         final Template template = new SimpleGenerator();
         final String keyOne = "${name}";
         final String valueOne = "Jon";
@@ -66,6 +66,24 @@ public class TemplateTest {
         template.addTemplateToTheMap(keyTwo, valueTwo);
 
         String actualValue = template.generate(inputValue);
+
+        assertThat(actualValue, is(expectedValue));
+    }
+
+    /**
+     * SimpleGenerator class.
+     * Method generate.
+     */
+    @Test
+    public void whenAFewWordsFallIntoAPatternThenReturnModifiedString() {
+        final Template template = new SimpleGenerator();
+        final String inputKey = "${sos}";
+        final String inputValue = "Aaa";
+        final String inputString = "${sos}, ${sos}, ${sos}";
+        final String expectedValue = "Aaa, Aaa, Aaa";
+
+        template.addTemplateToTheMap(inputKey, inputValue);
+        final String actualValue = template.generate(inputString);
 
         assertThat(actualValue, is(expectedValue));
     }
