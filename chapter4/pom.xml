@@ -13,8 +13,9 @@
     <modules>
         <!--<module>srp</module>-->
         <!--<module>ocp</module>-->
-        <module>lsp</module>
-        <module>isp</module>
+        <!--<module>lsp</module>-->
+        <!--<module>isp</module>-->
         <module>tdd</module>
+        <module>test-task</module>
     </modules>
 </project>
