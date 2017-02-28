@@ -1,6 +1,4 @@
 /**
- * TODO: comment.
- *
  * @author Alexey Voronin.
  * @since 28.02.2017.
  */
