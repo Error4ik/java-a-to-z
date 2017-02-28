@@ -1,14 +1,22 @@
 package ru.job4j;
 
-import java.util.HashMap;
 import java.util.Map;
-import java.util.StringTokenizer;
+import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import ru.job4j.exception.NotFoundKeyException;
 
 /**
  * @author Alexey Voronin.
  * @since 23.02.2017.
  */
 public class SimpleGenerator implements Template {
+
+    /**
+     * Pattern regEx.
+     */
+    private static final Pattern PATTERN = Pattern.compile("\\$\\{(\\w+)\\}");
 
     /**
      * HashMap keeps patterns.
@@ -24,25 +32,25 @@ public class SimpleGenerator implements Template {
     }
 
     /**
-     * This method parse string and replace values from map.
+     * This method parse inputString and replace values from map.
      *
-     * @param string string.
-     * @return modified string.
+     * @param inputString inputString.
+     * @return modified inputString.
+     * @throws NotFoundKeyException not found key.
      */
     @Override
-    public String generate(final String string) {
-        StringTokenizer tokenizer = new StringTokenizer(string, " \t\n\r,:-?!", true);
-        StringBuilder sb = new StringBuilder();
-        while (tokenizer.hasMoreTokens()) {
-            String tmp = tokenizer.nextToken();
-            if (this.getMap().containsKey(tmp)) {
-                tmp = this.map.get(tmp);
-                sb.append(tmp);
+    public String generate(final String inputString) throws NotFoundKeyException {
+        String result = "";
+        Matcher matcher = PATTERN.matcher(inputString);
+        while (matcher.find()) {
+            if (this.map.containsKey(matcher.group(1))) {
+                result = matcher.replaceFirst(this.map.get(matcher.group(1)));
+                matcher.reset(result);
             } else {
-                sb.append(tmp);
+                throw new NotFoundKeyException(String.format("Key not found %s", matcher.group(1)));
             }
         }
-        return sb.toString();
+        return result;
     }
 
     /**
