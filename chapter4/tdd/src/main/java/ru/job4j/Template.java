@@ -1,5 +1,7 @@
 package ru.job4j;
 
+import ru.job4j.exception.NotFoundKeyException;
+
 import java.util.Map;
 
 /**
@@ -13,8 +15,9 @@ public interface Template {
      *
      * @param template template.
      * @return string.
+     * @throws NotFoundKeyException exception.
      */
-    String generate(final String template);
+    String generate(final String template) throws NotFoundKeyException;
 
     /**
      * Add Template to the map.
