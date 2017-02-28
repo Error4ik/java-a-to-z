@@ -1,6 +1,7 @@
 package ru.job4j;
 
 import org.junit.Test;
+import ru.job4j.exception.NotFoundKeyException;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
@@ -20,7 +21,7 @@ public class TemplateTest {
     @Test
     public void whenAddedTemplateToTheMapThenReturnTrue() {
         final Template generator = new SimpleGenerator();
-        final String inputKey = "${name}";
+        final String inputKey = "name";
         final String inputValue = "Alex";
 
         generator.addTemplateToTheMap(inputKey, inputValue);
@@ -35,8 +36,8 @@ public class TemplateTest {
     @Test
     public void whenRemoveTemplateFromMapThenContainReturnFalse() {
         final Template generator = new SimpleGenerator();
-        final String inputOneKey = "${name}";
-        final String inputTwoKey = "${date}";
+        final String inputOneKey = "name";
+        final String inputTwoKey = "date";
         final String inputValueOne = "Alex";
         final String inputValueTwo = "23.02.2017";
 
@@ -51,13 +52,15 @@ public class TemplateTest {
     /**
      * SimpleGenerator class.
      * Method generate.
+     *
+     * @throws Exception key not found.
      */
     @Test
-    public void whenTakePatternThenThenReturnModifiedString() {
+    public void whenTakePatternThenThenReturnModifiedString() throws Exception {
         final Template template = new SimpleGenerator();
-        final String keyOne = "${name}";
+        final String keyOne = "name";
         final String valueOne = "Jon";
-        final String keyTwo = "${subject}";
+        final String keyTwo = "subject";
         final String valueTwo = "you";
         final String inputValue = "Hello ${name}, how are ${subject}?";
         final String expectedValue = "Hello Jon, how are you?";
@@ -73,11 +76,13 @@ public class TemplateTest {
     /**
      * SimpleGenerator class.
      * Method generate.
+     *
+     * @throws Exception key not found.
      */
     @Test
-    public void whenAFewWordsFallIntoAPatternThenReturnModifiedString() {
+    public void whenAFewWordsFallIntoAPatternThenReturnModifiedString() throws Exception {
         final Template template = new SimpleGenerator();
-        final String inputKey = "${sos}";
+        final String inputKey = "sos";
         final String inputValue = "Aaa";
         final String inputString = "${sos}, ${sos}, ${sos}";
         final String expectedValue = "Aaa, Aaa, Aaa";
@@ -86,5 +91,16 @@ public class TemplateTest {
         final String actualValue = template.generate(inputString);
 
         assertThat(actualValue, is(expectedValue));
+    }
+
+    /**
+     * @throws Exception key not found.
+     */
+    @Test(expected = NotFoundKeyException.class)
+    public void whenMapNotContainKeyThenThrowException() throws Exception {
+        final Template template = new SimpleGenerator();
+        final String inputString = "${sos}, ${sos}, ${sos}";
+
+        template.generate(inputString);
     }
 }
