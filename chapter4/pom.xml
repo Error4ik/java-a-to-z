@@ -15,7 +15,8 @@
         <!--<module>ocp</module>-->
         <!--<module>lsp</module>-->
         <!--<module>isp</module>-->
-        <module>tdd</module>
-        <module>test-task</module>
+        <!--<module>tdd</module>-->
+        <!--<module>test-task</module>-->
+        <module>additional_task</module>
     </modules>
 </project>
