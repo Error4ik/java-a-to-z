@@ -19,7 +19,7 @@ public class EvenNumbersIteratorTest {
      */
     @Test
     public void whenTakeArrayToNumbersShouldReturnEvenNumbers() {
-        final EvenNumbersIterator iterator = new EvenNumbersIterator(new int[]{11, 4, 7, 6, 9, 8, 24, 15});
+        final EvenNumbersIterator iterator = new EvenNumbersIterator(new int[]{11, 4, 7, 6, 9, 8, 15, 24});
         final int expectedValue1 = 4;
         final int expectedValue2 = 6;
         final int expectedValue3 = 8;
