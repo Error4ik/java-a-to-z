@@ -30,9 +30,6 @@ public class ArrayIterator implements Iterator<Integer> {
         this.array = array;
     }
 
-    /**
-     * @return true if has more element.
-     */
     @Override
     public boolean hasNext() {
         return this.array.length > index;
