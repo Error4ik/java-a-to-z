@@ -1,0 +1,17 @@
+<project
+        xmlns="jar://C:/Program Files (x86)/JetBrains/IntelliJ IDEA 2016.2/plugins/maven/lib/maven.jar!/schemas/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>chapter5</artifactId>
+    <version>2-0</version>
+    <packaging>pom</packaging>
+
+    <parent>
+        <groupId>ru.job4j</groupId>
+        <artifactId>java-a-to-z</artifactId>
+        <version>2.0</version>
+    </parent>
+
+    <modules>
+        <module>iterator</module>
+    </modules>
+</project>
