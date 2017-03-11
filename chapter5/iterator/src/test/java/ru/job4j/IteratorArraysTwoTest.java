@@ -62,4 +62,33 @@ public class IteratorArraysTwoTest {
         iterator.next();
         iterator.next();
     }
+
+    /**
+     * Method next.
+     * If array not square.
+     */
+    @Test
+    public void whenArrayIsNotSquareShouldReturnValidValue() {
+        final int[][] inputValue = new int[][]{{4, 3, 1}, {2, 1, 5, 9, 12}};
+        final IteratorArraysTwo iterator = new IteratorArraysTwo(inputValue);
+
+        final int expected1 = 4;
+        final int expected2 = 3;
+        final int expected3 = 1;
+
+        final int expected4 = 2;
+        final int expected5 = 1;
+        final int expected6 = 5;
+        final int expected7 = 9;
+        final int expected8 = 12;
+
+        assertThat(iterator.next(), is(expected1));
+        assertThat(iterator.next(), is(expected2));
+        assertThat(iterator.next(), is(expected3));
+        assertThat(iterator.next(), is(expected4));
+        assertThat(iterator.next(), is(expected5));
+        assertThat(iterator.next(), is(expected6));
+        assertThat(iterator.next(), is(expected7));
+        assertThat(iterator.next(), is(expected8));
+    }
 }
