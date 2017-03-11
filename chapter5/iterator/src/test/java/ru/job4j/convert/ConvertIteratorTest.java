@@ -39,6 +39,28 @@ public class ConvertIteratorTest {
         }
 
         assertThat(actualValue, is(expectedList));
+    }
+
+    /**
+     * Test convert iterator.
+     */
+    @Test
+    public void whenIteratorIteratorTakeArraysDifferentSizesShouldReturnIteratorToNumbers() {
+        final Iterator<Integer> iter1 = new ArrayIterator(new int[]{1, 8, 3});
+        final Iterator<Integer> iter2 = new ArrayIterator(new int[]{16, 5});
+        final Iterator<Integer> iter3 = new ArrayIterator(new int[]{1, 12, 4});
+        final List<Integer> expectedList = new ArrayList<Integer>(Arrays.asList(new Integer[]{1, 8, 3, 16, 5, 1, 12, 4}));
+        final Iterator<Iterator<Integer>> iteratorIterator = Arrays.asList(iter1, iter2, iter3).iterator();
+
+        final ConvertIterator convertIterator = new ConvertIterator();
+        final Iterator<Integer> iterator = convertIterator.convert(iteratorIterator);
+
+        final List<Integer> actualValue = new ArrayList<>();
+        while (iterator.hasNext()) {
+            actualValue.add(iterator.next());
+        }
+
+        assertThat(actualValue, is(expectedList));
 
     }
 }
