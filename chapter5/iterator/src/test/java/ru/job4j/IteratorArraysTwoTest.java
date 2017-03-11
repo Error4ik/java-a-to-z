@@ -34,6 +34,10 @@ public class IteratorArraysTwoTest {
         assertThat(iterator.next(), is(expectedFour));
     }
 
+    /**
+     * Method next.
+     * Input other value.
+     */
     @Test
     public void whenTakeArrayShouldMethodNextReturnValidTheItemsInTurn() {
         final int[][] inputValue = new int[][]{{4, 3}, {2, 1}};
