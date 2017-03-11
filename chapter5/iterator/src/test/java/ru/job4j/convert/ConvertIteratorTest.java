@@ -43,6 +43,7 @@ public class ConvertIteratorTest {
 
     /**
      * Test convert iterator.
+     * Add new test of other values.
      */
     @Test
     public void whenIteratorIteratorTakeArraysDifferentSizesShouldReturnIteratorToNumbers() {
@@ -61,6 +62,5 @@ public class ConvertIteratorTest {
         }
 
         assertThat(actualValue, is(expectedList));
-
     }
 }
