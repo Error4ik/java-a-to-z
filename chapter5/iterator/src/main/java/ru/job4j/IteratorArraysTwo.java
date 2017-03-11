@@ -38,11 +38,11 @@ public class IteratorArraysTwo implements Iterator<Integer> {
     @Override
     public boolean hasNext() {
         boolean flag = true;
-        if (twoIndex >= this.array[1].length) {
+        if (this.array[oneIndex].length <= this.twoIndex) {
             this.twoIndex = 0;
             this.oneIndex++;
         }
-        if (this.oneIndex >= this.array.length) {
+        if (this.array.length <= this.oneIndex) {
             flag = false;
         }
         return flag;
