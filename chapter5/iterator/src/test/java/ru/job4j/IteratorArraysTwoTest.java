@@ -34,10 +34,6 @@ public class IteratorArraysTwoTest {
         assertThat(iterator.next(), is(expectedFour));
     }
 
-    /**
-     * Method next.
-     * If iterator take array {{4, 3}, {2, 1}} should method next return 4, 3, 2, 1.
-     */
     @Test
     public void whenTakeArrayShouldMethodNextReturnValidTheItemsInTurn() {
         final int[][] inputValue = new int[][]{{4, 3}, {2, 1}};
