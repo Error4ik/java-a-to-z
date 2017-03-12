@@ -35,6 +35,11 @@ public class SimpleArray<T> {
      * @param value the value to add to the array.
      */
     public void add(final T value) {
+        if (this.array.length <= this.index) {
+            final Object[] oldArray = this.array;
+            this.array = new Object[this.getSize() * 2];
+            System.arraycopy(oldArray, 0, this.array, 0, oldArray.length);
+        }
         this.array[index++] = value;
     }
 
@@ -44,7 +49,9 @@ public class SimpleArray<T> {
      * @param index on this index, you need to delete the value from the array.
      */
     public void delete(final int index) {
-        this.array[index] = null;
+        if (this.array.length > index && this.array[index] != null) {
+            this.array[index] = null;
+        }
     }
 
     /**
@@ -54,7 +61,9 @@ public class SimpleArray<T> {
      * @param value new value.
      */
     public void update(final int index, final T value) {
-        this.array[index] = value;
+        if (this.array.length > index && value != null) {
+            this.array[index] = value;
+        }
     }
 
     /**
@@ -64,11 +73,15 @@ public class SimpleArray<T> {
      * @return value.
      */
     public T get(final int index) {
-        return (T) this.array[index];
+        if (this.array.length > index) {
+            return (T) this.array[index];
+        }
+        return null;
     }
 
     /**
      * Get size to array.
+     *
      * @return size.
      */
     public int getSize() {
