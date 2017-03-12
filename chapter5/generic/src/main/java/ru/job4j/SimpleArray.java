@@ -66,4 +66,12 @@ public class SimpleArray<T> {
     public T get(final int index) {
         return (T) this.array[index];
     }
+
+    /**
+     * Get size to array.
+     * @return size.
+     */
+    public int getSize() {
+        return this.array.length;
+    }
 }
