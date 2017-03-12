@@ -1,6 +1,7 @@
 package ru.job4j.convert;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * Convert Iterator Bypasses nested iterators.
@@ -22,6 +23,7 @@ public class ConvertIterator implements IConvert {
 
     /**
      * Convert Take iterator of iterator and return iterator of numbers.
+     *
      * @param iteratorIterator iterator of iterator.
      * @return iterator to numbers.
      */
@@ -34,20 +36,23 @@ public class ConvertIterator implements IConvert {
     @Override
     public boolean hasNext() {
         boolean flag = false;
-        if (iteratorIterator.hasNext()) {
+        if (currentIterator == null && iteratorIterator.hasNext()) {
+            currentIterator = iteratorIterator.next();
             flag = true;
-        } else if (currentIterator != null && currentIterator.hasNext()) {
+        } else if (!currentIterator.hasNext() && iteratorIterator.hasNext()) {
+            currentIterator = iteratorIterator.next();
             flag = true;
+        } else {
+            flag = this.currentIterator.hasNext();
         }
+
         return flag;
     }
 
     @Override
     public Integer next() {
-        if (currentIterator == null) {
-            currentIterator = iteratorIterator.next();
-        } else if (!currentIterator.hasNext()) {
-            currentIterator = iteratorIterator.next();
+        if (!hasNext()) {
+            throw new NoSuchElementException("No more items!");
         }
         return currentIterator.next();
     }
