@@ -3,10 +3,7 @@ package ru.job4j.convert;
 import org.junit.Test;
 import ru.job4j.ArrayIterator;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -62,5 +59,24 @@ public class ConvertIteratorTest {
         }
 
         assertThat(actualValue, is(expectedList));
+    }
+
+    /**
+     * Test convert iterator.
+     * Method next, if no more items throws exception.
+     */
+    @Test(expected = NoSuchElementException.class)
+    public void whenNoMoreItemsShouldThrowsException() {
+        final Iterator<Integer> iter1 = new ArrayIterator(new int[]{1, 8, 3});
+        final Iterator<Integer> iter2 = new ArrayIterator(new int[]{16, 5});
+        final Iterator<Integer> iter3 = new ArrayIterator(new int[]{1, 12, 4});
+        final Iterator<Iterator<Integer>> iteratorIterator = Arrays.asList(iter1, iter2, iter3).iterator();
+
+        final ConvertIterator convertIterator = new ConvertIterator();
+        final Iterator<Integer> iterator = convertIterator.convert(iteratorIterator);
+
+        for (int i = 0; i < 10; i++) {
+            iterator.next();
+        }
     }
 }
