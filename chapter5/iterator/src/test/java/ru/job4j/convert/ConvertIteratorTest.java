@@ -3,7 +3,12 @@ package ru.job4j.convert;
 import org.junit.Test;
 import ru.job4j.ArrayIterator;
 
-import java.util.*;
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.NoSuchElementException;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
