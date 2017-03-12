@@ -73,10 +73,7 @@ public class SimpleArray<T> {
      * @return value.
      */
     public T get(final int index) {
-        if (this.array.length > index) {
-            return (T) this.array[index];
-        }
-        return null;
+        return this.array.length > index ? (T) this.array[index] : null;
     }
 
     /**
