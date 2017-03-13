@@ -1,8 +1,6 @@
 package ru.job4j.array_list;
 
 import org.junit.Test;
-import ru.job4j.array_list.MySimpleList;
-import ru.job4j.array_list.SimpleList;
 
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.core.Is.is;
