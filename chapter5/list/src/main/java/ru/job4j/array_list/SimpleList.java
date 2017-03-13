@@ -6,7 +6,7 @@ package ru.job4j.array_list;
  * @since 13.03.2017.
  * Simple list.
  */
-public interface SimpleList<T> extends Iterable<T> {
+public interface SimpleList<T> {
 
     /**
      * Add item to list.
