@@ -1,6 +1,8 @@
-package ru.job4j;
+package ru.job4j.array_list;
 
 import org.junit.Test;
+import ru.job4j.array_list.MySimpleList;
+import ru.job4j.array_list.SimpleList;
 
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -76,7 +78,6 @@ public class MySimpleListTest {
         for (String s : myList) {
             actualArray[index++] = s;
         }
-
         assertThat(actualArray, is(expectedArray));
     }
 }
