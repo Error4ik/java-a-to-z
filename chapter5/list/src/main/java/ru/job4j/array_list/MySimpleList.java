@@ -11,7 +11,7 @@ import java.util.NoSuchElementException;
  * @author Alexey Voronin.
  * @since 13.03.2017.
  */
-public class MySimpleList<T> implements SimpleList<T> {
+public class MySimpleList<T> implements SimpleList<T>, Iterable<T> {
 
     /**
      * Default size.
