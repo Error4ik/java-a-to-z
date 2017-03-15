@@ -30,4 +30,11 @@ public interface IStore<T extends Base> {
      * @param newValue new value.
      */
     void update(T value, T newValue);
+
+    /**
+     * Get.
+     * @param id id.
+     * @return item by id.
+     */
+    T get(String id);
 }
