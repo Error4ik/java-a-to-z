@@ -10,7 +10,7 @@ import java.util.NoSuchElementException;
  * @author Alexey Voronin.
  * @since 15.03.2017.
  */
-public class MySet<T> implements Iterable<T>{
+public class MySet<T> implements Iterable<T> {
 
     /**
      * DefaultSIze to container.
@@ -77,6 +77,7 @@ public class MySet<T> implements Iterable<T>{
 
     /**
      * Adds all unique elements from the input array to the current Set.
+     *
      * @param t input array.
      */
     public void addAll(final T[] t) {
