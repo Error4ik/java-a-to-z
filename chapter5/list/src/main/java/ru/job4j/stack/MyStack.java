@@ -39,6 +39,8 @@ public class MyStack<T> {
      * @return item.
      */
     public T pop() {
-        return this.list.get(this.list.getSize() - 1);
+        T value = this.list.get(this.list.getSize() - 1);
+        this.list.remove(this.list.getSize() - 1);
+        return value;
     }
 }
