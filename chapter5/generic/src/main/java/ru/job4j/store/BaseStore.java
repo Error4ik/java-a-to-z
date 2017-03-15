@@ -7,6 +7,7 @@ import java.util.NoSuchElementException;
 /**
  * Base IStore class.
  *
+ * @param <T> any type.
  * @author Alexey Voronin.
  * @since 12.03.2017.
  */
@@ -71,6 +72,7 @@ public class BaseStore<T extends Base> implements IStore<T> {
 
     /**
      * Get array.
+     *
      * @return array.
      */
     public SimpleArray<Base> getSimpleArray() {
