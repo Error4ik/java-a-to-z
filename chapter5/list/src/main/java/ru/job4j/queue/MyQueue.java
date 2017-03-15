@@ -39,6 +39,8 @@ public class MyQueue<T> {
      * @return the head of this queue, or null if this queue is empty.
      */
     public T pull() {
-        return this.list.get(0);
+        T value = this.list.get(0);
+        this.list.remove(0);
+        return value;
     }
 }
