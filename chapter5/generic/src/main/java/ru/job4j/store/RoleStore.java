@@ -6,7 +6,7 @@ package ru.job4j.store;
  * @author Alexey Voronin.
  * @since 12.03.2017.
  */
-public class RoleStore extends BaseStore {
+public class RoleStore extends BaseStore<Role> {
 
     /**
      * Constructor.
