@@ -10,7 +10,7 @@ import java.util.NoSuchElementException;
  * @author Alexey Voronin.
  * @since 15.03.2017.
  */
-public class MySet<T> {
+public class MySet<T> implements Iterable<T>{
 
     /**
      * DefaultSIze to container.
@@ -99,6 +99,7 @@ public class MySet<T> {
      *
      * @return iterator.
      */
+    @Override
     public Iterator<T> iterator() {
         return new MyIterator<>();
     }
