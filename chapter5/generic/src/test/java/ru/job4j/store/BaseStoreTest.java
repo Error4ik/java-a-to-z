@@ -2,6 +2,8 @@ package ru.job4j.store;
 
 import org.junit.Test;
 
+import java.util.NoSuchElementException;
+
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -92,5 +94,32 @@ public class BaseStoreTest {
         role.setId("Bob");
 
         assertThat(role.getId(), is(expectedValue));
+    }
+
+    /**
+     * Method get.
+     * Return object by id.
+     */
+    @Test
+    public void whenGetWhenReturnValidObject() {
+        final User user1 = new User("user1");
+        final User user2 = new User("user2");
+        final BaseStore baseStore = new BaseStore(2);
+
+        baseStore.add(user1);
+        baseStore.add(user2);
+
+        assertThat(baseStore.get("user2"), is(user2));
+    }
+
+    /**
+     * Method get.
+     * If item equals null, throws NoSuchElementException.
+     */
+    @Test(expected = NoSuchElementException.class)
+    public void whenListIfEmptyGetShouldThrowsException() {
+        final BaseStore baseStore = new BaseStore(2);
+
+        baseStore.get("1");
     }
 }
