@@ -2,13 +2,15 @@ package ru.job4j.store;
 
 import ru.job4j.SimpleArray;
 
+import java.util.NoSuchElementException;
+
 /**
  * Base IStore class.
  *
  * @author Alexey Voronin.
  * @since 12.03.2017.
  */
-public class BaseStore implements IStore {
+public class BaseStore<T extends Base> implements IStore<T> {
 
     /**
      * Storage array.
@@ -50,6 +52,22 @@ public class BaseStore implements IStore {
             }
         }
     }
+
+    @Override
+    public T get(String id) {
+        T item = null;
+        for (int i = 0; i < this.simpleArray.getSize(); i++) {
+            if (this.simpleArray.get(i) != null && this.simpleArray.get(i).getId().equals(id)) {
+                item = (T) this.simpleArray.get(i);
+                break;
+            }
+        }
+        if (item == null) {
+            throw new NoSuchElementException("No item!");
+        }
+        return item;
+    }
+
 
     /**
      * Get array.
