@@ -2,8 +2,6 @@ package ru.job4j;
 
 import ru.job4j.linked_list.MyLinkedList;
 
-import java.util.Iterator;
-
 /**
  * My Set to linkedList.
  *
