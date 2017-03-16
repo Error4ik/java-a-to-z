@@ -1,5 +1,8 @@
 package ru.job4j.linked_list;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 /**
  * My linked list.
  *
@@ -7,7 +10,7 @@ package ru.job4j.linked_list;
  * @author Alexey Voronin.
  * @since 13.03.2017.
  */
-public class MyLinkedList<T> {
+public class MyLinkedList<T> implements Iterable<T>{
 
     /**
      * First item to the list.
@@ -109,6 +112,11 @@ public class MyLinkedList<T> {
         return this.size;
     }
 
+    @Override
+    public Iterator<T> iterator() {
+        return new MyIterator<>();
+    }
+
     /**
      * Class Item.
      *
@@ -169,6 +177,31 @@ public class MyLinkedList<T> {
          */
         public Item<T> getPreviousItem() {
             return previousItem;
+        }
+    }
+
+    /**
+     * My iterator.
+     * @param <T> any type.
+     */
+    private class MyIterator<T> implements Iterator<T> {
+
+        /**
+         * Index.
+         */
+        private int index = 0;
+
+        @Override
+        public boolean hasNext() {
+            return MyLinkedList.this.getSize() > index;
+        }
+
+        @Override
+        public T next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException("No more items!");
+            }
+            return (T) MyLinkedList.this.get(index++);
         }
     }
 }
