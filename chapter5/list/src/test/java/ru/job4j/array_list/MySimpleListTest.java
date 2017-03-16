@@ -2,6 +2,9 @@ package ru.job4j.array_list;
 
 import org.junit.Test;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -77,5 +80,19 @@ public class MySimpleListTest {
             actualArray[index++] = s;
         }
         assertThat(actualArray, is(expectedArray));
+    }
+
+    /**
+     * Test iterator to list.
+     * Throws NoSuchElementException.
+     */
+    @Test(expected = NoSuchElementException.class)
+    public void whenListIsEmptyThenMethodNextThrowsException() {
+        final MySimpleList<Integer> list = new MySimpleList<>(1);
+        final Iterator<Integer> iterator = list.iterator();
+
+        list.add(1);
+        iterator.next();
+        iterator.next();
     }
 }
