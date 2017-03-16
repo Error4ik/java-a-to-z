@@ -2,6 +2,9 @@ package ru.job4j.linked_list;
 
 import org.junit.Test;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -164,5 +167,31 @@ public class MyLinkedListTest {
         list.remove(2);
 
         assertThat(list.get(2), is(expectedValue));
+    }
+
+    /**
+     * Test iterator to linkedList.
+     */
+    @Test
+    public void whenExistItemInListThenMethodReturnElement() {
+        final MyLinkedList<Integer> list = new MyLinkedList<>();
+        final Integer expectedValue = 1;
+
+        final Iterator<Integer> iterator = list.iterator();
+        list.add(1);
+
+        assertThat(iterator.next(), is(expectedValue));
+    }
+
+    /**
+     * Test iterator to linkedList.
+     * Throws NoSuchElementException.
+     */
+    @Test(expected = NoSuchElementException.class)
+    public void whenListIsEmptyThenMethodNextThrowsException() {
+        final MyLinkedList<Integer> list = new MyLinkedList<>();
+        final Iterator<Integer> iterator = list.iterator();
+
+        iterator.next();
     }
 }
