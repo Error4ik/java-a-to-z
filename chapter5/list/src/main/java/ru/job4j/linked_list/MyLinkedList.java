@@ -10,7 +10,7 @@ import java.util.NoSuchElementException;
  * @author Alexey Voronin.
  * @since 13.03.2017.
  */
-public class MyLinkedList<T> implements Iterable<T>{
+public class MyLinkedList<T> implements Iterable<T> {
 
     /**
      * First item to the list.
