@@ -3,6 +3,7 @@ package ru.job4j;
 import org.junit.Test;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
@@ -75,5 +76,18 @@ public class MySetTest {
         }
 
         assertThat(actualArray, is(expectedArray));
+    }
+
+    /**
+     * If there are no items, throws an exception.
+     */
+    @Test(expected = NoSuchElementException.class)
+    public void whenListIsEmptyAndNoMoreItemsThenThrowsException() {
+        final MySet<Integer> set = new MySet<>(1);
+        final Iterator<Integer> iterator = set.iterator();
+
+        set.add(1);
+        iterator.next();
+        iterator.next();
     }
 }
