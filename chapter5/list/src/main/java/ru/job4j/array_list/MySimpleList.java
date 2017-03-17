@@ -48,9 +48,7 @@ public class MySimpleList<T> implements SimpleList<T>, Iterable<T> {
     @Override
     public void add(T t) {
         if (this.array.length == this.index) {
-            final Object[] oldArray = this.array;
-            this.array = (T[]) new Object[this.array.length * 2];
-            System.arraycopy(oldArray, 0, this.array, 0, oldArray.length);
+            changeCapacity();
         }
         this.array[index++] = t;
     }
@@ -80,14 +78,17 @@ public class MySimpleList<T> implements SimpleList<T>, Iterable<T> {
         return this.index;
     }
 
+    /**
+     * Add to list by position.
+     * @param position position.
+     * @param t item.
+     */
     public void add(final int position, final T t) {
         if (position < 0 || position > this.getAmountOfItems()) {
             throw new IndexOutOfBoundsException("Incorrect index!");
         }
         if (this.index + 1 >= this.array.length) {
-            final Object[] oldArray = this.array;
-            this.array = (T[]) new Object[this.array.length * 2];
-            System.arraycopy(oldArray, 0, this.array, 0, oldArray.length);
+            changeCapacity();
         }
         System.arraycopy(this.array, position, this.array, position + 1, this.index - position);
         this.array[position] = t;
@@ -97,6 +98,15 @@ public class MySimpleList<T> implements SimpleList<T>, Iterable<T> {
     @Override
     public Iterator<T> iterator() {
         return new MyIterator<>();
+    }
+
+    /**
+     * Changed capacity to array if is full.
+     */
+    private void changeCapacity() {
+        final Object[] oldArray = this.array;
+        this.array = (T[]) new Object[this.array.length * 2];
+        System.arraycopy(oldArray, 0, this.array, 0, oldArray.length);
     }
 
     /**
