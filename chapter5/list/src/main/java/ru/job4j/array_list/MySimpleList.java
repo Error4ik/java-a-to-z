@@ -72,6 +72,28 @@ public class MySimpleList<T> implements SimpleList<T>, Iterable<T> {
         return this.array.length;
     }
 
+    /**
+     * Amount items to array.
+     * @return amount.
+     */
+    public int getAmountOfItems() {
+        return this.index;
+    }
+
+    public void add(final int position, final T t) {
+        if (position < 0 || position > this.getAmountOfItems()) {
+            throw new IndexOutOfBoundsException("Incorrect index!");
+        }
+        if (this.index + 1 >= this.array.length) {
+            final Object[] oldArray = this.array;
+            this.array = (T[]) new Object[this.array.length * 2];
+            System.arraycopy(oldArray, 0, this.array, 0, oldArray.length);
+        }
+        System.arraycopy(this.array, position, this.array, position + 1, this.index - position);
+        this.array[position] = t;
+        this.index++;
+    }
+
     @Override
     public Iterator<T> iterator() {
         return new MyIterator<>();
