@@ -96,6 +96,14 @@ public class MySet<T> implements Iterable<T> {
     }
 
     /**
+     * Amount items to array.
+     * @return amount.
+     */
+    public int getAmountOfItems() {
+        return this.index;
+    }
+
+    /**
      * MyIterator.
      *
      * @return iterator.
