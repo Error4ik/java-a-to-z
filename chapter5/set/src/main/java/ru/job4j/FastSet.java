@@ -53,9 +53,6 @@ public class FastSet<T> {
      * if an element already exists in the sheet, it will return - 1.
      */
     private int checkDuplicate(final T t) {
-        if (this.getList().getAmountOfItems() == 0) {
-            return 0;
-        }
         int start = 0;
         int end = this.getList().getAmountOfItems();
         int middle = 0;
