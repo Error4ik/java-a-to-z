@@ -21,7 +21,7 @@ public class MySimpleList<T> implements SimpleList<T>, Iterable<T> {
     /**
      * array.
      */
-    private Object[] array;
+    private T[] array;
 
     /**
      * Index to array.
@@ -42,14 +42,14 @@ public class MySimpleList<T> implements SimpleList<T>, Iterable<T> {
      * @param capacity size to array.
      */
     public MySimpleList(final int capacity) {
-        this.array = new Object[capacity];
+        this.array = (T[]) new Object[capacity];
     }
 
     @Override
     public void add(T t) {
         if (this.array.length == this.index) {
             final Object[] oldArray = this.array;
-            this.array = new Object[this.array.length * 2];
+            this.array = (T[]) new Object[this.array.length * 2];
             System.arraycopy(oldArray, 0, this.array, 0, oldArray.length);
         }
         this.array[index++] = t;
