@@ -95,4 +95,49 @@ public class MySimpleListTest {
         iterator.next();
         iterator.next();
     }
+
+    /**
+     * Method add by index.
+     */
+    @Test
+    public void whenAddByPositionShouldAddItemToDesiredPosition() {
+        final MySimpleList<Integer> list = new MySimpleList<>();
+        final int expectedValue = 5;
+
+        list.add(1);
+        list.add(15);
+        list.add(6);
+        list.add(2);
+        list.add(9);
+        list.add(3, 5);
+
+        assertThat(list.get(3), is(expectedValue));
+    }
+
+    /**
+     * Method add.
+     * Throws exception.
+     */
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void whenIncorrectIndexTHenThrowsException() {
+        final MySimpleList<Integer> list = new MySimpleList<>();
+
+        list.add(5, 5);
+    }
+
+    /**
+     * Method add.
+     * Change capacity.
+     */
+    @Test
+    public void whenArrayIsFullThenChangeCapacity() {
+        final MySimpleList<Integer> list = new MySimpleList<>(2);
+        final int expectedValue = 4;
+
+        list.add(1);
+        list.add(3);
+        list.add(1, 5);
+
+        assertThat(list.getSize(), is(expectedValue));
+    }
 }
