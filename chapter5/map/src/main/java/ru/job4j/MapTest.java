@@ -80,7 +80,7 @@ public class MapTest {
         map.put(one, "one");
         map.put(two, "two");
 
-        System.out.printf("Override equals:| %s%s", map, separator);
+        System.out.printf("Override equals and hashCode:| %s%s", map, separator);
     }
 
     /**
