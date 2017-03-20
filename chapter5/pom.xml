@@ -12,10 +12,10 @@
     </parent>
 
     <modules>
-        <module>iterator</module>
-        <module>generic</module>
-        <module>list</module>
-        <module>set</module>
+        <!--<module>iterator</module>-->
+        <!--<module>generic</module>-->
+        <!--<module>list</module>-->
+        <!--<module>set</module>-->
         <module>map</module>
     </modules>
 </project>
