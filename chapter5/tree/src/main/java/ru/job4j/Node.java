@@ -6,6 +6,7 @@ import java.util.List;
 /**
  * Node to tree.
  *
+ * @param <T> any type.
  * @author Alexey Voronin.
  * @since 24.03.2017.
  */

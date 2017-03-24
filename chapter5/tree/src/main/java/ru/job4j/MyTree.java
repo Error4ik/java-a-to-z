@@ -2,7 +2,6 @@ package ru.job4j;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * My MyTree.
