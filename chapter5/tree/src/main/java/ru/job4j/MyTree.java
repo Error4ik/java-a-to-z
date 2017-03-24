@@ -66,4 +66,21 @@ public class MyTree<T> {
         }
         return value;
     }
+
+    /**
+     * Check if the tree is balanced.
+     * @param root root node.
+     * @return true if tree is balanced.
+     */
+    public boolean isBalance(final Node<T> root) {
+        boolean flag = true;
+        if (root.getChild().size() != 2 && root.getChild().size() != 0) {
+            flag = false;
+        } else {
+            for (Node<T> node : root.getChild()) {
+                flag = this.isBalance(node);
+            }
+        }
+        return flag;
+    }
 }
