@@ -46,4 +46,24 @@ public class MyTree<T> {
         }
         return child;
     }
+
+    /**
+     * Find element.
+     * @param root root tree.
+     * @param child element.
+     * @return value the element.
+     */
+    public T find(final Node<T> root, final Node<T> child) {
+        T value = null;
+        if (root.equals(child)) {
+            value = root.getValue();
+        } else if (root.getChild().size() != 0) {
+            for (Node<T> node : root.getChild()) {
+                if (value == null) {
+                    value = find(node, child);
+                }
+            }
+        }
+        return value;
+    }
 }
