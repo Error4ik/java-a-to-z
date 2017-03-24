@@ -76,6 +76,37 @@ public class Node<T> {
     }
 
     /**
+     * Check if the node is in the tree.
+     *
+     * @param value find value.
+     * @return true if tree contains to node.
+     */
+    public boolean contains(final T value) {
+        Node<T> currentNode = this;
+        boolean flag = false;
+        if (this.getValue().equals(value)) {
+            flag = true;
+        }
+        if (!flag && )
+
+
+
+
+        boolean added = false;
+        if (currentLeaf.getRoot().equals(e)) {
+            added = true;
+        }
+        if (!added && currentLeaf.getLeft() != null) {
+            added = this.findInLeaf(e, currentLeaf.getLeft());
+        }
+        if (!added && currentLeaf.getRight() != null) {
+            added = this.findInLeaf(e, currentLeaf.getRight());
+        }
+        return added;
+        return flag;
+    }
+
+    /**
      * Get.
      *
      * @return value.
