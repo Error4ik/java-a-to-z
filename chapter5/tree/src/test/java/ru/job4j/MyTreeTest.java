@@ -2,8 +2,10 @@ package ru.job4j;
 
 import org.junit.Test;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertTrue;
 
 /**
  * My tree test.
@@ -51,5 +53,49 @@ public class MyTreeTest {
         tree.addChild(child1, child4);
 
         assertThat(tree.find(root, child4), is(expectedValue));
+    }
+
+    /**
+     * Method isBalance.
+     * Return true if tree is balance.
+     */
+    @Test
+    public void whenTreeIsBalanceThenReturnTrue() {
+        final MyTree<String> tree = new MyTree<>();
+        final Node<String> root = new Node<>("root");
+        final Node<String> child1 = new Node<>("child1");
+        final Node<String> child2 = new Node<>("child2");
+        final Node<String> child3 = new Node<>("child3");
+        final Node<String> child4 = new Node<>("child4");
+        final Node<String> child5 = new Node<>("child5");
+        final Node<String> child6 = new Node<>("child6");
+
+        tree.addChild(root, child1);
+        tree.addChild(root, child2);
+        tree.addChild(child1, child3);
+        tree.addChild(child1, child4);
+        tree.addChild(child2, child5);
+        tree.addChild(child2, child6);
+
+        assertTrue(tree.isBalance(root));
+    }
+
+    /**
+     * Method isBalance.
+     * Return false if tree not is balance.
+     */
+    @Test
+    public void whenTreeIsNotBalanceThenReturnFalse() {
+        final MyTree<String> tree = new MyTree<>();
+        final Node<String> root = new Node<>("root");
+        final Node<String> child1 = new Node<>("child1");
+        final Node<String> child2 = new Node<>("child2");
+        final Node<String> child3 = new Node<>("child3");
+
+        tree.addChild(root, child1);
+        tree.addChild(root, child2);
+        tree.addChild(root, child3);
+
+        assertFalse(tree.isBalance(root));
     }
 }
