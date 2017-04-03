@@ -1,11 +1,11 @@
 package ru.job4j;
 
+import ru.job4j.model.Book;
 import ru.job4j.model.Order;
 import ru.job4j.view.ConsoleView;
 
-import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 /**
  * Processing data.
@@ -16,54 +16,9 @@ import java.util.TreeMap;
 public class Processing {
 
     /**
-     * Comparator by ascending.
+     * Contains all books.
      */
-    private final Comparator<Double> ascending = new Comparator<Double>() {
-        @Override
-        public int compare(Double o1, Double o2) {
-            return o2.compareTo(o1);
-        }
-    };
-
-    /**
-     * Comparator by descending.
-     */
-    private final Comparator<Double> descending = new Comparator<Double>() {
-        @Override
-        public int compare(Double o1, Double o2) {
-            return o1.compareTo(o2);
-        }
-    };
-
-    /**
-     * Contains all orders for sale from book-1.
-     */
-    private Map<Double, Order> tree1Sell = new TreeMap<>(ascending);
-
-    /**
-     * Contains all orders for buy from book-1.
-     */
-    private Map<Double, Order> tree1Buy = new TreeMap<>(descending);
-
-    /**
-     * Contains all orders for sale from book-2.
-     */
-    private Map<Double, Order> tree2Sell = new TreeMap<>(ascending);
-
-    /**
-     * Contains all orders for buy from book-2.
-     */
-    private Map<Double, Order> tree2Buy = new TreeMap<>(descending);
-
-    /**
-     * Contains all orders for sale from book-3.
-     */
-    private Map<Double, Order> tree3Sell = new TreeMap<>(ascending);
-
-    /**
-     * Contains all orders for buy from book-3.
-     */
-    private Map<Double, Order> tree3Buy = new TreeMap<>(descending);
+    private Map<String, Book> bookMap = new HashMap<>();
 
     /**
      * Output to console.
@@ -78,55 +33,47 @@ public class Processing {
     }
 
     /**
-     * Gets orders from map and distributes them to trees.
+     * Gets orders from map and distributes them to books.
+     *
      * @param map map.
      */
     public void distributesOrders(final Map<Integer, Order> map) {
         for (Order order : map.values()) {
-            if (order.getBook().equals("book-1")) {
-                this.fillTree(order, tree1Buy, tree1Sell);
-            } else if (order.getBook().equals("book-2")) {
-                this.fillTree(order, tree2Buy, tree2Sell);
+            String book = order.getBook();
+            Book tmp = bookMap.get(book);
+            if (tmp == null) {
+                tmp = new Book();
+                bookMap.put(book, tmp);
             } else {
-                this.fillTree(order, tree3Buy, tree3Sell);
+                if ("BUY".equals(order.getOper())) {
+                    this.fillTree(order, tmp.getBuy());
+                } else {
+                    this.fillTree(order, tmp.getSell());
+                }
             }
         }
 
-        this.consoleView.show(this.tree1Buy, this.tree1Sell);
-        this.consoleView.show(this.tree2Buy, this.tree2Sell);
-        this.consoleView.show(this.tree3Buy, this.tree3Sell);
+        for (Book books : bookMap.values()) {
+            consoleView.show(books.getBuy(), books.getSell());
+        }
     }
 
     /**
-     * Method relates buy and sell and fills the tree with orders.
+     * Method relates map and sell and fills the tree with orders.
      *
      * @param order order.
-     * @param buy   HashMap to buy.
-     * @param sell  HashMap to sell.
+     * @param map   TreeMap.
      */
-    private void fillTree(final Order order, final Map<Double, Order> buy, Map<Double, Order> sell) {
-        if (order.getOper().equals("BUY")) {
-            if (buy.containsKey(order.getPrice())) {
-                Order tmp = new Order(order.getBook(),
-                        "BUY",
-                        order.getPrice(),
-                        order.getVolume() + buy.get(order.getPrice()).getVolume(),
-                        order.getOrderId());
-                buy.put(order.getPrice(), tmp);
-            } else {
-                buy.put(order.getPrice(), order);
-            }
+    private void fillTree(final Order order, final Map<Double, Order> map) {
+        if (map.containsKey(order.getPrice())) {
+            Order tmp = new Order(order.getBook(),
+                    order.getOper(),
+                    order.getPrice(),
+                    order.getVolume() + map.get(order.getPrice()).getVolume(),
+                    order.getOrderId());
+            map.put(order.getPrice(), tmp);
         } else {
-            if (sell.containsKey(order.getPrice())) {
-                Order tmp = new Order(order.getBook(),
-                        "SELL",
-                        order.getPrice(),
-                        order.getVolume() + sell.get(order.getPrice()).getVolume(),
-                        order.getOrderId());
-                sell.put(order.getPrice(), tmp);
-            } else {
-                sell.put(order.getPrice(), order);
-            }
+            map.put(order.getPrice(), order);
         }
     }
 }
