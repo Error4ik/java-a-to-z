@@ -2,8 +2,6 @@ package ru.job4j;
 
 import ru.job4j.settings.Settings;
 
-import javax.xml.stream.XMLStreamException;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
@@ -35,11 +33,7 @@ public class Start {
         Processing processing = new Processing();
         String file = settings.getValue("orders");
 
-        try {
-            processing.distributesOrders(parser.parse(file));
-        } catch (FileNotFoundException | XMLStreamException e) {
-            e.printStackTrace();
-        }
+        processing.distributesOrders(parser.parse(file));
 
         System.out.printf("Time passed: %s second",
                 new SimpleDateFormat("s").format(System.currentTimeMillis() - start));
