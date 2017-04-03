@@ -6,7 +6,7 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.util.Map;
 import java.util.HashMap;
 
@@ -19,27 +19,70 @@ import java.util.HashMap;
 public class Parser {
 
     /**
+     * Book value.
+     */
+    private static final int BOOK = 0;
+
+    /**
+     * Operation type value.
+     */
+    private static final int OPERATION_TYPE = 1;
+
+    /**
+     * Price.
+     */
+    private static final int PRICE = 2;
+
+    /**
+     * Volume.
+     */
+    private static final int VOLUME = 3;
+
+    /**
+     * Order id.
+     */
+    private static final int ORDER_ID = 4;
+
+    /**
+     * Delete order id.
+     */
+    private static final int DELETE_ORDER_ID = 1;
+
+    /**
      * Method parse xml file.
      *
      * @param file this file is for parsing.
      * @return the map is filled with orders.
-     * @throws XMLStreamException throws if unexpected processing conditions.
-     * @throws IOException        i/o exception.
      */
-    public Map<Integer, Order> parse(final String file) throws XMLStreamException, IOException {
+    public Map<Integer, Order> parse(final String file) {
         Map<Integer, Order> map = new HashMap<>();
-        XMLStreamReader reader = XMLInputFactory.newInstance().createXMLStreamReader(new FileInputStream(file));
-        while (reader.hasNext()) {
-            reader.next();
-            if (reader.isStartElement()) {
-                if ("AddOrder".equals(reader.getLocalName())) {
-                    this.add(reader, map);
-                } else if ("DeleteOrder".equals(reader.getLocalName())) {
-                    this.delete(reader, map);
+
+        XMLStreamReader reader = null;
+        try {
+            reader = XMLInputFactory.newInstance().createXMLStreamReader(new FileInputStream(file));
+            if (reader != null) {
+                while (reader.hasNext()) {
+                    reader.next();
+                    if (reader.isStartElement()) {
+                        if ("AddOrder".equals(reader.getLocalName())) {
+                            this.add(reader, map);
+                        } else if ("DeleteOrder".equals(reader.getLocalName())) {
+                            this.delete(reader, map);
+                        }
+                    }
+                }
+            }
+        } catch (FileNotFoundException | XMLStreamException e) {
+            e.printStackTrace();
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (XMLStreamException e) {
+                    e.printStackTrace();
                 }
             }
         }
-        reader.close();
         return map;
     }
 
@@ -50,12 +93,12 @@ public class Parser {
      * @param map    the map that is filled with orders.
      */
     private void add(final XMLStreamReader reader, final Map<Integer, Order> map) {
-        map.put(Integer.parseInt(reader.getAttributeValue(4)),
-                new Order(reader.getAttributeValue(0),
-                        reader.getAttributeValue(1),
-                        Double.parseDouble(reader.getAttributeValue(2)),
-                        Integer.parseInt(reader.getAttributeValue(3)),
-                        Integer.parseInt(reader.getAttributeValue(4))));
+        map.put(Integer.parseInt(reader.getAttributeValue(ORDER_ID)),
+                new Order(reader.getAttributeValue(BOOK),
+                        reader.getAttributeValue(OPERATION_TYPE),
+                        Double.parseDouble(reader.getAttributeValue(PRICE)),
+                        Integer.parseInt(reader.getAttributeValue(VOLUME)),
+                        Integer.parseInt(reader.getAttributeValue(ORDER_ID))));
 
     }
 
@@ -66,6 +109,6 @@ public class Parser {
      * @param map    the map that is filled with orders.
      */
     private void delete(final XMLStreamReader reader, final Map<Integer, Order> map) {
-        map.remove(Integer.parseInt(reader.getAttributeValue(1)));
+        map.remove(Integer.parseInt(reader.getAttributeValue(DELETE_ORDER_ID)));
     }
 }
