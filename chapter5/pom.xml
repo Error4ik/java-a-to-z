@@ -19,6 +19,6 @@
         <!--<module>map</module>-->
         <!--<module>tree</module>-->
         <module>test_task</module>
-        <module>additional_task</module>
+        <!--<module>additional_task</module>-->
     </modules>
 </project>
