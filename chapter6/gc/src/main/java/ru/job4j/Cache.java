@@ -34,10 +34,10 @@ public class Cache {
      * @return file contents.
      */
     public String getFile(final String key) {
-        StringBuilder sb = new StringBuilder();
         if (this.cache.containsKey(key)) {
-            sb.append(this.cache.get(key).get());
+            return this.cache.get(key).get();
         } else {
+            StringBuilder sb = new StringBuilder();
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(key)))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
@@ -47,7 +47,7 @@ public class Cache {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            return this.cache.get(key).get();
         }
-        return sb.toString();
     }
 }
