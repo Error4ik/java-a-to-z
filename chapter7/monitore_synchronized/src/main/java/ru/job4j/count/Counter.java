@@ -1,7 +1,5 @@
 package ru.job4j.count;
 
-import org.apache.log4j.Logger;
-
 /**
  * Counter.
  *
