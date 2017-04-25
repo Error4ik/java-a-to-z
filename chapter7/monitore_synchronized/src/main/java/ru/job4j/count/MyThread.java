@@ -39,4 +39,28 @@ public class MyThread implements Runnable {
         }
         LOGGER.info(String.format("Thread %s finish.", Thread.currentThread().getName()));
     }
+
+    /**
+     * Main method.
+     * Starts 2 threads in which the method of increasing the variable is called.
+     *
+     * @param args args.
+     */
+    public static void main(String[] args) {
+        LOGGER.info("Start program.");
+        Counter count = new Counter();
+        Thread first = new Thread(new MyThread(count));
+        first.start();
+        Thread second = new Thread(new MyThread(count));
+        second.start();
+
+        try {
+            first.join();
+            second.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        LOGGER.info(String.format("Counter value: %s", count.getCount()));
+        LOGGER.info("finish program.");
+    }
 }
