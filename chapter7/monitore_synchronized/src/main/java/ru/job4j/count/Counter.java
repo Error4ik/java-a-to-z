@@ -32,7 +32,7 @@ public class Counter {
      *
      * @return count.
      */
-    public int getCount() {
+    public synchronized int getCount() {
         return this.count;
     }
 }
