@@ -96,7 +96,7 @@ public class Start {
         }
 
         thread.join();
-        Thread.sleep(3000);
+        Thread.sleep(1000);
         service.shutdownNow();
         LOGGER.info("Service shutdown!");
 
