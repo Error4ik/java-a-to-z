@@ -52,6 +52,7 @@ public class Validator {
      * Checks the validity of keys.
      *
      * @return true if keys is valid, or false If the keys are not valid.
+     * @throws InvalidKeyException throws if invalid key.
      */
     public boolean isCorrectKey() throws InvalidKeyException {
         boolean correct;

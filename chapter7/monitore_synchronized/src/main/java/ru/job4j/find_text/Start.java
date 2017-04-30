@@ -110,7 +110,6 @@ public class Start {
      * Main method.
      *
      * @param args args.
-     * @throws InvalidKeyException throws if invalid key.
      */
     public static void main(String[] args) {
         final Pattern pattern = Pattern.compile("^*(.txt|.docx)$");
