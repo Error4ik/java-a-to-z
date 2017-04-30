@@ -128,7 +128,7 @@ public class Start {
             }
         } else {
             validator.showConditions();
-            throw new InvalidKeyException("You entered not right key.");
+            throw new InvalidKeyException("You entered not right key!");
         }
     }
 }
