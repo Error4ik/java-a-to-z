@@ -1,6 +1,7 @@
 package ru.job4j.find_text;
 
 import com.google.common.base.Joiner;
+import ru.job4j.find_text.exception.InvalidKeyException;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -52,15 +53,17 @@ public class Validator {
      *
      * @return true if keys is valid, or false If the keys are not valid.
      */
-    public boolean isCorrectKey() {
-        boolean correct = false;
+    public boolean isCorrectKey() throws InvalidKeyException {
+        boolean correct;
         if (inputArgs.length == 6 && inputArgs[0].equals("-d")
                 && inputArgs[2].equals("-s") && inputArgs[4].equals("-f")) {
 
             this.init();
             correct = true;
+        } else {
+            showConditions();
+            throw new InvalidKeyException("You entered not right key!");
         }
-
         return correct;
     }
 
@@ -69,14 +72,13 @@ public class Validator {
      */
     public void showConditions() {
         System.out.printf(Joiner.on(separator).join("Line arguments must be of the form:   -d dir -s text -f flag",
+                "Eg -d c:/ -s \"Hello\" -f 0",
                 "{-d} key directory",
                 "{dir} directory to search file",
                 "{-s} key search text",
                 "{text} text to find",
                 "{-f} key stopSearch",
-                "{flag} 1 true 0 false."));
-        System.out.printf("%sYour line arguments:    %s %s %s %s %s %s %s", separator, inputArgs[0], inputArgs[1], inputArgs[2],
-                inputArgs[3], inputArgs[4], inputArgs[5], separator);
+                "{flag} 1 true 0 false.", ""));
     }
 
     /**
