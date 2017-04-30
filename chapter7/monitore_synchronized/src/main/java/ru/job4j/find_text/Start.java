@@ -112,23 +112,24 @@ public class Start {
      * @param args args.
      * @throws InvalidKeyException throws if invalid key.
      */
-    public static void main(String[] args) throws InvalidKeyException {
+    public static void main(String[] args) {
         final Pattern pattern = Pattern.compile("^*(.txt|.docx)$");
         final Validator validator = new Validator(args);
 
-        if (validator.isCorrectKey()) {
-            final Path path = validator.getPath();
-            final String findText = validator.getFindText();
-            final boolean flag = validator.isStopSearch();
-            final Start start = new Start(path, findText, pattern, flag);
-            try {
-                start.startSearch();
-            } catch (InterruptedException e) {
-                LOGGER.error("Error: ", e);
+        try {
+            if (validator.isCorrectKey()) {
+                final Path path = validator.getPath();
+                final String findText = validator.getFindText();
+                final boolean flag = validator.isStopSearch();
+                final Start start = new Start(path, findText, pattern, flag);
+                try {
+                    start.startSearch();
+                } catch (InterruptedException e) {
+                    LOGGER.error("Error: ", e);
+                }
             }
-        } else {
-            validator.showConditions();
-            throw new InvalidKeyException("You entered not right key!");
+        } catch (InvalidKeyException e) {
+            LOGGER.error("Invalid key: ", e);
         }
     }
 }
