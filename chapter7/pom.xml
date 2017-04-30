@@ -14,5 +14,6 @@
         <!--<module>threads</module>-->
         <!--<module>jmm</module>-->
         <module>monitore_synchronized</module>
+        <module>wait_notify_notifyall</module>
     </modules>
 </project>
