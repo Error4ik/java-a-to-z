@@ -13,5 +13,6 @@
     <modules>
         <module>queue</module>
         <module>thread_pool</module>
+        <module>lock</module>
     </modules>
 </project>
