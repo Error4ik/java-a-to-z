@@ -32,7 +32,7 @@ public class Queue<T> {
     /**
      * Signal to the producer and the consumer when to work, and when to wait.
      */
-    private boolean flag;
+    private volatile boolean flag;
 
     /**
      * Constructor.
