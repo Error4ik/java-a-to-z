@@ -23,10 +23,10 @@ public class Main {
 
         ExecutorService service = Executors.newFixedThreadPool(getRuntime().availableProcessors());
 
-        Thread thread =  new Thread(new Figure(new Point(0, 0), field));
-        Thread thread1 = new Thread(new Figure(new Point(0, 0), field));
-        Thread thread2 = new Thread(new Figure(new Point(0, 0), field));
-        Thread thread3 = new Thread(new Figure(new Point(0, 0), field));
+        Thread thread =  new Thread(new Monster(field, new Point(0, 0)));
+        Thread thread1 = new Thread(new Monster(field, new Point(0, 0)));
+        Thread thread2 = new Thread(new Monster(field, new Point(0, 0)));
+        Thread thread3 = new Thread(new Monster(field, new Point(0, 0)));
         service.execute(thread);
         service.execute(thread1);
         service.execute(thread2);
