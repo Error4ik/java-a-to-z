@@ -1,7 +1,5 @@
 package ru.job4j;
 
-import java.util.Random;
-
 import org.apache.log4j.Logger;
 
 /**
@@ -10,12 +8,12 @@ import org.apache.log4j.Logger;
  * @author Alexey Voronin.
  * @since 07.05.2017.
  */
-public class Monster extends AFigure {
+public class Enemy extends AFigure {
 
     /**
      * Logger.
      */
-    private static final Logger LOGGER = Logger.getLogger(Monster.class);
+    private static final Logger LOGGER = Logger.getLogger(Enemy.class);
 
 
     /**
@@ -24,7 +22,7 @@ public class Monster extends AFigure {
      * @param field start point.
      * @param point field.
      */
-    public Monster(final Field field, final Point point) {
+    public Enemy(final Field field, final Point point) {
         super(field, point, 4);
     }
 
