@@ -15,6 +15,7 @@
         <!--<module>jmm</module>-->
         <!--<module>monitore_synchronized</module>-->
         <!--<module>wait_notify_notifyall</module>-->
-        <module>non_blocking_algorithm</module>
+        <!--<module>non_blocking_algorithm</module>-->
+        <module>bomberman</module>
     </modules>
 </project>
