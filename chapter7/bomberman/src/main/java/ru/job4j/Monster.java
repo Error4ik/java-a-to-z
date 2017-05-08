@@ -10,49 +10,27 @@ import org.apache.log4j.Logger;
  * @author Alexey Voronin.
  * @since 07.05.2017.
  */
-public class Figure implements Runnable {
+public class Monster extends AFigure {
 
     /**
      * Logger.
      */
-    private static final Logger LOGGER = Logger.getLogger(Figure.class);
+    private static final Logger LOGGER = Logger.getLogger(Monster.class);
 
-    /**
-     * Field.
-     */
-    private final Field field;
-
-    /**
-     * Point.
-     */
-    private Point point;
-
-    /**
-     * Random.
-     */
-    private final Random random;
-
-    /**
-     * Variants of the move.
-     */
-    private final int move;
 
     /**
      * Constructor.
      *
-     * @param point start point.
-     * @param field field.
+     * @param field start point.
+     * @param point field.
      */
-    public Figure(final Point point, final Field field) {
-        this.point = point;
-        this.field = field;
-        this.random = new Random();
-        this.move = 4;
+    public Monster(final Field field, final Point point) {
+        super(field, point, 4);
     }
 
     @Override
     public void run() {
-        while (!this.field.getCell(this.point).getLock().tryLock()) {
+        while (!this.getField().getCell(this.getPoint()).getLock().tryLock()) {
             try {
                 Thread.sleep(10);
             } catch (InterruptedException e) {
@@ -62,11 +40,11 @@ public class Figure implements Runnable {
         }
         LOGGER.info(String.format("%s point - %s take block", Thread.currentThread().getName(), this.getPoint()));
         while (!Thread.currentThread().isInterrupted()) {
-            Point point = this.getMovePoint(this.random.nextInt(this.move));
-            Cell cell = this.field.getCell(point);
+            Point point = this.getMovePoint(this.getRandom().nextInt(this.getMove()));
+            Cell cell = this.getField().getCell(point);
             if (cell != null && cell.getLock().tryLock()) {
                 LOGGER.info(String.format("%s point - %s take block", Thread.currentThread().getName(), cell.getPoint()));
-                Cell oldCell = this.field.getCell(this.getPoint());
+                Cell oldCell = this.getField().getCell(this.getPoint());
                 try {
                     oldCell.getLock().unlock();
                     LOGGER.info(String.format("%s point - %s release block", Thread.currentThread().getName(), oldCell.getPoint()));
@@ -75,7 +53,7 @@ public class Figure implements Runnable {
                 }
                 this.setPoint(point);
                 try {
-                    Thread.sleep(new Random().nextInt(500));
+                    Thread.sleep(this.getRandom().nextInt(500));
                 } catch (InterruptedException e) {
                     LOGGER.error("interrupted: ", e);
                     return;
@@ -86,25 +64,7 @@ public class Figure implements Runnable {
 
     @Override
     public String toString() {
-        return "[" + this.point.getX() + ":" + this.point.getY() + "]";
-    }
-
-    /**
-     * Get.
-     *
-     * @return point.
-     */
-    public Point getPoint() {
-        return this.point;
-    }
-
-    /**
-     * Set.
-     *
-     * @param point new point.
-     */
-    public void setPoint(Point point) {
-        this.point = point;
+        return "[" + this.getPoint().getX() + ":" + this.getPoint().getY() + "]";
     }
 
     /**
@@ -113,20 +73,20 @@ public class Figure implements Runnable {
      * @param value variant of the move.
      * @return point.
      */
-    private Point getMovePoint(final int value) {
+    public Point getMovePoint(final int value) {
         Point point = null;
         switch (value) {
             case 0:
-                point = new Point(this.point.getX() + 1, this.point.getY());
+                point = new Point(this.getPoint().getX() + 1, this.getPoint().getY());
                 break;
             case 1:
-                point = new Point(this.point.getX() - 1, this.point.getY());
+                point = new Point(this.getPoint().getX() - 1, this.getPoint().getY());
                 break;
             case 2:
-                point = new Point(this.point.getX(), this.point.getY() + 1);
+                point = new Point(this.getPoint().getX(), this.getPoint().getY() + 1);
                 break;
             case 3:
-                point = new Point(this.point.getX(), this.point.getY() - 1);
+                point = new Point(this.getPoint().getX(), this.getPoint().getY() - 1);
                 break;
             default:
                 break;
