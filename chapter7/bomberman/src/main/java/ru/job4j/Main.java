@@ -1,42 +1,10 @@
 package ru.job4j;
 
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-import static java.lang.Runtime.getRuntime;
-
 /**
- * Main.
+ * TODO: comment.
  *
  * @author Alexey Voronin.
- * @since 07.05.2017.
+ * @since 10.05.2017.
  */
 public class Main {
-
-    /**
-     * Main method.
-     * @param args args.
-     */
-    public static void main(String[] args) {
-        Field field = new Field(10, 10);
-
-        ExecutorService service = Executors.newFixedThreadPool(getRuntime().availableProcessors());
-
-        Thread thread =  new Thread(new Enemy(field, new Point(0, 0)));
-        Thread thread1 = new Thread(new Enemy(field, new Point(0, 0)));
-        Thread thread2 = new Thread(new Enemy(field, new Point(0, 0)));
-        Thread thread3 = new Thread(new Enemy(field, new Point(0, 0)));
-        service.execute(thread);
-        service.execute(thread1);
-        service.execute(thread2);
-        service.execute(thread3);
-
-        try {
-            Thread.sleep(10000);
-            service.shutdownNow();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
 }
