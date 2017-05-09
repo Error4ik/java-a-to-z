@@ -7,7 +7,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * Cell.
  *
  * @author Alexey Voronin.
- * @since 07.05.2017.
+ * @since 09.05.2017.
  */
 public class Cell {
 
@@ -51,6 +51,6 @@ public class Cell {
 
     @Override
     public String toString() {
-        return String.format("%s.%s", this.getPoint().getX(), this.getPoint().getY());
+        return point.toString();
     }
 }
