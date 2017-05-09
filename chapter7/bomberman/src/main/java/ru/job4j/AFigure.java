@@ -30,6 +30,12 @@ public abstract class AFigure implements Runnable {
      */
     private final int move;
 
+    /**
+     * Constructor.
+     * @param field field.
+     * @param point point.
+     * @param move variant of the move.
+     */
     public AFigure(final Field field, final Point point, final int move) {
         this.field = field;
         this.point = point;
@@ -37,29 +43,60 @@ public abstract class AFigure implements Runnable {
         this.random = new Random();
     }
 
-    abstract public Point getMovePoint(final int value);
+    /**
+     * Move figure.
+     *
+     * @param value variant of the move.
+     * @return point.
+     */
+    abstract Point getMovePoint(final int value);
 
     @Override
     public String toString() {
         return "[" + this.point.getX() + ":" + this.point.getY() + "]";
     }
 
+    /**
+     * Get.
+     *
+     * @return point.
+     */
     public Point getPoint() {
-        return point;
+        return this.point;
     }
 
+    /**
+     * Get.
+     *
+     * @return field.
+     */
     public Field getField() {
-        return field;
+        return this.field;
     }
 
+    /**
+     * Get.
+     *
+     * @return random.
+     */
     public Random getRandom() {
-        return random;
+        return this.random;
     }
 
+    /**
+     * Get.
+     *
+     * @return move.
+     */
     public int getMove() {
-        return move;
+        return this.move;
     }
 
+    /**
+     * Set.
+     *
+     * @param point new point.
+     */
     public void setPoint(Point point) {
         this.point = point;
     }
