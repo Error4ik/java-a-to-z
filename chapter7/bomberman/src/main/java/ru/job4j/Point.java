@@ -4,7 +4,7 @@ package ru.job4j;
  * Point.
  *
  * @author Alexey Voronin.
- * @since 07.05.2017.
+ * @since 09.05.2017.
  */
 public class Point {
 
@@ -35,7 +35,7 @@ public class Point {
      * @return x.
      */
     public int getX() {
-        return this.x;
+        return x;
     }
 
     /**
@@ -44,11 +44,11 @@ public class Point {
      * @return y.
      */
     public int getY() {
-        return this.y;
+        return y;
     }
 
     @Override
     public String toString() {
-        return String.format("%s.%s", x, y);
+        return String.format("%s.%s", this.getX(), this.getY());
     }
 }
