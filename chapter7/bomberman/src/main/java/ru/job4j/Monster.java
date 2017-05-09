@@ -2,56 +2,67 @@ package ru.job4j;
 
 import org.apache.log4j.Logger;
 
+import java.util.Random;
+
 /**
- * Any figure.
+ * Monster.
  *
  * @author Alexey Voronin.
- * @since 07.05.2017.
+ * @since 09.05.2017.
  */
-public class Enemy extends AFigure {
+public class Monster extends Figure implements Runnable {
+
+    /**
+     * Random.
+     */
+    private final Random random;
 
     /**
      * Logger.
      */
-    private static final Logger LOGGER = Logger.getLogger(Enemy.class);
+    private static final Logger LOGGER = Logger.getLogger(Monster.class);
 
+
+    /**
+     * Variants of the MOVE.
+     */
+    private static final int MOVE = 4;
 
     /**
      * Constructor.
      *
-     * @param field start point.
-     * @param point field.
+     * @param field field.
      */
-    public Enemy(final Field field, final Point point) {
-        super(field, point, 4);
+    public Monster(final Field field) {
+        super(field);
+        this.random = new Random();
     }
 
     @Override
     public void run() {
-        while (!this.getField().getCell(this.getPoint()).getLock().tryLock()) {
-            try {
-                Thread.sleep(10);
-            } catch (InterruptedException e) {
-                LOGGER.error("Interrupted: ", e);
-                return;
-            }
-        }
-        LOGGER.info(String.format("%s point - %s take block", Thread.currentThread().getName(), this.getPoint()));
+        this.moveFigure();
+    }
+
+    @Override
+    void moveFigure() {
+        this.spawnPoint();
         while (!Thread.currentThread().isInterrupted()) {
-            Point point = this.getMovePoint(this.getRandom().nextInt(this.getMove()));
+            Point point = this.getMovePoint(this.random.nextInt(MOVE));
             Cell cell = this.getField().getCell(point);
             if (cell != null && cell.getLock().tryLock()) {
                 LOGGER.info(String.format("%s point - %s take block", Thread.currentThread().getName(), cell.getPoint()));
                 Cell oldCell = this.getField().getCell(this.getPoint());
                 try {
+                    this.setPoint(point);
                     oldCell.getLock().unlock();
                     LOGGER.info(String.format("%s point - %s release block", Thread.currentThread().getName(), oldCell.getPoint()));
                 } catch (IllegalMonitorStateException e) {
                     LOGGER.error("IllegalMonitorStateException: ", e);
                 }
+
                 this.setPoint(point);
                 try {
-                    Thread.sleep(this.getRandom().nextInt(500));
+                    Thread.sleep(this.random.nextInt(500));
                 } catch (InterruptedException e) {
                     LOGGER.error("interrupted: ", e);
                     return;
@@ -60,18 +71,31 @@ public class Enemy extends AFigure {
         }
     }
 
-    @Override
-    public String toString() {
-        return "[" + this.getPoint().getX() + ":" + this.getPoint().getY() + "]";
+    /**
+     * Randomly sets the monster on the field.
+     */
+    private void spawnPoint() {
+        this.setPoint(new Point(random.nextInt(this.getField().getRow()),
+                random.nextInt(this.getField().getColumn())));
+
+        while (!this.getField().getCell(this.getPoint()).getLock().tryLock()) {
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                return;
+            }
+            this.setPoint(this.getMovePoint(this.random.nextInt(MOVE)));
+        }
+        LOGGER.info(String.format("%s point - %s take block", Thread.currentThread().getName(), this.getPoint()));
     }
 
     /**
      * Randomly moves one cell.
      *
-     * @param value variant of the move.
+     * @param value variant of the MOVE.
      * @return point.
      */
-    public Point getMovePoint(final int value) {
+    private Point getMovePoint(final int value) {
         Point point = null;
         switch (value) {
             case 0:
