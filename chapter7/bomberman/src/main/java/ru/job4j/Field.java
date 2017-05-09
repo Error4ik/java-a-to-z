@@ -4,45 +4,56 @@ package ru.job4j;
  * Field.
  *
  * @author Alexey Voronin.
- * @since 07.05.2017.
+ * @since 09.05.2017.
  */
 public class Field {
 
     /**
-     * Row counts.
+     * Number of lines.
      */
     private final int row;
 
     /**
-     * Column counts.
+     * Number of columns.
      */
     private final int column;
 
     /**
-     * Cells field.
+     * Cell.
      */
     private final Cell[][] cells;
 
     /**
      * Constructor.
-     *
-     * @param row    row.
-     * @param column column.
+     * @param row number of lines.
+     * @param column number of columns.
      */
     public Field(final int row, final int column) {
         this.row = row;
         this.column = column;
         this.cells = new Cell[row][column];
-        this.initFields();
+        this.fillField();
     }
 
     /**
-     * Check point to valid coordinate.
-     *
-     * @param point point.
+     * Get.
+     * @param point point for which you need to return the cell.
+     * @return cell if point valid, or null.
+     */
+    public Cell getCell(final Point point) {
+       Cell cell = null;
+        if (checkPoint(point)) {
+           cell = this.cells[point.getX()][point.getY()];
+        }
+        return cell;
+    }
+
+    /**
+     * Check valid point.
+     * @param point point to check
      * @return true if point valid.
      */
-    private boolean checkPoint(final Point point) {
+    public boolean checkPoint(final Point point) {
         boolean flag = false;
         if (point.getX() >= 0 && point.getY() >= 0 && point.getX() < this.row && point.getY() < this.column) {
             flag = true;
@@ -51,28 +62,32 @@ public class Field {
     }
 
     /**
-     * Fills the field.
+     * Get.
+     * @return row.
      */
-    private void initFields() {
-        for (int i = 0; i < this.row; i++) {
-            for (int j = 0; j < this.column; j++) {
-                this.cells[i][j] = new Cell(new Point(i, j));
-            }
-        }
+    public int getRow() {
+        return row;
     }
 
     /**
-     * Get cell from field.
-     *
-     * @param point point.
-     * @return cell or null if invalid point.
+     * Get.
+     * @return column.
      */
-    public Cell getCell(final Point point) {
-        Cell cell = null;
-        if (this.checkPoint(point)) {
-            cell = this.cells[point.getX()][point.getY()];
-        }
-        return cell;
+    public int getColumn() {
+        return column;
     }
 
+    /**
+     * Fill field.
+     */
+    private void fillField() {
+        for (int i = 0; i < this.row; i++) {
+            for (int j = 0; j < this.column; j++) {
+                this.cells[i][j] = new Cell(new Point(i, j));
+                if (i % 2 != 0 && j %  2 != 0) {
+                    this.getCell(new Point(i, j)).getLock().lock();
+                }
+            }
+        }
+    }
 }
