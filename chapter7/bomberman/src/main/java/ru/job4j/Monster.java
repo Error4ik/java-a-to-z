@@ -64,7 +64,6 @@ public class Monster extends Figure implements Runnable {
                 oldCell.getLock().unlock();
                 LOGGER.info(String.format("%s point - %s release block", Thread.currentThread().getName(), oldCell.getPoint()));
             }
-            this.setPoint(point);
         }
     }
 
@@ -81,7 +80,10 @@ public class Monster extends Figure implements Runnable {
             } catch (InterruptedException e) {
                 return;
             }
-            this.setPoint(this.getMovePoint(this.random.nextInt(MOVE)));
+            Point point = this.getMovePoint(this.random.nextInt(MOVE));
+            if (this.getField().checkPoint(point)) {
+                this.setPoint(point);
+            }
         }
         LOGGER.info(String.format("%s point - %s take block", Thread.currentThread().getName(), this.getPoint()));
     }
