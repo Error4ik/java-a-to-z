@@ -60,10 +60,9 @@ public class Monster extends Figure implements Runnable {
             Cell oldCell = this.getField().getCell(this.getPoint());
             try {
                 this.setPoint(point);
+            } finally {
                 oldCell.getLock().unlock();
                 LOGGER.info(String.format("%s point - %s release block", Thread.currentThread().getName(), oldCell.getPoint()));
-            } catch (IllegalMonitorStateException e) {
-                LOGGER.error("IllegalMonitorStateException: ", e);
             }
             this.setPoint(point);
         }
