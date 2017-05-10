@@ -56,6 +56,8 @@ public abstract class Figure {
 
     /**
      * Motions of the figure by field.
+     *
+     * @param point point.
      */
     abstract void moveFigure(final Point point);
 }
