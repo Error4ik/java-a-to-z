@@ -40,34 +40,32 @@ public class Monster extends Figure implements Runnable {
 
     @Override
     public void run() {
-        this.moveFigure();
+        this.spawnPoint();
+        while (!Thread.currentThread().isInterrupted()) {
+            this.moveFigure(this.getMovePoint(random.nextInt(MOVE)));
+            try {
+                Thread.sleep(this.random.nextInt(500));
+            } catch (InterruptedException e) {
+                LOGGER.error("interrupted: ", e);
+                return;
+            }
+        }
     }
 
     @Override
-    void moveFigure() {
-        this.spawnPoint();
-        while (!Thread.currentThread().isInterrupted()) {
-            Point point = this.getMovePoint(this.random.nextInt(MOVE));
-            Cell cell = this.getField().getCell(point);
-            if (cell != null && cell.getLock().tryLock()) {
-                LOGGER.info(String.format("%s point - %s take block", Thread.currentThread().getName(), cell.getPoint()));
-                Cell oldCell = this.getField().getCell(this.getPoint());
-                try {
-                    this.setPoint(point);
-                    oldCell.getLock().unlock();
-                    LOGGER.info(String.format("%s point - %s release block", Thread.currentThread().getName(), oldCell.getPoint()));
-                } catch (IllegalMonitorStateException e) {
-                    LOGGER.error("IllegalMonitorStateException: ", e);
-                }
-
+    void moveFigure(final Point point) {
+        Cell cell = this.getField().getCell(point);
+        if (cell != null && cell.getLock().tryLock()) {
+            LOGGER.info(String.format("%s point - %s take block", Thread.currentThread().getName(), cell.getPoint()));
+            Cell oldCell = this.getField().getCell(this.getPoint());
+            try {
                 this.setPoint(point);
-                try {
-                    Thread.sleep(this.random.nextInt(500));
-                } catch (InterruptedException e) {
-                    LOGGER.error("interrupted: ", e);
-                    return;
-                }
+                oldCell.getLock().unlock();
+                LOGGER.info(String.format("%s point - %s release block", Thread.currentThread().getName(), oldCell.getPoint()));
+            } catch (IllegalMonitorStateException e) {
+                LOGGER.error("IllegalMonitorStateException: ", e);
             }
+            this.setPoint(point);
         }
     }
 
