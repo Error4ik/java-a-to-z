@@ -3,6 +3,7 @@ package ru.job4j;
 import org.apache.log4j.Logger;
 
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Monster.
@@ -55,15 +56,20 @@ public class Monster extends Figure implements Runnable {
     @Override
     void moveFigure(final Point point) {
         Cell cell = this.getField().getCell(point);
-        if (cell != null && cell.getLock().tryLock()) {
-            LOGGER.info(String.format("%s point - %s take block", Thread.currentThread().getName(), cell.getPoint()));
-            Cell oldCell = this.getField().getCell(this.getPoint());
-            try {
-                this.setPoint(point);
-            } finally {
-                oldCell.getLock().unlock();
-                LOGGER.info(String.format("%s point - %s release block", Thread.currentThread().getName(), oldCell.getPoint()));
+        try {
+            if (cell != null && cell.getLock().tryLock(500, TimeUnit.MILLISECONDS)) {
+                LOGGER.info(String.format("%s point - %s take block", Thread.currentThread().getName(), cell.getPoint()));
+                Cell oldCell = this.getField().getCell(this.getPoint());
+                try {
+                    this.setPoint(point);
+                } finally {
+                    oldCell.getLock().unlock();
+                    LOGGER.info(String.format("%s point - %s release block", Thread.currentThread().getName(), oldCell.getPoint()));
+                }
             }
+        } catch (InterruptedException e) {
+            LOGGER.error("Interrupted: ", e);
+            Thread.currentThread().interrupt();
         }
     }
 
