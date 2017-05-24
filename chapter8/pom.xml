@@ -11,6 +11,6 @@
     </parent>
 
     <modules>
-        <module>diagram</module>
+        <module>create_update_insert</module>
     </modules>
 </project>
