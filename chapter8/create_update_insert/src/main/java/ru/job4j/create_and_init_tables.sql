@@ -9,13 +9,13 @@
 
 CREATE TABLE rights (
 ID SERIAL PRIMARY KEY,
-rights VARCHAR (255)
+rights VARCHAR (255),
+role_id INTEGER NOT NULL REFERENCES rights(id)
 );
 
 CREATE TABLE role (
 ID SERIAL PRIMARY KEY,
-role VARCHAR(255),
-rights_id INTEGER NOT NULL REFERENCES rights(id)
+role VARCHAR(255)
 );
 
 CREATE TABLE users (
@@ -56,11 +56,12 @@ file_path VARCHAR (1000),
 claime_id INTEGER NOT NULL REFERENCES claim(id)
 );
 
-INSERT INTO rights (rights) VALUES ('READ');
-INSERT INTO rights (rights) VALUES ('WRITE');
+INSERT INTO role (role) VALUES ('User');
+INSERT INTO role (role) VALUES ('Admin');
 
-INSERT INTO role (role, rights_id) VALUES ('User', 1);
-INSERT INTO role (role, rights_id) VALUES ('Admin', 2);
+INSERT INTO rights (rights, role_id) VALUES ('READ', 1);
+INSERT INTO rights (rights, role_id) VALUES ('WRITE', 2);
+INSERT INTO rights (rights, role_id) VALUES ('READ', 2);
 
 INSERT INTO users (user_name, role_id) VALUES ('Alex', 1);
 INSERT INTO users (user_name, role_id) VALUES ('Bob', 2);
