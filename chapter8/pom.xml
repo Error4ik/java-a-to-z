@@ -12,7 +12,7 @@
 
     <modules>
         <!--<module>create_update_insert</module>-->
-        <module>query</module>
+        <!--<module>query</module>-->
         <!--<module>outer_join</module>-->
     </modules>
 </project>
