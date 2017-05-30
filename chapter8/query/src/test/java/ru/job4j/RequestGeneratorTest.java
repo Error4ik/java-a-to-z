@@ -30,7 +30,6 @@ public class RequestGeneratorTest {
         map.put("car.price < 5000$", "condition");
 
         final String actualValue = request.createRequest(map);
-        System.out.println(actualValue);
         assertThat(actualValue, is(expectedValue));
     }
 
@@ -50,7 +49,6 @@ public class RequestGeneratorTest {
         map.put("OR car.name LIKE 'Mercedes'", "condition");
 
         final String actualValue = request.createRequest(map);
-        System.out.println(actualValue);
         assertThat(actualValue, is(expectedValue));
     }
 
@@ -76,7 +74,6 @@ public class RequestGeneratorTest {
         map.put("OR car.name LIKE '%MW'", "condition");
 
         final String actualValue = request.createRequest(map);
-        System.out.println(actualValue);
         assertThat(actualValue, is(expectedValue));
     }
 
@@ -92,7 +89,6 @@ public class RequestGeneratorTest {
         map.put("car", "table");
 
         final String actualValue = request.createRequest(map);
-        System.out.println(actualValue);
         assertThat(actualValue, is(expectedValue));
     }
 }
