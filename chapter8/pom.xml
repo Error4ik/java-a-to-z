@@ -14,5 +14,6 @@
         <!--<module>create_update_insert</module>-->
         <module>query</module>
         <!--<module>outer_join</module>-->
+        <module>jdbc</module>
     </modules>
 </project>
