@@ -1,20 +1,20 @@
-package ru.job4j.update_tracker.tracker;
+package ru.job4j.tracker;
 
 
-import ru.job4j.update_tracker.CreateDB;
-import ru.job4j.update_tracker.action.AddNewTask;
-import ru.job4j.update_tracker.action.AddComment;
-import ru.job4j.update_tracker.action.EditTask;
-import ru.job4j.update_tracker.action.RemoveTask;
-import ru.job4j.update_tracker.action.RemoveComment;
-import ru.job4j.update_tracker.action.ShowAllCommentToTask;
-import ru.job4j.update_tracker.action.ShowAllTask;
-import ru.job4j.update_tracker.action.Action;
-import ru.job4j.update_tracker.action.ExitTrackerProgram;
-import ru.job4j.update_tracker.action.FilterByCoincidence;
-import ru.job4j.update_tracker.action.FilterTaskByName;
-import ru.job4j.update_tracker.input.Input;
-import ru.job4j.update_tracker.view.ConsoleView;
+import ru.job4j.CreateDB;
+import ru.job4j.action.AddNewTask;
+import ru.job4j.action.AddComment;
+import ru.job4j.action.EditTask;
+import ru.job4j.action.RemoveTask;
+import ru.job4j.action.RemoveComment;
+import ru.job4j.action.ShowAllCommentToTask;
+import ru.job4j.action.ShowAllTask;
+import ru.job4j.action.Action;
+import ru.job4j.action.ExitTrackerProgram;
+import ru.job4j.action.FilterByCoincidence;
+import ru.job4j.action.FilterTaskByName;
+import ru.job4j.input.Input;
+import ru.job4j.view.ConsoleView;
 
 import java.util.ArrayList;
 import java.util.List;
