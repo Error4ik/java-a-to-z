@@ -4,7 +4,7 @@ import ru.job4j.update_tracker.input.Input;
 import ru.job4j.update_tracker.tracker.Tracker;
 
 /**
- * Interface for actions.
+ * Interface for Actions.
  */
 public interface Action {
 
