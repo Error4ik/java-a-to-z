@@ -1,6 +1,7 @@
-package ru.job4j.update_tracker.models;
+package ru.job4j.models;
 
 import org.junit.Test;
+import ru.job4j.update_tracker.models.Task;
 
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.core.Is.is;

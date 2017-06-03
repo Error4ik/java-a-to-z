@@ -1,6 +1,7 @@
-package ru.job4j.update_tracker.input;
+package ru.job4j.input;
 
 import org.junit.Test;
+import ru.job4j.update_tracker.input.ConsoleInputData;
 
 import java.io.ByteArrayInputStream;
 

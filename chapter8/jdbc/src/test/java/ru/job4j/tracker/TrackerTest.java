@@ -1,4 +1,4 @@
-package ru.job4j.update_tracker.tracker;
+package ru.job4j.tracker;
 
 import org.junit.After;
 import org.junit.Before;
@@ -18,6 +18,7 @@ import ru.job4j.update_tracker.input.StubInput;
 import ru.job4j.update_tracker.models.Comment;
 import ru.job4j.update_tracker.models.Task;
 import ru.job4j.update_tracker.settings.Settings;
+import ru.job4j.update_tracker.tracker.Tracker;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
