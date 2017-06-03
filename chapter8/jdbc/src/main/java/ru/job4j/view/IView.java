@@ -1,10 +1,17 @@
 package ru.job4j.view;
 
 /**
- * TODO: comment.
+ * View.
  *
  * @author Alexey Voronin.
  * @since 03.06.2017.
  */
-public class IView {
+public interface IView {
+
+    /**
+     * Print a line.
+     *
+     * @param string line.
+     */
+    void execute(final String string);
 }
