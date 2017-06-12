@@ -1,7 +1,7 @@
 package ru.job4j.action;
 
+import ru.job4j.dao.ITracker;
 import ru.job4j.input.Input;
-import ru.job4j.tracker.Tracker;
 import ru.job4j.view.ConsoleView;
 
 /**
@@ -23,7 +23,7 @@ public class ExitTrackerProgram extends BaseAction {
     }
 
     @Override
-    public void execute(final Tracker tracker, final Input inputData) {
+    public void execute(final ITracker tracker, final Input inputData) {
         new ConsoleView().execute(String.format("Exit program%s", System.getProperty("line.separator")));
     }
 }
