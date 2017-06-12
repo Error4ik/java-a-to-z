@@ -1,15 +1,11 @@
 package ru.job4j.action;
 
-import org.apache.log4j.Logger;
+import ru.job4j.dao.ITracker;
 import ru.job4j.input.Input;
-import ru.job4j.tracker.Tracker;
+import ru.job4j.models.Task;
 import ru.job4j.view.ConsoleView;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.ResultSet;
+import java.util.List;
 
 /**
  * Query show all task.
@@ -18,11 +14,6 @@ import java.sql.ResultSet;
  * @since 03.06.2017.
  */
 public class ShowAllTask extends BaseAction {
-
-    /**
-     * Logger.
-     */
-    private static final Logger LOGGER = Logger.getLogger(ShowAllTask.class);
 
     /**
      * Constructor.
@@ -35,19 +26,11 @@ public class ShowAllTask extends BaseAction {
     }
 
     @Override
-    public void execute(final Tracker tracker, final Input inputData) {
-        StringBuilder sb = new StringBuilder();
-        try (Connection con = DriverManager.getConnection(tracker.getUrl(), tracker.getUserName(), tracker.getPassword());
-             PreparedStatement ps = con.prepareStatement("SELECT * FROM task;")) {
-            try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    sb.append(String.format("%d, %s, %s %s", rs.getInt("id"), rs.getString("name"),
-                            rs.getString("description"), rs.getTimestamp("create_date")))
-                            .append(System.getProperty("line.separator"));
-                }
-            }
-        } catch (SQLException e) {
-            LOGGER.error(e.getMessage(), e);
+    public void execute(final ITracker tracker, final Input inputData) {
+        final StringBuilder sb = new StringBuilder();
+        final List<Task> tasks = tracker.getAllTask();
+        for (Task task : tasks) {
+            sb.append(task).append(System.getProperty("line.separator"));
         }
         new ConsoleView().execute(sb.toString());
     }
