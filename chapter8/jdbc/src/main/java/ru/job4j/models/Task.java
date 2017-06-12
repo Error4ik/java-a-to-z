@@ -29,7 +29,7 @@ public class Task {
     /**
      * Date of task creation.
      */
-    private Date createDate;
+    private final Date createDate;
 
     /**
      * Constructor.
