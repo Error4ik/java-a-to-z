@@ -1,28 +1,29 @@
-package ru.job4j.tracker;
+package ru.job4j.menu_tracker;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import ru.job4j.CreateDB;
+import ru.job4j.CreateTable;
+import ru.job4j.PoolDataSource;
+import ru.job4j.action.ShowAllTask;
 import ru.job4j.action.AddComment;
+import ru.job4j.action.AddNewTask;
 import ru.job4j.action.RemoveTask;
 import ru.job4j.action.RemoveComment;
-import ru.job4j.action.AddNewTask;
-import ru.job4j.action.EditTask;
-import ru.job4j.action.ShowAllCommentToTask;
-import ru.job4j.action.ShowAllTask;
+import ru.job4j.action.UpdateTask;
 import ru.job4j.action.FilterByCoincidence;
 import ru.job4j.action.FilterTaskByName;
 import ru.job4j.action.ExitTrackerProgram;
+import ru.job4j.action.ShowAllCommentToTask;
+import ru.job4j.dao.Tracker;
 import ru.job4j.input.ConsoleInput;
 import ru.job4j.input.StubInput;
 import ru.job4j.models.Comment;
 import ru.job4j.models.Task;
 import ru.job4j.settings.Settings;
 
+import javax.sql.DataSource;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.sql.Timestamp;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
@@ -43,7 +44,7 @@ public class TrackerTest {
     private final Settings settings = new Settings();
 
     /**
-     * Url to connect tracker.
+     * Url to connect menu_tracker.
      */
     private final String trackerUrl = settings.getValue("trackerUrl");
 
@@ -58,27 +59,31 @@ public class TrackerTest {
     private final String password = settings.getValue("password");
 
     /**
-     * Tracker.
+     * Url create DB.
      */
-    private Tracker tracker;
+    private final String url = settings.getValue("url");
 
     /**
-     * Init tracker, create DB and tables.
+     * DataSource.
+     */
+    private final DataSource dataSource = PoolDataSource.setupDataSource(trackerUrl, userName, password);
+
+    /**
+     * Tracker.
+     */
+    private final Tracker tracker = new Tracker(dataSource);
+
+    /**
+     * Crete and drop table class.
+     */
+    private final CreateTable createTable = new CreateTable(dataSource);
+
+    /**
+     * Init menu_tracker, create DB and tables.
      */
     @Before
     public void init() {
-        new CreateDB(settings.getValue("url"), userName, password).createDB();
-        this.tracker = new Tracker(trackerUrl, userName, password);
-        tracker.createTable();
-    }
-
-    /**
-     * Drop table and DB after test.
-     */
-    @After
-    public void dropTables() {
-        this.tracker.dropTable("comments");
-        this.tracker.dropTable("task");
+        createTable.createTable();
     }
 
     /**
@@ -90,7 +95,7 @@ public class TrackerTest {
         task.execute(this.tracker, new StubInput(new String[]{"Repair", "Repair to TV"}));
         String expectedValue = "Repair";
 
-        String actualValue = tracker.getTask(1).getName();
+        String actualValue = tracker.getTaskById(1).getName();
 
         assertThat(actualValue, is(expectedValue));
     }
@@ -109,9 +114,9 @@ public class TrackerTest {
         final RemoveTask removeTask = new RemoveTask("1", "remove");
         removeTask.execute(this.tracker, new StubInput(new String[]{"1"}));
 
-        final Task actualTask = tracker.getTask(1);
-        final Comment oneComment = tracker.getComment(1);
-        final Comment twoComment = tracker.getComment(2);
+        final Task actualTask = tracker.getTaskById(1);
+        final Comment oneComment = tracker.getCommentById(1);
+        final Comment twoComment = tracker.getCommentById(2);
 
         assertNull(actualTask);
         assertNull(oneComment);
@@ -129,7 +134,7 @@ public class TrackerTest {
         comment.execute(this.tracker, new StubInput(new String[]{"1", "Comment to task!"}));
         String expectedValue = "Comment to task!";
 
-        String actualValue = tracker.getComment(1).getComment();
+        String actualValue = tracker.getCommentById(1).getComment();
 
         assertThat(actualValue, is(expectedValue));
     }
@@ -146,7 +151,7 @@ public class TrackerTest {
         final RemoveComment removeComment = new RemoveComment("1", "remove");
         removeComment.execute(tracker, new StubInput(new String[]{"1"}));
 
-        final Comment actualValue = tracker.getComment(1);
+        final Comment actualValue = tracker.getCommentById(1);
 
         assertNull(actualValue);
     }
@@ -158,13 +163,13 @@ public class TrackerTest {
     public void whenEditTaskShouldTaskChangeNameAndDescription() {
         final AddNewTask task = new AddNewTask("1", "add");
         task.execute(this.tracker, new StubInput(new String[]{"Repair", "Repair to TV"}));
-        final EditTask editTask = new EditTask("1", "edit");
-        editTask.execute(tracker, new StubInput(new String[]{"1", "Update", "Update PC"}));
+        final UpdateTask updateTask = new UpdateTask("1", "edit");
+        updateTask.execute(tracker, new StubInput(new String[]{"1", "Update", "Update PC"}));
         final String expectedName = "Update";
         final String expectedDescription = "Update PC";
 
-        final String actualName = tracker.getTask(1).getName();
-        final String actualDescription = tracker.getTask(1).getDescription();
+        final String actualName = tracker.getTaskById(1).getName();
+        final String actualDescription = tracker.getTaskById(1).getDescription();
 
         assertThat(actualName, is(expectedName));
         assertThat(actualDescription, is(expectedDescription));
@@ -183,10 +188,8 @@ public class TrackerTest {
         two.execute(this.tracker, new StubInput(new String[]{"Update", "Update to PO"}));
         final ShowAllTask showAllTask = new ShowAllTask("1", "show");
         sb.append("===========================================================").append(sep)
-                .append("1, Repair, Repair to TV ")
-                .append(new Timestamp(this.tracker.getTask(1).getCreateDate().getTime())).append(sep)
-                .append("2, Update, Update to PO ")
-                .append(new Timestamp(this.tracker.getTask(2).getCreateDate().getTime())).append(sep)
+                .append(tracker.getTaskById(1)).append(sep)
+                .append(tracker.getTaskById(2)).append(sep)
                 .append("===========================================================").append(sep);
 
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -212,10 +215,8 @@ public class TrackerTest {
         final ShowAllCommentToTask commentToTask = new ShowAllCommentToTask("1", "show");
 
         sb.append("===========================================================").append(sep)
-                .append("1, ").append(new Timestamp(this.tracker.getComment(1).getCreateDate().getTime()))
-                .append(", One to task!").append(sep)
-                .append("2, ").append(new Timestamp(this.tracker.getComment(2).getCreateDate().getTime()))
-                .append(", Two to task!").append(sep)
+                .append(tracker.getCommentById(1)).append(sep)
+                .append(tracker.getCommentById(2)).append(sep)
                 .append("===========================================================").append(sep);
 
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -242,10 +243,8 @@ public class TrackerTest {
         final FilterTaskByName filterName = new FilterTaskByName("1", "filter");
 
         sb.append("===========================================================").append(sep)
-                .append("1, Repair, Repair to TV ")
-                .append(new Timestamp(this.tracker.getTask(1).getCreateDate().getTime())).append(sep)
-                .append("3, Repair, Repair to PC ")
-                .append(new Timestamp(this.tracker.getTask(3).getCreateDate().getTime())).append(sep)
+                .append(tracker.getTaskById(1)).append(sep)
+                .append(tracker.getTaskById(3)).append(sep)
                 .append("===========================================================").append(sep);
 
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -271,10 +270,8 @@ public class TrackerTest {
         final FilterByCoincidence coincidence = new FilterByCoincidence("1", "coincidence");
 
         sb.append("===========================================================").append(sep)
-                .append("1, Repair, Repair to TV ")
-                .append(new Timestamp(this.tracker.getTask(1).getCreateDate().getTime())).append(sep)
-                .append("3, Repair, Repair to PC ")
-                .append(new Timestamp(this.tracker.getTask(3).getCreateDate().getTime())).append(sep)
+                .append(tracker.getTaskById(1)).append(sep)
+                .append(tracker.getTaskById(3)).append(sep)
                 .append("===========================================================").append(sep);
 
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -296,9 +293,9 @@ public class TrackerTest {
         final AddNewTask three = new AddNewTask("1", "add");
         three.execute(this.tracker, new StubInput(new String[]{"Repair", "Repair to PC"}));
 
-        final Task task1 = new Task(1, "Repair", "Repair to TV", this.tracker.getTask(1).getCreateDate().getTime());
-        final Task task2 = new Task(2, "Update", "Update to Soft", this.tracker.getTask(1).getCreateDate().getTime());
-        final Task task3 = new Task(3, "Repair", "Repair to PC", this.tracker.getTask(1).getCreateDate().getTime());
+        final Task task1 = new Task(1, "Repair", "Repair to TV", this.tracker.getTaskById(1).getCreateDate().getTime());
+        final Task task2 = new Task(2, "Update", "Update to Soft", this.tracker.getTaskById(1).getCreateDate().getTime());
+        final Task task3 = new Task(3, "Repair", "Repair to PC", this.tracker.getTaskById(1).getCreateDate().getTime());
 
         final List<Task> actualList = tracker.getAllTask();
 
@@ -319,8 +316,8 @@ public class TrackerTest {
         final AddComment second = new AddComment("1", "add");
         second.execute(this.tracker, new StubInput(new String[]{"1", "Two to comment!"}));
 
-        final Comment comment1 = new Comment(1, 1, tracker.getComment(1).getCreateDate().getTime(), "One to comment!");
-        final Comment comment2 = new Comment(2, 1, tracker.getComment(2).getCreateDate().getTime(), "Two to comment!");
+        final Comment comment1 = new Comment(1, 1, tracker.getCommentById(1).getCreateDate().getTime(), "One to comment!");
+        final Comment comment2 = new Comment(2, 1, tracker.getCommentById(2).getCreateDate().getTime(), "Two to comment!");
 
         List<Comment> comments = tracker.getAllCommentToTask(1);
 
