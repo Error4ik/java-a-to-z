@@ -1,15 +1,11 @@
 package ru.job4j.action;
 
-import org.apache.log4j.Logger;
+import ru.job4j.dao.ITracker;
 import ru.job4j.input.Input;
-import ru.job4j.tracker.Tracker;
+import ru.job4j.models.Comment;
 import ru.job4j.view.ConsoleView;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.ResultSet;
+import java.util.List;
 
 /**
  * Query show comment to task.
@@ -18,11 +14,6 @@ import java.sql.ResultSet;
  * @since 03.06.2017.
  */
 public class ShowAllCommentToTask extends BaseAction {
-
-    /**
-     * Logger.
-     */
-    private static final Logger LOGGER = Logger.getLogger(ShowAllCommentToTask.class);
 
     /**
      * Constructor.
@@ -35,21 +26,13 @@ public class ShowAllCommentToTask extends BaseAction {
     }
 
     @Override
-    public void execute(final Tracker tracker, final Input inputData) {
-        int taskID = Integer.parseInt(inputData.getInput("Enter the task id of the comments you want to receive: ").trim());
-        StringBuilder sb = new StringBuilder();
-        try (Connection con = DriverManager.getConnection(tracker.getUrl(), tracker.getUserName(), tracker.getPassword());
-             PreparedStatement ps = con.prepareStatement("SELECT * FROM comments WHERE task_id = ?;")) {
-            ps.setInt(1, taskID);
-            try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    sb.append(String.format("%d, %s, %s", rs.getInt("id"), rs.getTimestamp("create_date"),
-                            rs.getString("comment")))
-                            .append(System.getProperty("line.separator"));
-                }
-            }
-        } catch (SQLException e) {
-            LOGGER.error(e.getMessage(), e);
+    public void execute(final ITracker tracker, final Input inputData) {
+        final int taskID = Integer.parseInt(inputData.getInput(
+                "Enter the task id of the comments you want to receive: ").trim());
+        final StringBuilder sb = new StringBuilder();
+        List<Comment> comments = tracker.getAllCommentToTask(taskID);
+        for (Comment comment : comments) {
+            sb.append(comment).append(System.getProperty("line.separator"));
         }
         new ConsoleView().execute(sb.toString());
     }
