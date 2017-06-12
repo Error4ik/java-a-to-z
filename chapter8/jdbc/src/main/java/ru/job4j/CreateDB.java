@@ -2,6 +2,7 @@ package ru.job4j;
 
 import org.apache.log4j.Logger;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -53,27 +54,12 @@ public class CreateDB {
      * Create DB from file.
      */
     public void createDB() {
-        InputStream is = CreateDB.class.getClass().getResourceAsStream("/create_db.sql");
-
-        Connection con = null;
-        PreparedStatement ps = null;
-        try {
-            con = DriverManager.getConnection(this.url, this.userName, this.password);
-            ps = con.prepareStatement(ReadFile.readFile(is));
+        try (InputStream is = CreateDB.class.getClass().getResourceAsStream("/create_db.sql");
+             Connection con = DriverManager.getConnection(this.url, this.userName, this.password);
+             PreparedStatement ps = con.prepareStatement(ReadFile.readFile(is));) {
             ps.execute();
-        } catch (SQLException e) {
+        } catch (SQLException | IOException e) {
             LOGGER.error(e.getMessage(), e);
-        } finally {
-            try {
-                if (ps != null) {
-                    ps.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException e) {
-                LOGGER.error(e.getMessage(), e);
-            }
         }
     }
 }
