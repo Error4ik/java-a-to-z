@@ -1,7 +1,7 @@
 package ru.job4j.action;
 
+import ru.job4j.dao.ITracker;
 import ru.job4j.input.Input;
-import ru.job4j.tracker.Tracker;
 
 /**
  * Interface for actions.
@@ -28,8 +28,8 @@ public interface Action {
     /**
      * Performs all the main work of the menu item.
      *
-     * @param tracker   tracker.
+     * @param tracker   menu_tracker.
      * @param inputData user input.
      */
-    void execute(final Tracker tracker, final Input inputData);
+    void execute(final ITracker tracker, final Input inputData);
 }
