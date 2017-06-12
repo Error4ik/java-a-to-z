@@ -1,13 +1,18 @@
 package ru.job4j.startCLI;
 
+import org.apache.log4j.Logger;
 import ru.job4j.CreateDB;
+import ru.job4j.CreateTable;
+import ru.job4j.PoolDataSource;
 import ru.job4j.action.Action;
+import ru.job4j.dao.Tracker;
 import ru.job4j.exception.MenuOutException;
 import ru.job4j.input.ConsoleInput;
 import ru.job4j.input.Input;
+import ru.job4j.menu_tracker.MenuTracker;
 import ru.job4j.settings.Settings;
-import ru.job4j.tracker.MenuTracker;
-import ru.job4j.tracker.Tracker;
+
+import javax.sql.DataSource;
 
 /**
  * Start program.
@@ -18,37 +23,57 @@ import ru.job4j.tracker.Tracker;
 public class StartUI {
 
     /**
-     * Input.
+     * Logger.
      */
-    private Input input;
+    private static final Logger LOGGER = Logger.getLogger(StartUI.class);
 
     /**
-     * Menu tracker.
+     * Input.
      */
-    private MenuTracker menuTracker;
+    private final Input input;
+
+    /**
+     * Menu menu_tracker.
+     */
+    private final MenuTracker menuTracker;
+
+    /**
+     * CreateDB.
+     */
+    private final CreateDB createDB;
+
+    /**
+     * Create and drop table.
+     */
+    private final CreateTable createTable;
 
     /**
      * Constructor.
      *
      * @param input       user input.
      * @param menuTracker menu tracker.
+     * @param createDB    createDB.
+     * @param createTable createTable.
      */
-    public StartUI(final Input input, final MenuTracker menuTracker) {
+    public StartUI(final Input input, final MenuTracker menuTracker,
+                   final CreateDB createDB, final CreateTable createTable) {
         this.input = input;
         this.menuTracker = menuTracker;
+        this.createDB = createDB;
+        this.createTable = createTable;
     }
 
     /**
-     * Starts the tracker, displays the tracker menu and prompts the user for input.
+     * Starts the menu_tracker, displays the menu_tracker menu and prompts the user for input.
      */
     public void start() {
         int value = -1;
         final int exitNumber = 0;
-        String createBDAndTableAnew = input.getInput("If this is the first run of the program, "
+        String line = input.getInput("If this is the first run of the program, "
                 + "then you need to create a database and tables, create one? y/n: ").trim();
-        if (createBDAndTableAnew.equals("y")) {
-            menuTracker.getCreateDB().createDB();
-            menuTracker.getTracker().createTable();
+        if (line.equals("y")) {
+            createDB.createDB();
+            createTable.createTable();
         }
         do {
             menuTracker.showMenu();
@@ -56,7 +81,9 @@ public class StartUI {
                 value = Integer.parseInt(input.getInput("Choice Action:\n").trim());
                 validEnter(value);
             } catch (NumberFormatException e) {
-                System.out.println("This is not a number, try again!");
+                LOGGER.error("This is not a number, try again! ", e);
+            } catch (MenuOutException e) {
+                LOGGER.error("Invalid menu number, try again! ", e);
             }
         } while (value != exitNumber);
     }
@@ -97,10 +124,14 @@ public class StartUI {
         String password = settings.getValue("password");
         String url = settings.getValue("url");
 
-        Tracker tracker = new Tracker(trackerUrl, userName, password);
+        DataSource dataSource = PoolDataSource.setupDataSource(trackerUrl, userName, password);
+
+        Tracker tracker = new Tracker(dataSource);
         CreateDB createDB = new CreateDB(url, userName, password);
-        MenuTracker menuTracker = new MenuTracker(tracker, input, createDB);
+        CreateTable createTable = new CreateTable(dataSource);
+        MenuTracker menuTracker = new MenuTracker(tracker, input);
         menuTracker.fillAction();
-        new StartUI(input, menuTracker).start();
+
+        new StartUI(input, menuTracker, createDB, createTable).start();
     }
 }
