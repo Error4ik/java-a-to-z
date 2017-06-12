@@ -1,21 +1,20 @@
-package ru.job4j.tracker;
+package ru.job4j.menu_tracker;
 
 import org.junit.Test;
-import ru.job4j.CreateDB;
 import ru.job4j.action.AddComment;
 import ru.job4j.action.StubAction;
+import ru.job4j.dao.Tracker;
 import ru.job4j.input.ConsoleInput;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Menu tracker test.
+ * Menu menu_tracker test.
  *
  * @author Alexey Voronin.
  * @since 03.06.2017.
@@ -28,7 +27,7 @@ public class MenuTrackerTest {
     @Test
     public void whenFillActionThenCountActionsEqualTen() {
         final MenuTracker tracker =
-                new MenuTracker(new Tracker(null, null, null), new ConsoleInput(), new CreateDB(null, null, null));
+                new MenuTracker(new Tracker(null), new ConsoleInput());
         final int expectedValue = 10;
         tracker.fillAction();
 
@@ -43,7 +42,7 @@ public class MenuTrackerTest {
     @Test
     public void whenAddActionThenActionAddedToArrayAndReturnTrue() {
         final MenuTracker tracker =
-                new MenuTracker(new Tracker(null, null, null), new ConsoleInput(), new CreateDB(null, null, null));
+                new MenuTracker(new Tracker(null), new ConsoleInput());
         final int expectedValue = 1;
 
         final boolean expected = tracker.addAction(new AddComment("1", "add"));
@@ -61,7 +60,7 @@ public class MenuTrackerTest {
         final StringBuilder sb = new StringBuilder();
         final String sep = System.getProperty("line.separator");
         final MenuTracker tracker =
-                new MenuTracker(new Tracker(null, null, null), new ConsoleInput(), new CreateDB(null, null, null));
+                new MenuTracker(new Tracker(null), new ConsoleInput());
         tracker.fillAction();
         sb.append("===========================================================").append(sep)
                 .append("1. Add task").append(sep)
@@ -91,7 +90,7 @@ public class MenuTrackerTest {
         final StringBuilder sb = new StringBuilder();
         final String sep = System.getProperty("line.separator");
         final MenuTracker tracker =
-                new MenuTracker(new Tracker(null, null, null), new ConsoleInput(), new CreateDB(null, null, null));
+                new MenuTracker(new Tracker(null), new ConsoleInput());
         tracker.addAction(new StubAction("1", "stub"));
         sb.append("===========================================================").append(sep)
                 .append("WORK!").append(sep)
@@ -102,27 +101,5 @@ public class MenuTrackerTest {
         tracker.select(1);
 
         assertThat(out.toString(), is(sb.toString()));
-    }
-
-    /**
-     * getTracker.
-     */
-    @Test
-    public void whenGetTrackerThenReturnTracker() {
-        final MenuTracker menuTracker =
-                new MenuTracker(new Tracker(null, null, null), new ConsoleInput(), new CreateDB(null, null, null));
-
-        assertNotNull(menuTracker.getTracker());
-    }
-
-    /**
-     * getCreateDB.
-     */
-    @Test
-    public void whenGetCreateDBThenReturnCreateDB() {
-        final MenuTracker menuTracker =
-                new MenuTracker(new Tracker(null, null, null), new ConsoleInput(), new CreateDB(null, null, null));
-
-        assertNotNull(menuTracker.getCreateDB());
     }
 }
