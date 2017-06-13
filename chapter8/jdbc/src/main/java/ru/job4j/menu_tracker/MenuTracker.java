@@ -11,7 +11,7 @@ import ru.job4j.action.RemoveTask;
 import ru.job4j.action.ShowAllCommentToTask;
 import ru.job4j.action.ShowAllTask;
 import ru.job4j.action.UpdateTask;
-import ru.job4j.dao.Tracker;
+import ru.job4j.dao.ITracker;
 import ru.job4j.input.Input;
 import ru.job4j.view.ConsoleView;
 
@@ -34,7 +34,7 @@ public class MenuTracker {
     /**
      * Tracker.
      */
-    private final Tracker tracker;
+    private final ITracker tracker;
 
     /**
      * User input.
@@ -47,7 +47,7 @@ public class MenuTracker {
      * @param tracker   menu_tracker.
      * @param inputData user input.
      */
-    public MenuTracker(final Tracker tracker, final Input inputData) {
+    public MenuTracker(final ITracker tracker, final Input inputData) {
         this.tracker = tracker;
         this.inputData = inputData;
         this.actions = new ArrayList<>();
