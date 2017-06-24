@@ -14,6 +14,7 @@
         <!--<module>create_update_insert</module>-->
         <!--<module>query</module>-->
         <!--<module>outer_join</module>-->
-        <module>jdbc</module>
+        <!--<module>jdbc</module>-->
+        <module>test_task</module>
     </modules>
 </project>
