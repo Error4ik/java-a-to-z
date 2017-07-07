@@ -12,5 +12,6 @@
 
     <modules>
         <module>client_server</module>
+        <module>http</module>
     </modules>
 </project>
