@@ -11,7 +11,8 @@
     </parent>
 
     <modules>
-        <module>client_server</module>
-        <module>http</module>
+        <!--<module>client_server</module>-->
+        <!--<module>http</module>-->
+        <module>servlet</module>
     </modules>
 </project>
