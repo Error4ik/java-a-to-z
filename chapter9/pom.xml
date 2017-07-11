@@ -13,6 +13,7 @@
     <modules>
         <!--<module>client_server</module>-->
         <!--<module>http</module>-->
-        <module>servlet</module>
+        <!--<module>servlet</module>-->
+        <module>jsp</module>
     </modules>
 </project>
