@@ -32,7 +32,6 @@
         UserDao userDao = new UserToDB(PoolDataSource.setupDataSource(
                 settings.getValue("url"), settings.getValue("name"), settings.getValue("password")));
         for (User user : userDao.getAllUsers()) {
-            int id = user.getId();
     %>
     <tr>
         <td><%=user.getId()%>
