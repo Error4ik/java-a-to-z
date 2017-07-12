@@ -1,0 +1,41 @@
+<web-app>
+    <servlet>
+        <servlet-name>MainPage</servlet-name>
+        <servlet-class>ru.job4j.servlets.MainPage</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>MainPage</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddUser</servlet-name>
+        <servlet-class>ru.job4j.servlets.AddUser</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddUser</servlet-name>
+        <url-pattern>/Add</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UpdateUser</servlet-name>
+        <servlet-class>ru.job4j.servlets.UpdateUser</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UpdateUser</servlet-name>
+        <url-pattern>/Update</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DeleteUser</servlet-name>
+        <servlet-class>ru.job4j.servlets.DeleteUser</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeleteUser</servlet-name>
+        <url-pattern>/delete</url-pattern>
+    </servlet-mapping>
+</web-app>
