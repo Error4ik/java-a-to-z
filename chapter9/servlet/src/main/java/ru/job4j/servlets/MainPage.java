@@ -61,10 +61,9 @@ public class MainPage extends HttpServlet {
         }
         sb.append("</table>").append(String.format("<form action = %s/add method = get>", req.getContextPath()))
                 .append("</body>").append("</html>");
-        try (PrintWriter writer = new PrintWriter(resp.getOutputStream())) {
-            writer.append(sb.toString());
-            writer.flush();
-        }
+        PrintWriter writer = resp.getWriter();
+        writer.append(sb.toString());
+        writer.flush();
     }
 
 

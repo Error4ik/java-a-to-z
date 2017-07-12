@@ -46,10 +46,10 @@ public class AddUser extends HttpServlet {
                 .append("</form>")
                 .append("</body>")
                 .append("</html>");
-        try (PrintWriter writer = new PrintWriter(resp.getOutputStream())) {
-            writer.append(sb.toString());
-            writer.flush();
-        }
+        PrintWriter writer = resp.getWriter();
+        writer.append(sb.toString());
+        writer.flush();
+
     }
 
     @Override
