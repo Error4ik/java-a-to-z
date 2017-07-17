@@ -31,10 +31,9 @@ public class UserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         final int id = Integer.parseInt(req.getParameter("id"));
-        try (PrintWriter writer = new PrintWriter(resp.getOutputStream())) {
-            writer.append(user.getUserByID(id).toString());
-            writer.flush();
-        }
+        PrintWriter writer = new PrintWriter(resp.getOutputStream()))
+        writer.append(user.getUserByID(id).toString());
+        writer.flush();
     }
 
     @Override
