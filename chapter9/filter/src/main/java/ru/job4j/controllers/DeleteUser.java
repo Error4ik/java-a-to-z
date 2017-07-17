@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -28,7 +29,8 @@ public class DeleteUser extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final int id = Integer.parseInt(req.getParameter("id"));
         this.userDao.deleteUserByID(id);
-        if (id != (Integer) req.getSession().getAttribute("adminID")) {
+        HttpSession session = req.getSession();
+        if (id != Integer.parseInt(String.valueOf(session.getAttribute("adminID")))) {
             resp.sendRedirect(String.format("%s/admin", req.getContextPath()));
         } else {
             req.getSession().invalidate();
