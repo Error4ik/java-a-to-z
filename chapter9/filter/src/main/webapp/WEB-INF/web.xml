@@ -1,0 +1,82 @@
+<web-app>
+    <filter>
+        <filter-name>Authentication Filter</filter-name>
+        <filter-class>ru.job4j.controllers.AuthorizationFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Authentication Filter</filter-name>
+        <url-pattern>*</url-pattern>
+    </filter-mapping>
+
+    <servlet>
+        <servlet-name>Sign In</servlet-name>
+        <servlet-class>ru.job4j.controllers.SignIn</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Sign In</servlet-name>
+        <url-pattern>/signin</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>User Page</servlet-name>
+        <servlet-class>ru.job4j.controllers.UserPage</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>User Page</servlet-name>
+        <url-pattern>/user</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Admin Page</servlet-name>
+        <servlet-class>ru.job4j.controllers.AdminPage</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Admin Page</servlet-name>
+        <url-pattern>/admin</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>User Update Page</servlet-name>
+        <servlet-class>ru.job4j.controllers.UpdateUser</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>User Update Page</servlet-name>
+        <url-pattern>/user_update</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Delete User</servlet-name>
+        <servlet-class>ru.job4j.controllers.DeleteUser</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Delete User</servlet-name>
+        <url-pattern>/delete</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LogOut</servlet-name>
+        <servlet-class>ru.job4j.controllers.LogOutUser</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LogOut</servlet-name>
+        <url-pattern>/log_out</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Admin User Update</servlet-name>
+        <servlet-class>ru.job4j.controllers.AdminUserUpdate</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Admin User Update</servlet-name>
+        <url-pattern>/admin_update</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Admin add user</servlet-name>
+        <servlet-class>ru.job4j.controllers.AdminAddUser</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Admin add user</servlet-name>
+        <url-pattern>/admin_add_user</url-pattern>
+    </servlet-mapping>
+</web-app>
