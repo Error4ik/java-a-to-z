@@ -127,6 +127,8 @@
                     <ignoredDependencies>
                         <ignoredDependency>org.postgresql:postgresql:jar:42.1.1</ignoredDependency>
                         <ignoredDependency>org.apache.commons:commons-pool2:jar:2.4.2</ignoredDependency>
+                        <ignoredDependency>taglibs:standard:jar:1.1.2</ignoredDependency>
+                        <ignoredDependency>javax.servlet:jstl:jar:1.2</ignoredDependency>
                     </ignoredDependencies>
                 </configuration>
                 <executions>
