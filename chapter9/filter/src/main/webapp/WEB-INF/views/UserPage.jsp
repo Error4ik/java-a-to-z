@@ -17,29 +17,29 @@
         <th>Edit</th>
         <th>Delete</th>
     </tr>
-    <c:forEach items="${users}" var="user">
+    <c:forEach items="${users}" var="currentUser">
         <tr>
-            <td><c:out value="${user.id}"></c:out></td>
-            <td><c:out value="${user.login}"></c:out></td>
-            <c:if test="${id == user.id}">
-                <td><c:out value="${user.password}"></c:out></td>
+            <td><c:out value="${currentUser.id}"></c:out></td>
+            <td><c:out value="${currentUser.login}"></c:out></td>
+            <c:if test="${user.id == currentUser.id}">
+                <td><c:out value="${currentUser.password}"></c:out></td>
             </c:if>
-            <c:if test="${id != user.id}">
+            <c:if test="${user.id != currentUser.id}">
                 <td><c:out value="*****"></c:out></td>
             </c:if>
-            <td><c:out value="${user.email}"></c:out></td>
-            <td><c:out value="${date.format(user.createDate)}"></c:out></td>
-            <td><c:out value="${user.role.role}"></c:out></td>
-            <c:if test="${id == user.id}">
+            <td><c:out value="${currentUser.email}"></c:out></td>
+            <td><c:out value="${date.format(currentUser.createDate)}"></c:out></td>
+            <td><c:out value="${currentUser.role.role}"></c:out></td>
+            <c:if test="${user.id == currentUser.id}">
                 <td>
                     <form action="${pageContext.servletContext.contextPath}/user_update" method=get>
-                        <input type="hidden" name="id" value="${user.id}"/>
+                        <input type="hidden" name="id" value="${currentUser.id}"/>
                         <input type="submit" value="Update"/>
                     </form>
                 </td>
                 <td>
                     <form action="${pageContext.servletContext.contextPath}/delete" method=post>
-                        <input type="hidden" name="id" value="${user.id}"/>
+                        <input type="hidden" name="id" value="${currentUser.id}"/>
                         <input type="submit" value="Delete"/>
                     </form>
                 </td>

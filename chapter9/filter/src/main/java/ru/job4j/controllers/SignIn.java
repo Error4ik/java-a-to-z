@@ -40,19 +40,12 @@ public class SignIn extends HttpServlet {
         User user = userDao.getUserByLoginAndPassword(login, password);
         HttpSession session = req.getSession();
         if (user != null) {
-            synchronized (session) {
-                if (user.getRole().getRole().equals("admin")) {
-                    session.setAttribute("adminID", user.getId());
-                    session.setAttribute("login", login);
-                    session.setAttribute("password", password);
-                    resp.sendRedirect(String.format("%s/admin", req.getContextPath()));
-                } else if (user.getRole().getRole().equals("user")) {
-                    session.setAttribute("id", user.getId());
-                    session.setAttribute("adminID", user.getId());
-                    session.setAttribute("login", login);
-                    session.setAttribute("password", password);
-                    resp.sendRedirect(String.format("%s/user", req.getContextPath()));
-                }
+            if (user.getRole().getRole().equals("admin")) {
+                session.setAttribute("user", user);
+                resp.sendRedirect(String.format("%s/admin", req.getContextPath()));
+            } else if (user.getRole().getRole().equals("user")) {
+                session.setAttribute("user", user);
+                resp.sendRedirect(String.format("%s/user", req.getContextPath()));
             }
         } else {
             req.setAttribute("error", "Credential invalid!");

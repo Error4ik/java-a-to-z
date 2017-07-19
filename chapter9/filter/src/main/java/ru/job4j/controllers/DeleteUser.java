@@ -3,6 +3,7 @@ package ru.job4j.controllers;
 import ru.job4j.dao.UserDao;
 import ru.job4j.dao.UserToDB;
 import ru.job4j.database.PoolDataSource;
+import ru.job4j.model.User;
 import ru.job4j.settings.Settings;
 
 import javax.servlet.ServletException;
@@ -30,7 +31,8 @@ public class DeleteUser extends HttpServlet {
         final int id = Integer.parseInt(req.getParameter("id"));
         this.userDao.deleteUserByID(id);
         HttpSession session = req.getSession();
-        if (id != Integer.parseInt(String.valueOf(session.getAttribute("adminID")))) {
+        User user = (User) session.getAttribute("user");
+        if (id != user.getId()) {
             resp.sendRedirect(String.format("%s/admin", req.getContextPath()));
         } else {
             req.getSession().invalidate();

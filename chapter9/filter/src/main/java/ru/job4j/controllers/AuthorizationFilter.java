@@ -1,11 +1,13 @@
 package ru.job4j.controllers;
 
+import ru.job4j.model.User;
+
+import javax.servlet.ServletRequest;
 import javax.servlet.Filter;
 import javax.servlet.FilterConfig;
-import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -32,11 +34,10 @@ public class AuthorizationFilter implements Filter {
             chain.doFilter(req, resp);
         } else {
             HttpSession session = request.getSession();
-            synchronized (session) {
-                if (session.getAttribute("login") == null) {
-                    response.sendRedirect(String.format("%s/signin", request.getContextPath()));
-                    return;
-                }
+            User user = (User) session.getAttribute("user");
+            if (user == null) {
+                response.sendRedirect(String.format("%s/signin", request.getContextPath()));
+                return;
             }
             chain.doFilter(req, resp);
         }

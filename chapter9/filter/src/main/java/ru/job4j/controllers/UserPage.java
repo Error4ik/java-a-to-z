@@ -3,6 +3,7 @@ package ru.job4j.controllers;
 import ru.job4j.dao.UserDao;
 import ru.job4j.dao.UserToDB;
 import ru.job4j.database.PoolDataSource;
+import ru.job4j.model.User;
 import ru.job4j.settings.Settings;
 
 import javax.servlet.ServletException;
@@ -29,12 +30,11 @@ public class UserPage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
-        synchronized (session) {
-            req.setAttribute("users", userDao.getAllUsers());
-            req.setAttribute("date", new SimpleDateFormat("dd MMM yyyy - HH:mm"));
-            req.setAttribute("id", session.getAttribute("id"));
-            req.getRequestDispatcher("/WEB-INF/views/UserPage.jsp").forward(req, resp);
-        }
+        User user = (User) session.getAttribute("user");
+        req.setAttribute("users", userDao.getAllUsers());
+        req.setAttribute("date", new SimpleDateFormat("dd MMM yyyy - HH:mm"));
+        req.setAttribute("id", user.getId());
+        req.getRequestDispatcher("/WEB-INF/views/UserPage.jsp").forward(req, resp);
     }
 
     @Override

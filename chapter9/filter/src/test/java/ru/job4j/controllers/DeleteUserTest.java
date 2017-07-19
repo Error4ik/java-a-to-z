@@ -49,19 +49,20 @@ public class DeleteUserTest {
     @Test
     public void deleteUser() throws ServletException, IOException {
         final int userId = this.userDao.addUser(new User(0, "test", "test", "test", new Date(), new Role(1, "admin")));
+        final User user1 = new User(userId, "", "", "", null, new Role(1, "admin"));
         final DeleteUser deleteUser = new DeleteUser();
         final HttpServletRequest request = mock(HttpServletRequest.class);
         final HttpServletResponse response = mock(HttpServletResponse.class);
         final HttpSession session = mock(HttpSession.class);
         when(request.getParameter("id")).thenReturn(String.format("%s", userId));
         when(request.getSession()).thenReturn(session);
-        when(session.getAttribute("adminID")).thenReturn(String.format("%s", userId));
+        when(session.getAttribute("user")).thenReturn(user1);
 
         deleteUser.init();
         deleteUser.doPost(request, response);
 
         verify(request, atLeast(1)).getParameter("id");
-        verify(session, atLeast(1)).getAttribute("adminID");
+        verify(session, atLeast(1)).getAttribute("user");
 
         final User user = this.userDao.getUserByID(userId);
 
