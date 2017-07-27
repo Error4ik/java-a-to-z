@@ -16,6 +16,7 @@
         <!--<module>servlet</module>-->
         <!--<module>jsp</module>-->
         <!--<module>mvc</module>-->
-        <module>filter</module>
+        <!--<module>filter</module>-->
+        <module>html_css_js</module>
     </modules>
 </project>

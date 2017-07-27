@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Add user page</title>
+    <script>
+
+        $(getRole());
+        $(getCountry());
+
+        function getCountry() {
+            $.ajax({
+                url: './country',
+                dataType: 'json',
+                success: function (data) {
+                    $.each(data, function (i, val) {
+                        document.getElementById("country").innerHTML +=
+                                "<option value=" + val.country + ">" + val.country + "</option>";
+                    });
+                    loadCities();
+                }
+            });
+        }
+
+        function getRole() {
+            $.ajax({
+                url: './role',
+                dataType: 'json',
+                success: function (data) {
+                    $.each(data, function (i, val) {
+                        document.getElementById("role").innerHTML +=
+                                "<option value=" + val.role + ">" + val.role + "</option>"
+                    })
+                }
+            });
+        }
+
+        function loadCities() {
+            var country = document.getElementById("country").value;
+            $("#city").empty();
+            $.ajax({
+                url: './city',
+                data: {country: country},
+                dataType: "json",
+                success: function (data, textStatus) {
+                    $.each(data, function (i, val) {
+                        document.getElementById("city").innerHTML += "<option value=" + val.city + ">" + val.city + "</option>";
+                    });
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+<div class="container">
+    <h2 style="margin-left: 15px">Sign On</h2>
+    <div class="col col-md-4">
+        <form action="./add" method="post" id="add-form">
+            <div class="form-group">
+                <label for="login">Login:</label>
+                <input type="text" class="form-control" id="login" placeholder="Enter login" name="login">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" id="password" placeholder="Enter password"
+                       name="password">
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+            </div>
+            <div class="form-group">
+                <label for="role">Role:</label>
+                <select class="form-control" id="role" name="role"></select>
+            </div>
+            <div class="form-group">
+                <label for="country">Country</label>
+                <select name="country" id="country" class="form-control" onchange="loadCities()">
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="city">City</label>
+                <select name="city" id="city" class="form-control">
+                </select>
+            </div>
+            <button type="submit" class="btn btn-info">Sign On</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

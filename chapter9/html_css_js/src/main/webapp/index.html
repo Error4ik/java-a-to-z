@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Main Page</title>
+</head>
+<script>
+    var currentSignIn = null;
+
+    $(getCurrentUser());
+    $(loadUsers());
+
+    function getCurrentUser() {
+        $.ajax({
+            url: './getUser',
+            dataType: "json",
+            success: function (data) {
+                currentSignIn = data;
+            }
+        });
+    }
+
+    function loadUsers() {
+        $.ajax({
+            url: './index',
+            dataType: "json",
+            success: function (data) {
+                $.each(data, function (i, user) {
+                    var result = "<tr class='table-td'>" +
+                            "<td>" + user.id + "</td>" +
+                            "<td>" + user.login + "</td>";
+                    if (currentSignIn.role.role != "admin") {
+                        result += "<td>************</td>"
+                    } else {
+                        result += "<td>" + user.password + "</td>";
+                    }
+                    result += "<td>" + user.email + "</td>" +
+                            "<td>" + new Date(user.createDate).toDateString() + "</td>" +
+                            "<td>" + user.role.role + "</td>" +
+                            "<td>" + user.country.country + "</td>" +
+                            "<td>" + user.city.city + "</td>";
+                    if (currentSignIn.role.role == "admin") {
+                        result += "<td><form action='./edit'><input type='hidden' name='id' value='" + user.id + "'/>" +
+                                "<input type='submit' class='btn btn-info' value='Edit'></form></td>" +
+                                "<td><form action='./delete' method='post'><input type='hidden' name='id' value='" + user.id + "'/>" +
+                                "<input type='submit' class='btn btn-info' value='Delete'></form></td>";
+                    } else if (currentSignIn.id == user.id) {
+                        result += "<td><form action='./edit'><input type='hidden' name='id' value='" + user.id + "'/>" +
+                                "<input type='submit' class='btn btn-info' value='Edit'></form></td>" +
+                                "<td><form action='./delete' method='post'><input type='hidden' name='id' value='" + user.id + "'/>" +
+                                "<input type='submit' class='btn btn-info' value='Delete'></form></td>";
+                    } else {
+                        result += "<td></td><td></td>";
+                    }
+                    result += "</tr>";
+                    document.getElementById("users").innerHTML += result;
+                    document.getElementById("add-user-button").disabled = currentSignIn.role.role != "admin";
+                });
+            }
+        })
+    }
+
+    function refresh() {
+        $("tbody").empty();
+        loadUsers();
+    }
+
+</script>
+<body>
+<div class="container">
+    <table class="table table-bordered" id="users">
+        <thead>
+        <tr>
+            <th class="table-td">ID</th>
+            <th class="table-td">Login</th>
+            <th class="table-td">Password</th>
+            <th class="table-td">Email</th>
+            <th class="table-td">Create date</th>
+            <th class="table-td">Role</th>
+            <th class="table-td">Country</th>
+            <th class="table-td">City</th>
+            <th class="table-td">Edit</th>
+            <th class="table-td">Delete</th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <div>
+        <a href="./add.html" style="padding-right:50px"><input type="button" class='btn btn-info' value="Add User"
+                                                               id="add-user-button"/></a>
+        <input type="button" value="Refresh data" class='btn btn-info' onclick="refresh();">
+        <a href="./log-out" style="padding-left: 50px"><input type="button" class='btn btn-info' value="Log Out"/></a>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Edit user page</title>
+    <script>
+
+        $(getCurrentUser());
+        $(getSessionUser());
+        $(getCountry());
+
+        function getCurrentUser() {
+            $.ajax({
+                url: './current',
+                dataType: "json",
+                success: function (data) {
+                    document.getElementById("currentID").value = data.id;
+                    document.getElementById("edit-login").value = data.login;
+                    document.getElementById("edit-password").value = data.password;
+                    document.getElementById("edit-email").value = data.email;
+                }
+            });
+        }
+
+        function getRole(role) {
+            if (role == "admin") {
+                $.ajax({
+                    url: './role',
+                    dataType: 'json',
+                    success: function (data) {
+                        $.each(data, function (i, val) {
+                            document.getElementById("edit-role").innerHTML += "<option value=" + val.role + ">" + val.role + "</option>";
+                        });
+                    }
+                });
+            } else {
+                document.getElementById("edit-role").innerHTML += "<option value=\"user\">user</option>";
+            }
+        }
+
+        function getSessionUser() {
+            $.ajax({
+                url: './getUser',
+                dataType: "json",
+                success: function (data) {
+                    getRole(data.role.role);
+                }
+            });
+        }
+
+
+        function getCountry() {
+            $.ajax({
+                url: './country',
+                dataType: 'json',
+                success: function (data) {
+                    $.each(data, function (i, val) {
+                        document.getElementById("edit-country").innerHTML += "<option value=" + val.country + ">" + val.country + "</option>";
+                    });
+                    loadCities();
+                }
+            });
+        }
+
+
+        function loadCities() {
+            var country = document.getElementById("edit-country").value;
+            $("#edit-city").empty();
+            $.ajax({
+                url: './city',
+                data: {country: country},
+                dataType: "json",
+                success: function (data, textStatus) {
+                    $.each(data, function (i, val) {
+                        document.getElementById("edit-city").innerHTML += "<option value=" + val.city + ">" + val.city + "</option>";
+                    });
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+<div class="container">
+    <h2 style="margin-left: 15px">Sign On</h2>
+    <div class="col col-md-4">
+        <form action="./edit" method="post">
+            <div class="form-group">
+                <label for="edit-login">Login:</label>
+                <input type="hidden" id="currentID" name="id" value="">
+                <input type="text" class="form-control" id="edit-login" placeholder="Enter login" name="edit-login">
+            </div>
+            <div class="form-group">
+                <label for="edit-password">Password:</label>
+                <input type="text" class="form-control" id="edit-password" placeholder="Enter password"
+                       name="edit-password">
+            </div>
+            <div class="form-group">
+                <label for="edit-email">Email:</label>
+                <input type="email" class="form-control" id="edit-email" placeholder="Enter email" name="edit-email">
+            </div>
+            <div class="form-group">
+                <label for="edit-role">Role:</label>
+                <select class="form-control" id="edit-role" name="edit-role"></select>
+            </div>
+            <div class="form-group">
+                <label for="edit-country">Country:</label>
+                <select class="form-control" id="edit-country" name="edit-country" onchange="loadCities();"></select>
+            </div>
+            <div class="form-group">
+                <label for="edit-city">City:</label>
+                <select class="form-control" id="edit-city" name="edit-city"></select>
+            </div>
+            <button type="submit" class="btn btn-info">Apply Change</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
