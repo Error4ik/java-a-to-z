@@ -51,6 +51,7 @@ public class MyList<T> {
         Node node = this.first;
         while (node != null) {
             sb.append(node.value).append(" ");
+            node = node.next;
         }
         return sb.toString().trim();
     }
