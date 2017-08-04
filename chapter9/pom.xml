@@ -17,6 +17,7 @@
         <!--<module>jsp</module>-->
         <!--<module>mvc</module>-->
         <!--<module>filter</module>-->
-        <module>html_css_js</module>
+        <!--<module>html_css_js</module>-->
+        <module>task</module>
     </modules>
 </project>
