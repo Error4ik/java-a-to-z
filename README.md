@@ -7,7 +7,7 @@
     ###### 3. Условный Оператор.
     ###### 4. Циклы.
     ###### 5. Массивы.
-    ###### 6. Контрольные вопросы и тестовое задание.
+    ###### 6. Тестовое задание.
 *
 ## [ООП.](https://github.com/Error4ik/java-a-to-z/tree/master/chapter2)
 *
@@ -17,13 +17,13 @@
     ###### 4. Внутренние классы.
     ###### 5. Исключения.
     ###### 6. Абстрактные и анонимные классы.
-    ###### 7. Контрольные вопросы и тестовое задание.
+    ###### 7. Тестовое задание.
 *
 ## [Ввод-вывод.](https://github.com/Error4ik/java-a-to-z/tree/master/chapter3)
 *
    ###### 1. Ввод-вывод.
    ###### 2. Socket.
-   ###### 3. Контрольные вопросы и тестовое задание.
+   ###### 3. Тестовое задание.
 *
 ## [ООД.](https://github.com/Error4ik/java-a-to-z/tree/master/chapter4)
 *
@@ -33,7 +33,7 @@
     ###### 4. ISP.
     ###### 5. DIP.
     ###### 6. TDD.
-    ###### 7. Контрольные вопросы и тестовое задание.
+    ###### 7. Тестовое задание.
 *
 ## [Collections.](https://github.com/Error4ik/java-a-to-z/tree/master/chapter5)
 *
@@ -43,7 +43,7 @@
     ###### 4. Set.
     ###### 5. Map.
     ###### 6. Tree.
-    ###### 7. Контрольные вопросы и тестовое задание.
+    ###### 7. Тестовое задание.
 *
 ## [Garbage Collection.](https://github.com/Error4ik/java-a-to-z/tree/master/chapter6)
 *
@@ -51,7 +51,7 @@
     ######  2. Виды сборщиков мусоров.
     ######  3. Профилирование приложения.
     ######  4. Типы ссылок и коллекции на soft week ссылках.
-    ######  5. Контрольные вопросы и тестовое задание.
+    ######  5. Тестовое задание.
 *
 ## [Multithreading.](https://github.com/Error4ik/java-a-to-z/tree/master/chapter7)
 *
@@ -60,7 +60,7 @@
     ###### 3. Monitor, Synchronized.
     ###### 4. Wait, Notify, NotifyAll.
     ###### 5. Non Blocking Algorithms.
-    ###### 6. Контрольные вопросы и тестовое задание.
+    ###### 6. Тестовое задание.
 *
 ## [SQL, JDBC.](https://github.com/Error4ik/java-a-to-z/tree/master/chapter8)
 *
@@ -68,5 +68,15 @@
     ###### 2. Query.
     ###### 3. Outer join.
     ###### 4. JDBC.
-    ###### 5. Контрольные вопросы.
+*
+## [Servlet JSP.](https://github.com/Error4ik/java-a-to-z/tree/master/chapter9)
+*
+    ###### 1. Структура клиент-серверных приложений.
+    ###### 2. HTTP протокол.
+    ###### 3. Servlet.
+    ###### 4. JSP.
+    ###### 5. Реализация MVC на Servlet, JSP, JSTL.
+    ###### 6. Filter, Security.
+    ###### 7. Mockito.
+    ###### 8. HTML, CSS, JS.
 *
