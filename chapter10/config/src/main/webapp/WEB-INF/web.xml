@@ -1,0 +1,28 @@
+<web-app>
+    <servlet>
+        <servlet-name>Index</servlet-name>
+        <servlet-class>ru.job4j.controllers.ItemController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Index</servlet-name>
+        <url-pattern>/index</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Created</servlet-name>
+        <servlet-class>ru.job4j.controllers.CreateController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Created</servlet-name>
+        <url-pattern>/create</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Update</servlet-name>
+        <servlet-class>ru.job4j.controllers.UpdateController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Update</servlet-name>
+        <url-pattern>/update</url-pattern>
+    </servlet-mapping>
+</web-app>
