@@ -1,0 +1,54 @@
+package ru.job4j.repository;
+
+import lombok.NonNull;
+import org.hibernate.Session;
+import ru.job4j.commands.AllEntity;
+import ru.job4j.commands.CRUDOperation;
+import ru.job4j.models.User;
+
+import java.util.List;
+
+/**
+ * User repository.
+ *
+ * @author Alexey Voronin.
+ * @since 16.11.2017.
+ */
+public class UserRepository extends CommonRepository<User> {
+
+    /**
+     * Save user to database.
+     *
+     * @param user user.
+     * @return user id.
+     */
+    public int save(@NonNull final User user) {
+        final int[] userId = {0};
+        super.execute(new CRUDOperation<User>() {
+            @Override
+            public void execute(Session session, User value) {
+                userId[0] = (int) session.save(value);
+            }
+        }, user);
+        return userId[0];
+    }
+
+    /**
+     * Returns user by email and password.
+     *
+     * @param email email.
+     * @param pass  password.
+     * @return user.
+     */
+    public User getUserByEmailAndPass(@NonNull final String email, @NonNull final String pass) {
+        return super.getAllEntity(new AllEntity<User>() {
+            @Override
+            public List<User> getAll(Session session) {
+                return session.createQuery("from User where email=:email and password=:password")
+                        .setParameter("email", email)
+                        .setParameter("password", pass)
+                        .list();
+            }
+        }).get(0);
+    }
+}

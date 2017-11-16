@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Main Page</title>
+    <link rel="stylesheet" href="style.css" charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" charset="utf-8"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" charset="utf-8"></script>
+
+    <script>
+        var sessionUser = null;
+
+        $(getSessionUser());
+        $(loadUsers());
+
+        function loadUsers() {
+            var result = "";
+            $.ajax({
+                url: './index',
+                method: "GET",
+                success: function (data) {
+                    $.each(data, function (i, advert) {
+                        if (advert.author.id === sessionUser.id) {
+                            result += "<tr class='success'>";
+                        } else {
+                            result += "<tr>";
+                        }
+                        result +=
+                            "<td class='table-td'><img src='./image/" + advert.photo.id + "' alt='" + advert.photo.name +
+                            "' style='display: block; width: 100%; margin: 0 auto'></td>" +
+                            "<td class='size'>" + advert.title + "<br/>" +
+                            "Продавец " + advert.author.name + "<br/>" +
+                            "Марка: " + advert.car.carBrand.name + "<br/>Модель: " + advert.car.carModel.name + "<br/>Кузов: "
+                            + advert.car.carBody.name + "<br/></td>" +
+                            "<td class='table-td'>" + advert.city.name + "</td>" +
+                            "<td class='table-td'>" + advert.yearOfIssue + "</td> " +
+                            "<td class='table-td'>" + new Date(advert.created).toDateString() + "</td>" +
+                            "<td class='table-td'>" + advert.mileage + "</td>" +
+                            "<td class='table-td'>" + advert.price + "<br/>";
+                        if (advert.sale) {
+                            result += "<br/><label for='sale'>Продано</label><br/>" +
+                                "<input type='checkbox' id='sale' checked='true' onchange='changeBox(" + advert.id + ")'";
+                        } else {
+                            result += "<br/><label for='sale'>Продано</label><br/>" +
+                                "<input type='checkbox' id='sale' onchange='changeBox(" + advert.id + ")'";
+                        }
+                        if (sessionUser.email !== advert.author.email) {
+                            result += "' disabled>";
+                        } else {
+                            result += "'>";
+                        }
+                        result += "</td>" + "</tr>";
+                    });
+                    document.getElementById("table_body").innerHTML += result;
+                }
+            });
+        }
+
+        function changeBox(id) {
+            var checked = $("#sale").is(":checked");
+            $.ajax({
+                url: "./update",
+                method: "POST",
+                data: {"id": id},
+                success: function () {
+                }
+            });
+        }
+
+        function getSessionUser() {
+            $.ajax({
+                url: './getUser',
+                dataType: "json",
+                success: function (data) {
+                    sessionUser = data;
+                }
+            });
+        }
+    </script>
+
+</head>
+<body>
+<div class="container">
+    <div style="margin-top: 30px">
+        <a href="add_advert.html" class="btn btn-info" style="width: 40%">Add new Advert</a>
+        <a href="./log-out" class="btn btn-info" style="width: 40%; float: right">Log Out</a>
+    </div>
+</div>
+<div class="container" style="margin-top: 30px">
+    <div class="col-md-12">
+        <table class="table" id="items">
+            <thead>
+            <tr>
+                <th class="table-td">Фото</th>
+                <th class="size">Описание</th>
+                <th class="table-td">Город</th>
+                <th class="table-td">Год выпуска</th>
+                <th class="table-td">Создано</th>
+                <th class="table-td">Пробег</th>
+                <th class="table-td">Цена</th>
+            </tr>
+            </thead>
+            <tbody id="table_body"></tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<web-app>
+    <filter>
+        <filter-name>Auth Filter</filter-name>
+        <filter-class>ru.job4j.filters.AuthFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Auth Filter</filter-name>
+        <url-pattern>*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>CharsetFilter</filter-name>
+        <filter-class>ru.job4j.filters.CharsetFilter</filter-class>
+        <init-param>
+            <param-name>requestEncoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>CharsetFilter</filter-name>
+        <url-pattern>*</url-pattern>
+    </filter-mapping>
+
+    <servlet>
+        <servlet-name>Index</servlet-name>
+        <servlet-class>ru.job4j.controllers.IndexController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Index</servlet-name>
+        <url-pattern>/index</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Brand</servlet-name>
+        <servlet-class>ru.job4j.controllers.BrandController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Brand</servlet-name>
+        <url-pattern>/brand</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Model</servlet-name>
+        <servlet-class>ru.job4j.controllers.ModelController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Model</servlet-name>
+        <url-pattern>/model</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Engine</servlet-name>
+        <servlet-class>ru.job4j.controllers.EngineController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Engine</servlet-name>
+        <url-pattern>/engine</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Transmission</servlet-name>
+        <servlet-class>ru.job4j.controllers.TransmissionController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Transmission</servlet-name>
+        <url-pattern>/transmission</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DriveUnit</servlet-name>
+        <servlet-class>ru.job4j.controllers.DriverUnitController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DriveUnit</servlet-name>
+        <url-pattern>/driveUnit</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CarBody</servlet-name>
+        <servlet-class>ru.job4j.controllers.CarBodyController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CarBody</servlet-name>
+        <url-pattern>/carBody</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>City</servlet-name>
+        <servlet-class>ru.job4j.controllers.CityController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>City</servlet-name>
+        <url-pattern>/city</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Create</servlet-name>
+        <servlet-class>ru.job4j.controllers.CreateController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Create</servlet-name>
+        <url-pattern>/create</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Image</servlet-name>
+        <servlet-class>ru.job4j.controllers.ImageController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Image</servlet-name>
+        <url-pattern>/image/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>ru.job4j.controllers.LoginController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Log Out</servlet-name>
+        <servlet-class>ru.job4j.controllers.LogOutController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Log Out</servlet-name>
+        <url-pattern>/log-out</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Get User</servlet-name>
+        <servlet-class>ru.job4j.controllers.GetSessionUser</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Get User</servlet-name>
+        <url-pattern>/getUser</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>update</servlet-name>
+        <servlet-class>ru.job4j.controllers.UpdateController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>update</servlet-name>
+        <url-pattern>/update</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Register</servlet-name>
+        <servlet-class>ru.job4j.controllers.RegistrationController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Register</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+</web-app>
