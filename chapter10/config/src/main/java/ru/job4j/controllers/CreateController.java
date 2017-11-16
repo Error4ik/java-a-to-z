@@ -1,7 +1,7 @@
 package ru.job4j.controllers;
 
+import ru.job4j.repository.ItemRepository;
 import ru.job4j.models.Item;
-import ru.job4j.services.ItemService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,23 +18,13 @@ import java.sql.Timestamp;
  */
 public class CreateController extends HttpServlet {
 
-    /**
-     * Item service.
-     */
-    private ItemService service;
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        final String description = req.getParameter("data");
+        final String desc = req.getParameter("data");
         Item item = new Item();
-        item.setDescription(description);
+        item.setDescription(desc);
         item.setCreated(new Timestamp(System.currentTimeMillis()));
         item.setDone(false);
-        service.saveOrUpdate(item);
-    }
-
-    @Override
-    public void init() throws ServletException {
-        this.service = new ItemService();
+        new ItemRepository().addItem(item);
     }
 }

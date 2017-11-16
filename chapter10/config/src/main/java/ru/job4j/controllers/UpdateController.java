@@ -1,8 +1,8 @@
 package ru.job4j.controllers;
 
 import lombok.extern.log4j.Log4j;
+import ru.job4j.repository.ItemRepository;
 import ru.job4j.models.Item;
-import ru.job4j.services.ItemService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,21 +19,11 @@ import java.io.IOException;
 @Log4j
 public class UpdateController extends HttpServlet {
 
-    /**
-     * Item service.
-     */
-    private ItemService service;
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final int itemId = Integer.parseInt(req.getParameter("id"));
-        Item item = this.service.getItemById(itemId);
+        Item item = new ItemRepository().getItemById(itemId);
         item.setDone(!item.isDone());
-        this.service.saveOrUpdate(item);
-    }
-
-    @Override
-    public void init() throws ServletException {
-        this.service = new ItemService();
+        new ItemRepository().addItem(item);
     }
 }
