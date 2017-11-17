@@ -40,7 +40,7 @@ public class UserRepository extends CommonRepository<User> {
      * @param pass  password.
      * @return user.
      */
-    public User getUserByEmailAndPass(@NonNull final String email, @NonNull final String pass) {
+    public List<User> getUserByEmailAndPass(@NonNull final String email, @NonNull final String pass) {
         return super.getAllEntity(new AllEntity<User>() {
             @Override
             public List<User> getAll(Session session) {
@@ -49,6 +49,6 @@ public class UserRepository extends CommonRepository<User> {
                         .setParameter("password", pass)
                         .list();
             }
-        }).get(0);
+        });
     }
 }
