@@ -3,6 +3,7 @@ package ru.job4j.repository;
 import lombok.NonNull;
 import org.hibernate.Session;
 import ru.job4j.commands.AllEntity;
+import ru.job4j.commands.CRUDOperation;
 import ru.job4j.commands.EntityByName;
 import ru.job4j.models.City;
 
@@ -44,5 +45,22 @@ public class CityRepository extends CommonRepository<City> {
                 return session.createQuery("from City order by name asc").list();
             }
         });
+    }
+
+    /**
+     * Save city to database.
+     *
+     * @param city city.
+     * @return cityId.
+     */
+    public int save(@NonNull final City city) {
+        final int[] cityId = {0};
+        super.execute(new CRUDOperation<City>() {
+            @Override
+            public void execute(Session session, City value) {
+                cityId[0] = (int) session.save(city);
+            }
+        }, city);
+        return cityId[0];
     }
 }

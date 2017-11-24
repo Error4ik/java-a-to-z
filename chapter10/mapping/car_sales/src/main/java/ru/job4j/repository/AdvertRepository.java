@@ -51,13 +51,16 @@ public class AdvertRepository extends CommonRepository<Advert> {
      * Save advert to database.
      *
      * @param advert advert.
+     * @return index.
      */
-    public void save(@NonNull final Advert advert) {
+    public int save(@NonNull final Advert advert) {
+        final int[] advertId = {0};
         super.execute(new CRUDOperation<Advert>() {
             @Override
             public void execute(Session session, Advert value) {
-                session.saveOrUpdate(advert);
+                advertId[0] = (int) session.save(advert);
             }
         }, advert);
+        return advertId[0];
     }
 }

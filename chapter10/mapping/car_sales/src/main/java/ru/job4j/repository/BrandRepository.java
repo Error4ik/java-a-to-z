@@ -3,6 +3,7 @@ package ru.job4j.repository;
 import lombok.NonNull;
 import org.hibernate.Session;
 import ru.job4j.commands.AllEntity;
+import ru.job4j.commands.CRUDOperation;
 import ru.job4j.commands.EntityByName;
 import ru.job4j.models.CarDetails;
 
@@ -44,5 +45,22 @@ public class BrandRepository extends CommonRepository<CarDetails> {
                 return session.createQuery("from CarBrand order by name asc").list();
             }
         });
+    }
+
+    /**
+     * Save brand to database.
+     *
+     * @param brand brand.
+     * @return index.
+     */
+    public int save(@NonNull final CarDetails brand) {
+        final int[] brandId = {0};
+        super.execute(new CRUDOperation<CarDetails>() {
+            @Override
+            public void execute(Session session, CarDetails value) {
+                brandId[0] = (int) session.save(brand);
+            }
+        }, brand);
+        return brandId[0];
     }
 }

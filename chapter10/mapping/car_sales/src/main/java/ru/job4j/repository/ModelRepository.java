@@ -3,6 +3,7 @@ package ru.job4j.repository;
 import lombok.NonNull;
 import org.hibernate.Session;
 import ru.job4j.commands.AllEntity;
+import ru.job4j.commands.CRUDOperation;
 import ru.job4j.commands.EntityByName;
 import ru.job4j.models.CarDetails;
 import ru.job4j.models.CarModel;
@@ -46,5 +47,22 @@ public class ModelRepository extends CommonRepository<CarDetails> {
                         .setParameter("name", name).uniqueResult();
             }
         });
+    }
+
+    /**
+     * Save model to database.
+     *
+     * @param model car model.
+     * @return id.
+     */
+    public int save(@NonNull final CarDetails model) {
+        final int[] modelId = {0};
+        super.execute(new CRUDOperation<CarDetails>() {
+            @Override
+            public void execute(Session session, CarDetails value) {
+                modelId[0] = (int) session.save(model);
+            }
+        }, model);
+        return modelId[0];
     }
 }
