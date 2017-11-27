@@ -157,6 +157,8 @@
                         <ignoredDependency>org.apache.commons:commons-pool2:jar:2.4.2</ignoredDependency>
                         <ignoredDependency>taglibs:standard:jar:1.1.2</ignoredDependency>
                         <ignoredDependency>javax.servlet:jstl:jar:1.2</ignoredDependency>
+                        <ignoredDependency>org.hsqldb:hsqldb:jar:2.4.0</ignoredDependency>
+                        <ignoredDependency>com.fasterxml.jackson.core:jackson-annotations:jar:2.7.0</ignoredDependency>
                     </ignoredDependencies>
                 </configuration>
                 <executions>
