@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Error4ik/java-a-to-z.svg?branch=master)](https://travis-ci.org/Error4ik/java-a-to-z)
+[![codecov](https://codecov.io/gh/Error4ik/java-a-to-z/branch/master/graph/badge.svg)](https://codecov.io/gh/Error4ik/java-a-to-z)
 # Курс java-a-to-z.
 
 ## [Базовый Синтаксис.](https://github.com/Error4ik/java-a-to-z/tree/master/chapter1)
