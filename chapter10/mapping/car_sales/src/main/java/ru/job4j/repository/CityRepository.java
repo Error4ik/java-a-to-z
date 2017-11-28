@@ -54,13 +54,11 @@ public class CityRepository extends CommonRepository<City> {
      * @return cityId.
      */
     public int save(@NonNull final City city) {
-        final int[] cityId = {0};
-        super.execute(new CRUDOperation<City>() {
+        return super.execute(new CRUDOperation<City>() {
             @Override
-            public void execute(Session session, City value) {
-                cityId[0] = (int) session.save(city);
+            public int execute(Session session, City value) {
+                return (int) session.save(city);
             }
         }, city);
-        return cityId[0];
     }
 }

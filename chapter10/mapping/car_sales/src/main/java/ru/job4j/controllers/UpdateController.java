@@ -24,7 +24,7 @@ public class UpdateController extends HttpServlet {
         int advertId = Integer.parseInt(req.getParameter("id"));
         Advert advert = advertRepository.getById(advertId);
         advert.setSale(!advert.getSale());
-        advertRepository.save(advert);
+        advertRepository.saveOrUpdate(advert);
         resp.sendRedirect("index.html");
     }
 }

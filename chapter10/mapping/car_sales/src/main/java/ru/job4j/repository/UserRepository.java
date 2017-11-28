@@ -23,14 +23,12 @@ public class UserRepository extends CommonRepository<User> {
      * @return user id.
      */
     public int save(@NonNull final User user) {
-        final int[] userId = {0};
-        super.execute(new CRUDOperation<User>() {
+        return super.execute(new CRUDOperation<User>() {
             @Override
-            public void execute(Session session, User value) {
-                userId[0] = (int) session.save(value);
+            public int execute(Session session, User value) {
+                return (int) session.save(value);
             }
         }, user);
-        return userId[0];
     }
 
     /**

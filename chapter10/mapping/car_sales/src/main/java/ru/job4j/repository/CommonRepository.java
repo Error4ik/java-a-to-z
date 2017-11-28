@@ -21,12 +21,13 @@ import java.util.List;
 @Log4j
 public abstract class CommonRepository<T> {
 
-    public void execute(@NonNull final CRUDOperation<T> command, @NonNull final T value) {
+    public int execute(@NonNull final CRUDOperation<T> command, @NonNull final T value) {
         Session session = null;
+        int id = 0;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            command.execute(session, value);
+            id = command.execute(session, value);
             session.getTransaction().commit();
         } catch (HibernateException e) {
             log.error(e.getMessage(), e);
@@ -38,6 +39,7 @@ public abstract class CommonRepository<T> {
                 session.close();
             }
         }
+        return id;
     }
 
     public T getEntityById(@NonNull final EntityById<T> entityById) {

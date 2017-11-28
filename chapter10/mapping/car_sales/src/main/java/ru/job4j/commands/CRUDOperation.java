@@ -16,6 +16,7 @@ public interface CRUDOperation<T> {
      *
      * @param session hibernate session.
      * @param value   entity.
+     * @return index or 0;
      */
-    void execute(final Session session, final T value);
+    int execute(final Session session, final T value);
 }

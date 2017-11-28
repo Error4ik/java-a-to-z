@@ -54,13 +54,11 @@ public class DriveUnitRepository extends CommonRepository<CarDetails> {
      * @return id.
      */
     public int save(@NonNull final CarDetails driveUnit) {
-        final int[] driveUnitId = {0};
-        super.execute(new CRUDOperation<CarDetails>() {
+        return super.execute(new CRUDOperation<CarDetails>() {
             @Override
-            public void execute(Session session, CarDetails value) {
-                driveUnitId[0] = (int) session.save(driveUnit);
+            public int execute(Session session, CarDetails value) {
+                return (int) session.save(driveUnit);
             }
         }, driveUnit);
-        return driveUnitId[0];
     }
 }

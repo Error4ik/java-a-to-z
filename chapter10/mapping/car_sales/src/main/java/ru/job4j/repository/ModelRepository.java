@@ -56,13 +56,11 @@ public class ModelRepository extends CommonRepository<CarDetails> {
      * @return id.
      */
     public int save(@NonNull final CarDetails model) {
-        final int[] modelId = {0};
-        super.execute(new CRUDOperation<CarDetails>() {
+        return super.execute(new CRUDOperation<CarDetails>() {
             @Override
-            public void execute(Session session, CarDetails value) {
-                modelId[0] = (int) session.save(model);
+            public int execute(Session session, CarDetails value) {
+                return (int) session.save(model);
             }
         }, model);
-        return modelId[0];
     }
 }

@@ -54,13 +54,11 @@ public class CarBodyRepository extends CommonRepository<CarDetails> {
      * @return bodyId.
      */
     public int save(@NonNull final CarDetails body) {
-        final int[] bodyId = {0};
-        super.execute(new CRUDOperation<CarDetails>() {
+        return super.execute(new CRUDOperation<CarDetails>() {
             @Override
-            public void execute(Session session, CarDetails value) {
-                bodyId[0] = (int) session.save(body);
+            public int execute(Session session, CarDetails value) {
+                return (int) session.save(body);
             }
         }, body);
-        return bodyId[0];
     }
 }

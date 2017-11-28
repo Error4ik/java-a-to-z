@@ -21,18 +21,17 @@ public class PhotoRepository extends CommonRepository<Photo> {
      * @return id.
      */
     public int save(@NonNull final Photo photo) {
-        final int[] photoId = {0};
-        super.execute(new CRUDOperation<Photo>() {
+        return super.execute(new CRUDOperation<Photo>() {
             @Override
-            public void execute(Session session, Photo value) {
-                photoId[0] = (int) session.save(photo);
+            public int execute(Session session, Photo value) {
+                return (int) session.save(photo);
             }
         }, photo);
-        return photoId[0];
     }
 
     /**
      * Return photo by id.
+     *
      * @param id id.
      * @return photo.
      */

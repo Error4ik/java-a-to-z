@@ -54,13 +54,11 @@ public class BrandRepository extends CommonRepository<CarDetails> {
      * @return index.
      */
     public int save(@NonNull final CarDetails brand) {
-        final int[] brandId = {0};
-        super.execute(new CRUDOperation<CarDetails>() {
+        return super.execute(new CRUDOperation<CarDetails>() {
             @Override
-            public void execute(Session session, CarDetails value) {
-                brandId[0] = (int) session.save(brand);
+            public int execute(Session session, CarDetails value) {
+                return (int) session.save(brand);
             }
         }, brand);
-        return brandId[0];
     }
 }
