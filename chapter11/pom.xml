@@ -11,6 +11,7 @@
     </parent>
 
     <modules>
-        <module>ioc</module>
+        <!--<module>ioc</module>-->
+        <module>mvc</module>
     </modules>
 </project>
