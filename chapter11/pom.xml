@@ -12,6 +12,7 @@
 
     <modules>
         <!--<module>ioc</module>-->
-        <module>mvc</module>
+        <!--<module>mvc</module>-->
+        <module>spring-data</module>
     </modules>
 </project>
