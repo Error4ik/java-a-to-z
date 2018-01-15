@@ -1,5 +1,6 @@
-package ru.job4j.models;
+package ru.job4j.domain;
 
+import javax.persistence.*;
 import java.util.Objects;
 
 /**
@@ -8,35 +9,50 @@ import java.util.Objects;
  * @author Alexey Voronin.
  * @since 30.10.2017.
  */
+@Entity(name = "cars")
 public class Car {
     /**
      * Id.
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     /**
      * Brand.
      */
-    private CarDetails carBrand;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "brands_id")
+    private CarBrand carBrand;
     /**
      * Model.
      */
-    private CarDetails carModel;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "models_id")
+    private CarModel carModel;
     /**
      * Car body.
      */
-    private CarDetails carBody;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "car_body_id")
+    private CarBody carBody;
     /**
      * Transmission.
      */
-    private CarDetails transmission;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "gearboxes_id")
+    private Transmission transmission;
     /**
      * Engine.
      */
-    private CarDetails engine;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "engines_id")
+    private Engine engine;
     /**
      * Drive unit.
      */
-    private CarDetails driverUnit;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "drive_unit_id")
+    private DriveUnit driverUnit;
 
     /**
      * Default constructor.
@@ -64,7 +80,7 @@ public class Car {
      * Get.
      * @return carBrand.
      */
-    public CarDetails getCarBrand() {
+    public CarBrand getCarBrand() {
         return carBrand;
     }
 
@@ -72,7 +88,7 @@ public class Car {
      * Set.
      * @param carBrand carBrand.
      */
-    public void setCarBrand(CarDetails carBrand) {
+    public void setCarBrand(CarBrand carBrand) {
         this.carBrand = carBrand;
     }
 
@@ -80,7 +96,7 @@ public class Car {
      * Get.
      * @return carModel.
      */
-    public CarDetails getCarModel() {
+    public CarModel getCarModel() {
         return carModel;
     }
 
@@ -88,7 +104,7 @@ public class Car {
      * Set.
      * @param carModel carModel.
      */
-    public void setCarModel(CarDetails carModel) {
+    public void setCarModel(CarModel carModel) {
         this.carModel = carModel;
     }
 
@@ -96,7 +112,7 @@ public class Car {
      * Get.
      * @return carBody.
      */
-    public CarDetails getCarBody() {
+    public CarBody getCarBody() {
         return carBody;
     }
 
@@ -104,7 +120,7 @@ public class Car {
      * Set.
      * @param carBody carBody.
      */
-    public void setCarBody(CarDetails carBody) {
+    public void setCarBody(CarBody carBody) {
         this.carBody = carBody;
     }
 
@@ -112,7 +128,7 @@ public class Car {
      * Get.
      * @return transmission.
      */
-    public CarDetails getTransmission() {
+    public Transmission getTransmission() {
         return transmission;
     }
 
@@ -120,7 +136,7 @@ public class Car {
      * Set.
      * @param transmission transmission.
      */
-    public void setTransmission(CarDetails transmission) {
+    public void setTransmission(Transmission transmission) {
         this.transmission = transmission;
     }
 
@@ -128,7 +144,7 @@ public class Car {
      * Get.
      * @return engine.
      */
-    public CarDetails getEngine() {
+    public Engine getEngine() {
         return engine;
     }
 
@@ -136,7 +152,7 @@ public class Car {
      * Set.
      * @param engine engine.
      */
-    public void setEngine(CarDetails engine) {
+    public void setEngine(Engine engine) {
         this.engine = engine;
     }
 
@@ -144,7 +160,7 @@ public class Car {
      * Get.
      * @return driverUnit.
      */
-    public CarDetails getDriverUnit() {
+    public DriveUnit getDriverUnit() {
         return driverUnit;
     }
 
@@ -152,7 +168,7 @@ public class Car {
      * Set.
      * @param driverUnit driverUnit.
      */
-    public void setDriverUnit(CarDetails driverUnit) {
+    public void setDriverUnit(DriveUnit driverUnit) {
         this.driverUnit = driverUnit;
     }
 

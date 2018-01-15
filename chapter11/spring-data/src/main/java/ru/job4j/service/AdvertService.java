@@ -3,11 +3,11 @@ package ru.job4j.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import ru.job4j.models.Advert;
-import ru.job4j.models.Car;
-import ru.job4j.models.ModelForFillingAdverts;
-import ru.job4j.models.User;
-import ru.job4j.storage.AdvertStorage;
+import ru.job4j.domain.Advert;
+import ru.job4j.domain.Car;
+import ru.job4j.domain.ModelForFillingAdverts;
+import ru.job4j.domain.User;
+import ru.job4j.repository.AdvertRepository;
 import ru.job4j.util.WritePhotoToDisk;
 
 import java.sql.Timestamp;
@@ -26,7 +26,7 @@ public class AdvertService {
      * Advert storage.
      */
     @Autowired
-    private AdvertStorage advertStorage;
+    private AdvertRepository advertRepository;
     /**
      * Brand service.
      */
@@ -85,7 +85,7 @@ public class AdvertService {
      * @return saved a advert.
      */
     public Advert save(final Advert value) {
-        return this.advertStorage.save(value);
+        return this.advertRepository.save(value);
     }
 
     /**
@@ -95,7 +95,7 @@ public class AdvertService {
      * @return a advert.
      */
     public Advert getById(final int id) {
-        return this.advertStorage.getById(id);
+        return this.advertRepository.findById(id).get();
     }
 
     /**
@@ -104,7 +104,7 @@ public class AdvertService {
      * @return the list of a advert.
      */
     public List<Advert> getAll() {
-        return this.advertStorage.getAll();
+        return (List<Advert>) this.advertRepository.findAll();
     }
 
     /**

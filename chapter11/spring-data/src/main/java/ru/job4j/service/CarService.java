@@ -2,8 +2,8 @@ package ru.job4j.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.job4j.models.Car;
-import ru.job4j.storage.CarStorage;
+import ru.job4j.domain.Car;
+import ru.job4j.repository.CarRepository;
 
 /**
  * Car service..
@@ -18,7 +18,7 @@ public class CarService {
      * The car storage.
      */
     @Autowired
-    private CarStorage carStorage;
+    private CarRepository carRepository;
 
     /**
      * Save car to storage.
@@ -27,6 +27,6 @@ public class CarService {
      * @return car.
      */
     public Car save(final Car value) {
-        return this.carStorage.save(value);
+        return this.carRepository.save(value);
     }
 }

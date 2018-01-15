@@ -180,7 +180,7 @@
                     </div>
                 </div>
                 <label for="upFile">Выберите файл</label>
-                <input type="file" name="upFile" id="upFile"><br/>
+                <input type="file" name="upFile" id="upFile" required="required"><br/>
                 <div class="form-group" style="margin-top: 20px">
                     <input type="submit" class="btn btn-info" onsubmit="checkValid()"/>
                 </div>

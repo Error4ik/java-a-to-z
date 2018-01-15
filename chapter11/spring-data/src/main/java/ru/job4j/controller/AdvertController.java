@@ -6,8 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import ru.job4j.models.Advert;
-import ru.job4j.models.ModelForFillingAdverts;
+import ru.job4j.domain.Advert;
+import ru.job4j.domain.ModelForFillingAdverts;
 import ru.job4j.service.AdvertService;
 
 import java.util.List;

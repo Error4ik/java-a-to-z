@@ -5,9 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import ru.job4j.models.CarDetails;
-import ru.job4j.models.CarModel;
-import ru.job4j.models.City;
+import ru.job4j.domain.*;
 import ru.job4j.service.*;
 
 import java.util.List;
@@ -65,7 +63,7 @@ public class FillFieldsController {
      */
     @RequestMapping("/carBrand")
     public @ResponseBody
-    List<CarDetails> getBrands() {
+    List<CarBrand> getBrands() {
         return this.brandService.getAll();
     }
 
@@ -88,7 +86,7 @@ public class FillFieldsController {
      */
     @RequestMapping("/engine")
     public @ResponseBody
-    List<CarDetails> getEngines() {
+    List<Engine> getEngines() {
         return this.engineService.getAll();
     }
 
@@ -99,7 +97,7 @@ public class FillFieldsController {
      */
     @RequestMapping("/transmission")
     public @ResponseBody
-    List<CarDetails> getTransmissions() {
+    List<Transmission> getTransmissions() {
         return this.transmissionService.getAll();
     }
 
@@ -110,7 +108,7 @@ public class FillFieldsController {
      */
     @RequestMapping("/carBody")
     public @ResponseBody
-    List<CarDetails> getBodies() {
+    List<CarBody> getBodies() {
         return this.bodyService.getAll();
     }
 
@@ -121,7 +119,7 @@ public class FillFieldsController {
      */
     @RequestMapping("/driveUnit")
     public @ResponseBody
-    List<CarDetails> getDriverUnits() {
+    List<DriveUnit> getDriverUnits() {
         return this.driveUnitService.getAll();
     }
 

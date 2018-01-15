@@ -1,32 +1,35 @@
-package ru.job4j.models;
+package ru.job4j.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Objects;
 
 /**
- * Common class for car parts.
+ * Car body.
  *
  * @author Alexey Voronin.
- * @since 12.11.2017.
+ * @since 30.10.2017.
  */
-public class CarDetails {
+@Entity(name = "car_body")
+public class CarBody {
 
     /**
      * Id.
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     /**
-     * Detail name.
+     * CarBody name.
      */
     private String name;
 
     /**
-     * Default constructor.
-     */
-    public CarDetails() {
-    }
-
-    /**
      * Get.
+     *
      * @return id.
      */
     public int getId() {
@@ -35,7 +38,8 @@ public class CarDetails {
 
     /**
      * Set.
-     * @param id id.
+     *
+     * @param id set id.
      */
     public void setId(int id) {
         this.id = id;
@@ -43,7 +47,8 @@ public class CarDetails {
 
     /**
      * Get.
-     * @return detail name.
+     *
+     * @return car body name.
      */
     public String getName() {
         return name;
@@ -51,6 +56,7 @@ public class CarDetails {
 
     /**
      * Set.
+     *
      * @param name name.
      */
     public void setName(String name) {
@@ -62,12 +68,12 @@ public class CarDetails {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof CarDetails)) {
+        if (!(o instanceof CarBody)) {
             return false;
         }
-        CarDetails that = (CarDetails) o;
-        return getId() == that.getId()
-                && Objects.equals(getName(), that.getName());
+        CarBody body = (CarBody) o;
+        return getId() == body.getId()
+                && Objects.equals(getName(), body.getName());
     }
 
     @Override
@@ -77,6 +83,6 @@ public class CarDetails {
 
     @Override
     public String toString() {
-        return String.format("%s {id=%s name=%s}", this.getClass().getSimpleName(), getId(), getName());
+        return String.format("CarBody: {id=%s name=%s}", getId(), getName());
     }
 }

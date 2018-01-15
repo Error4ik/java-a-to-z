@@ -2,8 +2,8 @@ package ru.job4j.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.job4j.models.Image;
-import ru.job4j.storage.ImageStorage;
+import ru.job4j.domain.Image;
+import ru.job4j.repository.ImageRepository;
 
 /**
  * Image service.
@@ -18,7 +18,7 @@ public class ImageService {
      * The images storage.
      */
     @Autowired
-    private ImageStorage photoStorage;
+    private ImageRepository imageRepository;
 
     /**
      * Save image to storage.
@@ -27,7 +27,7 @@ public class ImageService {
      * @return saved image.
      */
     public Image save(final Image value) {
-        return this.photoStorage.save(value);
+        return this.imageRepository.save(value);
     }
 
     /**
@@ -37,6 +37,6 @@ public class ImageService {
      * @return image.
      */
     public Image getById(final int id) {
-        return this.photoStorage.getById(id);
+        return this.imageRepository.findById(id).get();
     }
 }

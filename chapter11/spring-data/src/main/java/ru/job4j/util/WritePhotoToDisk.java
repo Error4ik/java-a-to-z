@@ -1,7 +1,7 @@
 package ru.job4j.util;
 
 import org.springframework.web.multipart.MultipartFile;
-import ru.job4j.models.Image;
+import ru.job4j.domain.Image;
 
 import java.io.File;
 import java.io.FileOutputStream;

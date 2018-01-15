@@ -2,8 +2,8 @@ package ru.job4j.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.job4j.models.CarDetails;
-import ru.job4j.storage.EngineStorage;
+import ru.job4j.domain.Engine;
+import ru.job4j.repository.EngineRepository;
 
 import java.util.List;
 
@@ -20,15 +20,15 @@ public class EngineService {
      * The engines storage.
      */
     @Autowired
-    private EngineStorage engineStorage;
+    private EngineRepository engineRepository;
 
     /**
      * Get all engines from storage.
      *
      * @return the list of engines.
      */
-    public List<CarDetails> getAll() {
-        return this.engineStorage.getAll();
+    public List<Engine> getAll() {
+        return (List<Engine>) this.engineRepository.findAll();
     }
 
     /**
@@ -37,7 +37,7 @@ public class EngineService {
      * @param name name.
      * @return engine.
      */
-    public CarDetails getByName(String name) {
-        return this.engineStorage.getByName(name);
+    public Engine getByName(String name) {
+        return this.engineRepository.findByName(name);
     }
 }

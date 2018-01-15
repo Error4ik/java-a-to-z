@@ -1,5 +1,6 @@
-package ru.job4j.models;
+package ru.job4j.domain;
 
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
 
@@ -9,56 +10,68 @@ import java.util.Objects;
  * @author Alexey Voronin.
  * @since 30.10.2017.
  */
+@Entity(name = "adverts")
 public class Advert {
 
     /**
      * id.
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     /**
      * Title.
      */
     private String title;
     /**
-     * Description.
-     */
-    private String description;
-    /**
      * Sale.
      */
     private Boolean sale;
     /**
-     * Author.
+     * Description.
      */
-    private User author;
+    private String description;
     /**
      * Date of created.
      */
     private Timestamp created;
     /**
-     * City.
-     */
-    private City city;
-    /**
      * Price.
      */
     private long price;
     /**
+     * Mileage.
+     */
+    private Integer mileage;
+    /**
+     * Year of issue.
+     */
+    @Column(name = "year_of_issue")
+    private Integer yearOfIssue;
+    /**
+     * Author.
+     */
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "author_id")
+    private User author;
+    /**
+     * City.
+     */
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "city_id")
+    private City city;
+    /**
      * Photo.
      */
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "photo_id")
     private Image photo;
     /**
      * Car.
      */
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "cars_id")
     private Car car;
-    /**
-     * Year of issue.
-     */
-    private Integer yearOfIssue;
-    /**
-     * Mileage.
-     */
-    private Integer mileage;
 
     /**
      * Default constructor.

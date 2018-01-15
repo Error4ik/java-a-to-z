@@ -2,8 +2,8 @@ package ru.job4j.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.job4j.models.User;
-import ru.job4j.storage.UserStorage;
+import ru.job4j.domain.User;
+import ru.job4j.repository.UserRepository;
 
 /**
  * User service.
@@ -18,7 +18,7 @@ public class UserService {
      * The users storage.
      */
     @Autowired
-    private UserStorage userStorage;
+    private UserRepository userRepository;
 
     /**
      * Save user to storage.
@@ -27,7 +27,7 @@ public class UserService {
      * @return saved user.
      */
     public User save(final User value) {
-        return this.userStorage.save(value);
+        return this.userRepository.save(value);
     }
 
     /**
@@ -37,7 +37,7 @@ public class UserService {
      * @return user.
      */
     public User getById(final int id) {
-        return this.userStorage.getById(id);
+        return this.userRepository.findById(id).get();
     }
 
     /**
@@ -47,6 +47,6 @@ public class UserService {
      * @return user.
      */
     public User getByName(final String name) {
-        return userStorage.getByName(name);
+        return userRepository.findByName(name);
     }
 }

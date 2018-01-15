@@ -2,8 +2,8 @@ package ru.job4j.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.job4j.models.CarModel;
-import ru.job4j.storage.CarModelStorage;
+import ru.job4j.domain.CarModel;
+import ru.job4j.repository.CarModelsRepository;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ public class CarModelService {
      * The car models storage.
      */
     @Autowired
-    private CarModelStorage modelStorage;
+    private CarModelsRepository modelsRepository;
 
     /**
      * Get all car models.
@@ -28,7 +28,7 @@ public class CarModelService {
      * @return the list of models.
      */
     public List<CarModel> getAll() {
-        return this.modelStorage.getAll();
+        return (List<CarModel>) this.modelsRepository.findAll();
     }
 
     /**
@@ -38,7 +38,7 @@ public class CarModelService {
      * @return car model.
      */
     public CarModel getByName(final String name) {
-        return this.modelStorage.getByName(name);
+        return this.modelsRepository.findByName(name);
     }
 
     /**
@@ -48,6 +48,6 @@ public class CarModelService {
      * @return the list of car models.
      */
     public List<CarModel> getModelsByBrandId(final int id) {
-        return this.modelStorage.getModelsByBrandId(id);
+        return this.modelsRepository.findByCarBrandId(id);
     }
 }

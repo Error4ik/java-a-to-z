@@ -1,5 +1,6 @@
-package ru.job4j.models;
+package ru.job4j.domain;
 
+import javax.persistence.*;
 import java.util.Objects;
 
 /**
@@ -8,11 +9,14 @@ import java.util.Objects;
  * @author Alexey Voronin.
  * @since 30.10.2017.
  */
+@Entity(name = "photo")
 public class Image {
 
     /**
      * Id.
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     /**
      * Name.
@@ -21,6 +25,7 @@ public class Image {
     /**
      * image url.
      */
+    @Column(name = "image_url")
     private String imageUrl;
 
     /**

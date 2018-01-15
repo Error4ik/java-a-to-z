@@ -2,8 +2,8 @@ package ru.job4j.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.job4j.models.CarDetails;
-import ru.job4j.storage.DriveUnitStorage;
+import ru.job4j.domain.DriveUnit;
+import ru.job4j.repository.DriveUnitRepository;
 
 import java.util.List;
 
@@ -20,15 +20,15 @@ public class DriveUnitService {
      * The drive unit storage.
      */
     @Autowired
-    private DriveUnitStorage driveUnitStorage;
+    private DriveUnitRepository driveUnitRepository;
 
     /**
      * Get all driver unit from storage.
      *
      * @return the list of driver unit.
      */
-    public List<CarDetails> getAll() {
-        return this.driveUnitStorage.getAll();
+    public List<DriveUnit> getAll() {
+        return (List<DriveUnit>) this.driveUnitRepository.findAll();
     }
 
     /**
@@ -37,7 +37,7 @@ public class DriveUnitService {
      * @param name name.
      * @return drive.
      */
-    public CarDetails getByName(String name) {
-        return this.driveUnitStorage.getByName(name);
+    public DriveUnit getByName(String name) {
+        return this.driveUnitRepository.findByName(name);
     }
 }

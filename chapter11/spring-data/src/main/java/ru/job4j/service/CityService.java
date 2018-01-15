@@ -2,8 +2,8 @@ package ru.job4j.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.job4j.models.City;
-import ru.job4j.storage.CityStorage;
+import ru.job4j.domain.City;
+import ru.job4j.repository.CityRepository;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ public class CityService {
      * The cities storage.
      */
     @Autowired
-    private CityStorage cityStorage;
+    private CityRepository cityRepository;
 
     /**
      * Get all cities from storage.
@@ -28,7 +28,7 @@ public class CityService {
      * @return the list of cities.
      */
     public List<City> getAll() {
-        return this.cityStorage.getAll();
+        return (List<City>) this.cityRepository.findAll();
     }
 
     /**
@@ -38,6 +38,6 @@ public class CityService {
      * @return city.
      */
     public City getByName(final String name) {
-        return this.cityStorage.getByName(name);
+        return this.cityRepository.findByName(name);
     }
 }

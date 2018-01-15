@@ -2,8 +2,8 @@ package ru.job4j.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.job4j.models.CarDetails;
-import ru.job4j.storage.TransmissionStorage;
+import ru.job4j.domain.Transmission;
+import ru.job4j.repository.TransmissionRepository;
 
 import java.util.List;
 
@@ -20,15 +20,15 @@ public class TransmissionService {
      * The transmissions storage.
      */
     @Autowired
-    private TransmissionStorage transmissionStorage;
+    private TransmissionRepository transmissionRepository;
 
     /**
      * Get all transmissions from storage.
      *
      * @return the list of transmissions.
      */
-    public List<CarDetails> getAll() {
-        return this.transmissionStorage.getAll();
+    public List<Transmission> getAll() {
+        return (List<Transmission>) this.transmissionRepository.findAll();
     }
 
     /**
@@ -37,7 +37,7 @@ public class TransmissionService {
      * @param name name.
      * @return transmission.
      */
-    public CarDetails getByName(String name) {
-        return this.transmissionStorage.getByName(name);
+    public Transmission getByName(String name) {
+        return this.transmissionRepository.findByName(name);
     }
 }

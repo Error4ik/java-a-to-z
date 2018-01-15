@@ -1,7 +1,8 @@
-package ru.job4j.models;
+package ru.job4j.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
@@ -11,12 +12,14 @@ import java.util.Objects;
  * @author Alexey Voronin.
  * @since 30.10.2017.
  */
-
+@Entity(name = "users")
 public class User {
 
     /**
      * Id.
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     /**
      * Name.
@@ -34,6 +37,8 @@ public class User {
      * List adverts.
      */
     @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "author_id")
     private List<Advert> adverts;
 
     /**
