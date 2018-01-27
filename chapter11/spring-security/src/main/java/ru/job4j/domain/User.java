@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * User.
@@ -40,6 +41,15 @@ public class User {
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "author_id")
     private List<Advert> adverts;
+
+    /**
+     * User Roles.
+     */
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roleSet;
 
     /**
      * Get.
@@ -131,9 +141,26 @@ public class User {
         this.adverts = adverts;
     }
 
+    /**
+     * Get.
+     *
+     * @return roles.
+     */
+    public Set<Role> getRoleSet() {
+        return roleSet;
+    }
+
+    /**
+     * Set.
+     *
+     * @param roleSet roles.
+     */
+    public void setRoleSet(Set<Role> roleSet) {
+        this.roleSet = roleSet;
+    }
+
     @Override
     public boolean equals(Object o) {
-
         if (this == o) {
             return true;
         }
@@ -145,7 +172,8 @@ public class User {
                 && Objects.equals(getName(), user.getName())
                 && Objects.equals(getEmail(), user.getEmail())
                 && Objects.equals(getPassword(), user.getPassword())
-                && Objects.equals(getAdverts(), user.getAdverts());
+                && Objects.equals(getAdverts(), user.getAdverts())
+                && Objects.equals(getRoleSet(), user.getRoleSet());
     }
 
     @Override
@@ -155,7 +183,7 @@ public class User {
 
     @Override
     public String toString() {
-        return String.format("User {id=%s name=%s email=%s password=%s adverts=%s}",
-                getId(), getName(), getEmail(), getPassword(), getAdverts());
+        return String.format("User {id=%s name=%s email=%s password=%s adverts=%s roles=%s}",
+                getId(), getName(), getEmail(), getPassword(), getAdverts(), getRoleSet());
     }
 }

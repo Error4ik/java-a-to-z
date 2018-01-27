@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html;charset=UTF-8" session="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +20,7 @@
         function loadAdverts() {
             var result = "";
             $.ajax({
-                url: './list',
+                url: '${contextPath}/list',
                 success: function (data) {
                     result = fillRow(data);
                     document.getElementById("table_body").innerHTML += result;
@@ -31,9 +31,17 @@
 
         function fillRow(data) {
             var row = "";
+            var check = false;
+            var currentUserEmail = "${pageContext.request.userPrincipal.name}";
             $.each(data, function (i, advert) {
-                row += "<tr>" +
-                    "<td class='table-td'><img src='./image/" + advert.photo.id + "' alt='Not Photo'" +
+                check = currentUserEmail === advert.author.email;
+                if (check) {
+                    row += "<tr class='success'>";
+                } else {
+                    row += "<tr>";
+                }
+                row +=
+                    "<td class='table-td'><img src='${contextPath}/image/" + advert.photo.id + "' alt='Not Photo'" +
                     " style='display: block; width: 100%; margin: 0 auto'></td>" +
                     "<td class='size'>" + advert.title + "<br/>" +
                     "Продавец " + advert.author.name + "<br/>" +
@@ -51,7 +59,12 @@
                     row += "<td class='table-td'>" +
                         "<input type='checkbox' id='sale' onchange='changeBox(" + advert.id + ")'";
                 }
-                row += "'></td></tr>";
+                if (!check) {
+                    row += "' disabled>"
+                } else {
+                    row += "'>";
+                }
+                row += "</td></tr>";
             });
             return row;
         }
@@ -59,7 +72,7 @@
         function changeBox(id) {
             var checked = $("#sale").is(":checked");
             $.ajax({
-                url: "./update",
+                url: "${contextPath}/update",
                 method: "POST",
                 data: {"id": id},
                 success: function () {
@@ -72,8 +85,8 @@
 <body>
 <div class="container">
     <div style="margin-top: 30px">
-        <a href="./add" class="btn btn-info" style="width: 100%">Add new Advert</a>
-        <%--<a href="./log-out" class="btn btn-info" style="width: 40%; float: right">Log Out</a>--%>
+        <a href="${contextPath}/add" class="btn btn-info" style="width: 40%">Add new Advert</a>
+        <a href="${contextPath}/login?logout" class="btn btn-info" style="width: 40%; float: right">Log Out</a>
     </div>
 </div>
 <div class="container" style="margin-top: 30px">

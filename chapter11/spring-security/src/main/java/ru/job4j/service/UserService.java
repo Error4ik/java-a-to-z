@@ -1,9 +1,14 @@
 package ru.job4j.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import ru.job4j.domain.Role;
 import ru.job4j.domain.User;
 import ru.job4j.repository.UserRepository;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * User service.
@@ -13,6 +18,24 @@ import ru.job4j.repository.UserRepository;
  */
 @Service
 public class UserService {
+
+    /**
+     * To encrypt the password.
+     */
+    @Autowired
+    private BCryptPasswordEncoder encoder;
+
+    /**
+     * Security service. Authorize and Authenticate user.
+     */
+    @Autowired
+    private SecurityService securityService;
+
+    /**
+     * Role service.
+     */
+    @Autowired
+    private RoleService roleService;
 
     /**
      * The users storage.
@@ -43,10 +66,25 @@ public class UserService {
     /**
      * Get user bu name from storage.
      *
-     * @param name name.
+     * @param email email.
      * @return user.
      */
-    public User getByName(final String name) {
-        return userRepository.findByName(name);
+    public User getByEmail(final String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    /**
+     * Reg new user.
+     *
+     * @param user user.
+     */
+    public void regUser(final User user) {
+        String pass = user.getPassword();
+        user.setPassword(encoder.encode(user.getPassword()));
+        Set<Role> roles = new HashSet<>();
+        roles.add(this.roleService.getRoleById(1));
+        user.setRoleSet(roles);
+        this.save(user);
+        securityService.autoLogin(user.getEmail(), pass);
     }
 }

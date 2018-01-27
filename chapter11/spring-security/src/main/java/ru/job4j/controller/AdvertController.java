@@ -81,7 +81,7 @@ public class AdvertController {
      * @param id id the ad that will be changed.
      * @return redirect to main page.
      */
-    @RequestMapping(value = "/update")
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String getList(@RequestParam int id) {
         Advert advert = this.advertService.getById(id);
         advert.setSale(!advert.getSale());

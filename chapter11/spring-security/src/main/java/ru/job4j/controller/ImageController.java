@@ -38,7 +38,6 @@ public class ImageController {
     @ResponseBody
     @GetMapping(value = "/image/{photoID}", produces = MediaType.IMAGE_JPEG_VALUE)
     public byte[] getPhoto(@PathVariable final int photoID) throws IOException {
-        byte[] b = IOUtils.toByteArray(new FileInputStream(new File(this.photoService.getById(photoID).getImageUrl())));
-        return b;
+        return IOUtils.toByteArray(new FileInputStream(new File(this.photoService.getById(photoID).getImageUrl())));
     }
 }

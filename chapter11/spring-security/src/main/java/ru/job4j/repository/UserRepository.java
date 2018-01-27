@@ -14,10 +14,10 @@ import ru.job4j.domain.User;
 public interface UserRepository extends CrudRepository<User, Integer> {
 
     /**
-     * Return user by name.
+     * Return user by email.
      *
-     * @param name name.
+     * @param email email.
      * @return user.
      */
-    User findByName(final String name);
+    User findByEmail(final String email);
 }

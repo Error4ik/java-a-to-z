@@ -23,6 +23,12 @@ import java.util.List;
 public class AdvertService {
 
     /**
+     * Security service.
+     */
+    @Autowired
+    private SecurityService securityService;
+
+    /**
      * Advert storage.
      */
     @Autowired
@@ -137,14 +143,7 @@ public class AdvertService {
      * @return user.
      */
     private User getUser() {
-        User user = this.userService.getByName("test");
-        if (user == null) {
-            user = new User();
-            user.setName("test");
-            user.setEmail("test@mail.ru");
-            user.setPassword("test");
-            this.userService.save(user);
-        }
+        User user = this.userService.getByEmail(this.securityService.findLoggedUser());
         return user;
     }
 

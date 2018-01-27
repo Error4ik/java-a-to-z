@@ -1,4 +1,6 @@
 <%@ page language="java" pageEncoding="utf-8" session="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +20,7 @@
         function loadBrand() {
             $("#brand").empty();
             $.ajax({
-                url: './carBrand',
+                url: '${contextPath}/carBrand',
                 dataType: 'json',
                 success: function (data) {
                     $.each(data, function (i, val) {
@@ -34,7 +36,7 @@
             var brand = document.getElementById("brand").value;
             $("#model").empty();
             $.ajax({
-                url: './carModel',
+                url: '${contextPath}/carModel',
                 data: {brand: brand},
                 dataType: "json",
                 success: function (data) {
@@ -48,7 +50,7 @@
         function loadCarBody() {
             $("#body").empty();
             $.ajax({
-                url: './carBody',
+                url: '${contextPath}/carBody',
                 dataType: "json",
                 success: function (data) {
                     $.each(data, function (i, val) {
@@ -61,7 +63,7 @@
         function loadEngine() {
             $("#engine").empty();
             $.ajax({
-                url: './engine',
+                url: '${contextPath}/engine',
                 dataType: "json",
                 success: function (data) {
                     $.each(data, function (i, val) {
@@ -74,7 +76,7 @@
         function loadTransmission() {
             $("#transmission").empty();
             $.ajax({
-                url: './transmission',
+                url: '${contextPath}/transmission',
                 dataType: "json",
                 success: function (data) {
                     $.each(data, function (i, val) {
@@ -87,7 +89,7 @@
         function loadDriveUnit() {
             $("#driveUnit").empty();
             $.ajax({
-                url: './driveUnit',
+                url: '${contextPath}/driveUnit',
                 dataType: "json",
                 success: function (data) {
                     $.each(data, function (i, val) {
@@ -100,7 +102,7 @@
         function loadCity() {
             $("#city").empty();
             $.ajax({
-                url: './city',
+                url: '${contextPath}/city',
                 dataType: "json",
                 success: function (data) {
                     $.each(data, function (i, val) {
@@ -114,7 +116,7 @@
 </head>
 <body>
 <div class="container">
-    <form action="./create" method="post" enctype="multipart/form-data">
+    <form action="${contextPath}/create" method="post" enctype="multipart/form-data">
         <div class="form-group" style="align-content: center">
             <div class="col-md-10" style="padding-top: 50px">
                 <div class="row" style="text-align: center">
@@ -156,11 +158,13 @@
                 <div class="row" style="text-align: center">
                     <div class="col-md-5">
                         <label for="yearOfIssue">Год выпуска</label>
-                        <input type="number" class="form-control" step="any" id="yearOfIssue" name="yearOfIssue" required="required">
+                        <input type="number" class="form-control" step="any" id="yearOfIssue" name="yearOfIssue"
+                               required="required">
                     </div>
                     <div class="col-md-5">
                         <label for="mileage">Пробег</label>
-                        <input type="number" class="form-control" step="any" id="mileage" name="mileage" required="required">
+                        <input type="number" class="form-control" step="any" id="mileage" name="mileage"
+                               required="required">
                     </div>
                 </div>
                 <div class="row" style="text-align: center">
@@ -170,19 +174,21 @@
                     </div>
                     <div class="col-md-5">
                         <label for="price">Цена</label>
-                        <input type="number" class="form-control" step="any" id="price" name="price" required="required">
+                        <input type="number" class="form-control" step="any" id="price" name="price"
+                               required="required">
                     </div>
                 </div>
                 <div class="row" style="text-align: center">
                     <div class="col-md-10">
                         <label for="description" style="font-weight: bold">Описание</label>
-                        <textarea class="form-control" id="description" name="description" required="required"></textarea>
+                        <textarea class="form-control" id="description" name="description"
+                                  required="required"></textarea>
                     </div>
                 </div>
                 <label for="upFile">Выберите файл</label>
                 <input type="file" name="upFile" id="upFile" required="required"><br/>
                 <div class="form-group" style="margin-top: 20px">
-                    <input type="submit" class="btn btn-info" onsubmit="checkValid()"/>
+                    <input type="submit" class="btn btn-info"/>
                 </div>
             </div>
         </div>
