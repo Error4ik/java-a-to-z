@@ -1,8 +1,5 @@
-<%@ page language="java" pageEncoding="utf-8" session="true" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Add new Advert</title>
@@ -20,7 +17,7 @@
         function loadBrand() {
             $("#brand").empty();
             $.ajax({
-                url: '${contextPath}/carBrand',
+                url: './carBrand',
                 dataType: 'json',
                 success: function (data) {
                     $.each(data, function (i, val) {
@@ -36,7 +33,7 @@
             var brand = document.getElementById("brand").value;
             $("#model").empty();
             $.ajax({
-                url: '${contextPath}/carModel',
+                url: './carModel',
                 data: {brand: brand},
                 dataType: "json",
                 success: function (data) {
@@ -50,7 +47,7 @@
         function loadCarBody() {
             $("#body").empty();
             $.ajax({
-                url: '${contextPath}/carBody',
+                url: './carBody',
                 dataType: "json",
                 success: function (data) {
                     $.each(data, function (i, val) {
@@ -63,7 +60,7 @@
         function loadEngine() {
             $("#engine").empty();
             $.ajax({
-                url: '${contextPath}/engine',
+                url: './engine',
                 dataType: "json",
                 success: function (data) {
                     $.each(data, function (i, val) {
@@ -76,7 +73,7 @@
         function loadTransmission() {
             $("#transmission").empty();
             $.ajax({
-                url: '${contextPath}/transmission',
+                url: './transmission',
                 dataType: "json",
                 success: function (data) {
                     $.each(data, function (i, val) {
@@ -89,7 +86,7 @@
         function loadDriveUnit() {
             $("#driveUnit").empty();
             $.ajax({
-                url: '${contextPath}/driveUnit',
+                url: './driveUnit',
                 dataType: "json",
                 success: function (data) {
                     $.each(data, function (i, val) {
@@ -102,7 +99,7 @@
         function loadCity() {
             $("#city").empty();
             $.ajax({
-                url: '${contextPath}/city',
+                url: './city',
                 dataType: "json",
                 success: function (data) {
                     $.each(data, function (i, val) {
@@ -116,7 +113,7 @@
 </head>
 <body>
 <div class="container">
-    <form action="${contextPath}/create" method="post" enctype="multipart/form-data">
+    <form th:action="@{/create}" method="post" enctype="multipart/form-data">
         <div class="form-group" style="align-content: center">
             <div class="col-md-10" style="padding-top: 50px">
                 <div class="row" style="text-align: center">

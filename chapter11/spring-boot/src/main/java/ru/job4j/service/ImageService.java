@@ -37,6 +37,6 @@ public class ImageService {
      * @return image.
      */
     public Image getById(final int id) {
-        return this.imageRepository.findById(id).get();
+        return this.imageRepository.findOne(id);
     }
 }

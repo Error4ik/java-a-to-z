@@ -10,6 +10,7 @@ import ru.job4j.domain.Advert;
 import ru.job4j.domain.ModelForFillingAdverts;
 import ru.job4j.service.AdvertService;
 
+import java.security.Principal;
 import java.util.List;
 
 /**
@@ -33,8 +34,10 @@ public class AdvertController {
      * @return main page.
      */
     @GetMapping(value = "/")
-    public ModelAndView getAdverts() {
+    public ModelAndView getAdverts(final Principal principal) {
+        String email = principal.getName();
         ModelAndView view = new ModelAndView();
+        view.addObject("email", email);
         view.setViewName("index");
         return view;
     }

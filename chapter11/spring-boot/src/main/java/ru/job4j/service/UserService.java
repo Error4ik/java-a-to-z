@@ -60,7 +60,7 @@ public class UserService {
      * @return user.
      */
     public User getById(final int id) {
-        return this.userRepository.findById(id).get();
+        return this.userRepository.findOne(id);
     }
 
     /**

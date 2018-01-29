@@ -101,7 +101,7 @@ public class AdvertService {
      * @return a advert.
      */
     public Advert getById(final int id) {
-        return this.advertRepository.findById(id).get();
+        return this.advertRepository.findOne(id);
     }
 
     /**

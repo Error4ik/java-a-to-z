@@ -27,6 +27,6 @@ public class RoleService {
      * @return role.
      */
     public Role getRoleById(final int id) {
-        return this.roleRepository.findById(id).get();
+        return this.roleRepository.findOne(id);
     }
 }

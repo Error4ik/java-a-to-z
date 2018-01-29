@@ -1,7 +1,5 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,11 +11,8 @@
 <body>
 <div class="container">
     <div class="col col-md-4">
-        <c:if test="${error}">
-            <div class="alert alert-danger" role="alert" style="margin-top: 10px; width: 300px">Invalid Username or Password</div>
-        </c:if>
         <h2>Sign On</h2>
-        <form name="register" action="${contextPath}/register" method="post" style="width: 300px">
+        <form name="register" action="./register" method="post" style="width: 300px">
             <div class="form-group">
                 <label for="name">Name:</label>
                 <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" autofocus>
