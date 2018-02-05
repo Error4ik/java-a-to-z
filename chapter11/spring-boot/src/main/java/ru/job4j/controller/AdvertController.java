@@ -73,7 +73,7 @@ public class AdvertController {
      * @return redirect to main page.
      */
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public String addAdvert(ModelForFillingAdverts modelToAdvert, @RequestParam("upFile") MultipartFile file) {
+    public String addAdvert(ModelForFillingAdverts modelToAdvert, @RequestParam(value = "upFile", required = false) MultipartFile file) {
         this.advertService.save(this.advertService.prepareAdvert(modelToAdvert, file));
         return "redirect:/";
     }
