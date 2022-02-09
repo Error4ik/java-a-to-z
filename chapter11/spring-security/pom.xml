@@ -22,7 +22,7 @@
         <javax-servlet.version>4.0.0</javax-servlet.version>
         <org-codehaus-jackson.version>1.9.13</org-codehaus-jackson.version>
         <spring-data.version>2.0.2.RELEASE</spring-data.version>
-        <hibernate-core.version>5.2.12.Final</hibernate-core.version>
+        <hibernate-core.version>5.4.24.Final</hibernate-core.version>
         <hibernate-javax-persistence.version>1.0.0.Final</hibernate-javax-persistence.version>
         <postgresql.version>42.1.4</postgresql.version>
         <jsp.api.version>2.2</jsp.api.version>
