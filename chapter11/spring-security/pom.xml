@@ -11,7 +11,7 @@
     </parent>
 
     <properties>
-        <spring-core.vercion>5.0.2.RELEASE</spring-core.vercion>
+        <spring-core.vercion>5.3.18</spring-core.vercion>
         <spring-security.version>5.2.10.RELEASE</spring-security.version>
         <jackson-core.version>2.9.10.8</jackson-core.version>
         <commons-io.version>2.6</commons-io.version>
