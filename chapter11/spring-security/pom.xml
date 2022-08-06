@@ -24,7 +24,7 @@
         <spring-data.version>2.0.2.RELEASE</spring-data.version>
         <hibernate-core.version>5.4.24.Final</hibernate-core.version>
         <hibernate-javax-persistence.version>1.0.0.Final</hibernate-javax-persistence.version>
-        <postgresql.version>42.3.3</postgresql.version>
+        <postgresql.version>42.4.1</postgresql.version>
         <jsp.api.version>2.2</jsp.api.version>
     </properties>
 
